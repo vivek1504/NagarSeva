@@ -1,7 +1,6 @@
-
 generator client {
   provider = "prisma-client"
-  output = "../src/generated"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -20,12 +19,12 @@ enum IssueType {
 }
 
 enum IssueStatus {
-  DETECTED      
-  ASSIGNED     
-  IN_PROGRESS   
-  FIXED         
-  RESOLVED      
-  REJECTED      
+  DETECTED
+  ASSIGNED
+  IN_PROGRESS
+  FIXED
+  REJECTED
+  RESOLVED
 }
 
 enum RouteAssignmentStatus {
@@ -33,45 +32,36 @@ enum RouteAssignmentStatus {
   IN_PROGRESS
   COMPLETED
 }
+
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  role      UserRole
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  role UserRole
 
-  department IssueType?
-
-  wardId   String?
-  ward     Ward?    @relation(fields: [wardId], references: [id])
+  routeAssigned RouteAssignment[]
+  issueAssigned IssueAssignment[]
+  issueResolved IssueResolution[]
 
   createdAt DateTime @default(now())
-
-  routeAssignments RouteAssignment[]  
-  issueAssignments IssueAssignment[]   
-  issueResolutions IssueResolution[]   
-  reportedIssues Issue[]               
 }
 
 model Ward {
-  id     String @id @default(uuid())
-  name   String
-  number Int    @unique
-
-  userId String?
-  user User[]
+  id String @id @default(uuid())
+  name String
+  number Int @unique
 
   routes Route[]
   issues Issue[]
 }
 
-
 model Route {
-  id        String @id @default(uuid())
-  name      String
+  id String @id @default(uuid())
+  name String
 
-  wardId    String
-  ward      Ward   @relation(fields: [wardId], references: [id])
+  wardId String
+  ward Ward @relation(fields: [wardId], references: [id])
 
   startLat  Float
   startLon  Float
@@ -80,92 +70,83 @@ model Route {
   distance  Float
 
   assignments RouteAssignment[]
-  issues      Issue[]
+  issues Issue[]
 }
 
 model RouteAssignment {
-  id         String @id @default(uuid())
-  routeId    String
+  id String @id @default(uuid())
+  routeId String
   surveyorId String
+  status RouteAssignmentStatus @default(PENDING)
 
-  status     RouteAssignmentStatus @default(PENDING)
-
-  route      Route @relation(fields: [routeId], references: [id])
-  surveyor   User  @relation(fields: [surveyorId], references: [id])
+  route Route @relation(fields: [routeId], references: [id])
+  surveyor User @relation(fields: [surveyorId], references: [id])
 
   assignedAt DateTime @default(now())
-  completedAt DateTime?
+  completed Boolean @default(false)
 
-  sessions   SurveySession[]
+  sessions SurveySession[]
 }
 
-model SurveySession {
-  id                String   @id @default(uuid())
+model SurveySession{
+  id String @id @default(uuid())
   routeAssignmentId String
-
-  startedAt DateTime
-  endedAt   DateTime?
+  startedAt DateTime 
+  endedAt DateTime?
 
   routeAssignment RouteAssignment @relation(fields: [routeAssignmentId], references: [id])
-  issues          Issue[]
+  issues Issue[]
 }
 
 model Issue {
-  id              String @id @default(uuid())
-  clientCaptureId String @unique  
+  id String @id @default(uuid())
+  type IssueType
+  status IssueStatus
+  
+  latitude Float
+  longitude Float
 
-  type            IssueType?
-  status          IssueStatus @default(DETECTED)
-
-  latitude        Float
-  longitude       Float
-
-  wardId          String
-  ward            Ward @relation(fields: [wardId], references: [id])
-
-  routeId         String
-  route           Route @relation(fields: [routeId], references: [id])
+  wardId String
+  ward Ward @relation(fields: [wardId], references: [id])
 
   surveySessionId String
-  surveySession   SurveySession @relation(fields: [surveySessionId], references: [id])
+  surveySession SurveySession @relation(fields: [surveySessionId], references: [id])
 
-  surveyorId      String
-  surveyor        User @relation(fields: [surveyorId], references: [id])
+  routeId String
+  route Route @relation(fields: [routeId], references: [id])
 
-  imageUrl        String
-  afterImageUrl   String?
+  imageUrl String
+  afterUrl String?
 
-  assignment      IssueAssignment?
-  resolution      IssueResolution?
+  assignments IssueAssignment[]
+  resolutions IssueResolution[]
 
-  createdAt       DateTime @default(now())
+  createdAt DateTime @default(now())
 }
 
 model IssueAssignment {
-  id         String @id @default(uuid())
-  issueId    String @unique
+  id String @id @default(uuid())
+  issueId String
   engineerId String
 
-  issue      Issue @relation(fields: [issueId], references: [id])
-  engineer   User  @relation(fields: [engineerId], references: [id])
+  issue Issue @relation(fields: [issueId], references: [id])
+  engineer User @relation(fields: [engineerId], references: [id])
 
   assignedAt DateTime @default(now())
 }
 
-
 model IssueResolution {
-  id                String   @id @default(uuid())
-  issueId           String   @unique
+  id String @id @default(uuid())
+  issueId String
+  approved Boolean @default(false)
+  feedback String?
 
-  approved          Boolean  @default(false)
-  feedback          String?
+  issue Issue @relation(fields: [issueId], references: [id])
 
   verifiedByAdminId String?
-  verifiedByAdmin   User?    @relation(fields: [verifiedByAdminId], references: [id])
+  verifiedByAdmin User? @relation(fields: [verifiedByAdminId], references: [id])
 
-  verifiedAt        DateTime?
-  createdAt         DateTime @default(now())
-
-  issue             Issue    @relation(fields: [issueId], references: [id])
+  createdAt DateTime @default(now())
 }
+
 
