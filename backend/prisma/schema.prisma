@@ -1,0 +1,128 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN 
+  SURVEYOR
+  ENGINEER
+}
+
+enum EngineerDepartment {
+  POTHOLE
+  GARBAGE
+}
+
+enum IssueType {
+  POTHOLE
+  GARBAGE
+}
+
+enum IssueStatus {
+  DETECTED
+  ASSIGNED
+  IN_PROGRESS
+  FIXED
+  REJECTED
+  RESOLVED
+}
+
+enum RouteAssignmentStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+model User{
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  role UserRole
+
+  wardId String
+  ward Ward @relation(fields: [wardId], references: [id])
+
+  department EngineerDepartment?
+
+  issues Issue[]
+  assignedIssues IssueAssignment[]
+  resolutions IssueResolution[]
+
+  createdAt DateTime @default(now())
+}
+
+model Ward {
+  id String @id @default(uuid())
+  name String 
+  number Int @unique
+
+  engineers User[]
+  issues Issue[]
+}
+
+model Issue {
+  id               String      @id @default(uuid())
+  clientCaptureId  String      @unique
+
+  type             IssueType?
+  aiDetectedType   IssueType?
+  aiConfidence     Float?
+
+  status           IssueStatus @default(DETECTED)
+
+  latitude         Float
+  longitude        Float
+
+  imageUrl         String
+  afterImageUrl    String?
+
+  wardId           String
+  ward             Ward        @relation(fields: [wardId], references: [id])
+
+  surveyorId       String
+  surveyor         User        @relation(fields: [surveyorId], references: [id])
+
+  assignment       IssueAssignment?
+  resolution       IssueResolution?
+
+  createdAt        DateTime    @default(now())
+}
+
+
+model IssueAssignment {
+  id         String   @id @default(uuid())
+  issueId    String   @unique
+  engineerId String
+
+  issue      Issue    @relation(fields: [issueId], references: [id])
+  engineer   User     @relation(fields: [engineerId], references: [id])
+
+  assignedAt DateTime @default(now())
+}
+
+model IssueResolution {
+  id                String   @id @default(uuid())
+  issueId           String   @unique
+
+  approved          Boolean  @default(false)
+  feedback          String?
+
+  verifiedByAdminId String?
+  verifiedByAdmin   User?    @relation(fields: [verifiedByAdminId], references: [id])
+
+  issue             Issue    @relation(fields: [issueId], references: [id])
+
+  createdAt         DateTime @default(now())
+}
