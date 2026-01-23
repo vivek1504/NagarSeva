@@ -386,6 +386,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Ward: 'Ward',
+  Route: 'Route',
+  RouteAssignment: 'RouteAssignment',
+  SurveySession: 'SurveySession',
   Issue: 'Issue',
   IssueAssignment: 'IssueAssignment',
   IssueResolution: 'IssueResolution'
@@ -404,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "ward" | "issue" | "issueAssignment" | "issueResolution"
+    modelProps: "user" | "ward" | "route" | "routeAssignment" | "surveySession" | "issue" | "issueAssignment" | "issueResolution"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +556,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.WardCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.WardCountAggregateOutputType> | number
+        }
+      }
+    }
+    Route: {
+      payload: Prisma.$RoutePayload<ExtArgs>
+      fields: Prisma.RouteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RouteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoutePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RouteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoutePayload>
+        }
+        findFirst: {
+          args: Prisma.RouteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoutePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RouteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoutePayload>
+        }
+        findMany: {
+          args: Prisma.RouteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoutePayload>[]
+        }
+        create: {
+          args: Prisma.RouteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoutePayload>
+        }
+        createMany: {
+          args: Prisma.RouteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RouteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoutePayload>[]
+        }
+        delete: {
+          args: Prisma.RouteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoutePayload>
+        }
+        update: {
+          args: Prisma.RouteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoutePayload>
+        }
+        deleteMany: {
+          args: Prisma.RouteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RouteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RouteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoutePayload>[]
+        }
+        upsert: {
+          args: Prisma.RouteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoutePayload>
+        }
+        aggregate: {
+          args: Prisma.RouteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRoute>
+        }
+        groupBy: {
+          args: Prisma.RouteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RouteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RouteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RouteCountAggregateOutputType> | number
+        }
+      }
+    }
+    RouteAssignment: {
+      payload: Prisma.$RouteAssignmentPayload<ExtArgs>
+      fields: Prisma.RouteAssignmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RouteAssignmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RouteAssignmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RouteAssignmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RouteAssignmentPayload>
+        }
+        findFirst: {
+          args: Prisma.RouteAssignmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RouteAssignmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RouteAssignmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RouteAssignmentPayload>
+        }
+        findMany: {
+          args: Prisma.RouteAssignmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RouteAssignmentPayload>[]
+        }
+        create: {
+          args: Prisma.RouteAssignmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RouteAssignmentPayload>
+        }
+        createMany: {
+          args: Prisma.RouteAssignmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RouteAssignmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RouteAssignmentPayload>[]
+        }
+        delete: {
+          args: Prisma.RouteAssignmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RouteAssignmentPayload>
+        }
+        update: {
+          args: Prisma.RouteAssignmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RouteAssignmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.RouteAssignmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RouteAssignmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RouteAssignmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RouteAssignmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.RouteAssignmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RouteAssignmentPayload>
+        }
+        aggregate: {
+          args: Prisma.RouteAssignmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRouteAssignment>
+        }
+        groupBy: {
+          args: Prisma.RouteAssignmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RouteAssignmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RouteAssignmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RouteAssignmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    SurveySession: {
+      payload: Prisma.$SurveySessionPayload<ExtArgs>
+      fields: Prisma.SurveySessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SurveySessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveySessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SurveySessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveySessionPayload>
+        }
+        findFirst: {
+          args: Prisma.SurveySessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveySessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SurveySessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveySessionPayload>
+        }
+        findMany: {
+          args: Prisma.SurveySessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveySessionPayload>[]
+        }
+        create: {
+          args: Prisma.SurveySessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveySessionPayload>
+        }
+        createMany: {
+          args: Prisma.SurveySessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SurveySessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveySessionPayload>[]
+        }
+        delete: {
+          args: Prisma.SurveySessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveySessionPayload>
+        }
+        update: {
+          args: Prisma.SurveySessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveySessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.SurveySessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SurveySessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SurveySessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveySessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.SurveySessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveySessionPayload>
+        }
+        aggregate: {
+          args: Prisma.SurveySessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSurveySession>
+        }
+        groupBy: {
+          args: Prisma.SurveySessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SurveySessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SurveySessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SurveySessionCountAggregateOutputType> | number
         }
       }
     }
@@ -823,8 +1048,8 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role',
-  wardId: 'wardId',
   department: 'department',
+  wardId: 'wardId',
   createdAt: 'createdAt'
 } as const
 
@@ -834,25 +1059,62 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const WardScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  number: 'number'
+  number: 'number',
+  userId: 'userId'
 } as const
 
 export type WardScalarFieldEnum = (typeof WardScalarFieldEnum)[keyof typeof WardScalarFieldEnum]
+
+
+export const RouteScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  wardId: 'wardId',
+  startLat: 'startLat',
+  startLon: 'startLon',
+  endLat: 'endLat',
+  endLon: 'endLon',
+  distance: 'distance'
+} as const
+
+export type RouteScalarFieldEnum = (typeof RouteScalarFieldEnum)[keyof typeof RouteScalarFieldEnum]
+
+
+export const RouteAssignmentScalarFieldEnum = {
+  id: 'id',
+  routeId: 'routeId',
+  surveyorId: 'surveyorId',
+  status: 'status',
+  assignedAt: 'assignedAt',
+  completedAt: 'completedAt'
+} as const
+
+export type RouteAssignmentScalarFieldEnum = (typeof RouteAssignmentScalarFieldEnum)[keyof typeof RouteAssignmentScalarFieldEnum]
+
+
+export const SurveySessionScalarFieldEnum = {
+  id: 'id',
+  routeAssignmentId: 'routeAssignmentId',
+  startedAt: 'startedAt',
+  endedAt: 'endedAt'
+} as const
+
+export type SurveySessionScalarFieldEnum = (typeof SurveySessionScalarFieldEnum)[keyof typeof SurveySessionScalarFieldEnum]
 
 
 export const IssueScalarFieldEnum = {
   id: 'id',
   clientCaptureId: 'clientCaptureId',
   type: 'type',
-  aiDetectedType: 'aiDetectedType',
-  aiConfidence: 'aiConfidence',
   status: 'status',
   latitude: 'latitude',
   longitude: 'longitude',
+  wardId: 'wardId',
+  routeId: 'routeId',
+  surveySessionId: 'surveySessionId',
+  surveyorId: 'surveyorId',
   imageUrl: 'imageUrl',
   afterImageUrl: 'afterImageUrl',
-  wardId: 'wardId',
-  surveyorId: 'surveyorId',
   createdAt: 'createdAt'
 } as const
 
@@ -875,6 +1137,7 @@ export const IssueResolutionScalarFieldEnum = {
   approved: 'approved',
   feedback: 'feedback',
   verifiedByAdminId: 'verifiedByAdminId',
+  verifiedAt: 'verifiedAt',
   createdAt: 'createdAt'
 } as const
 
@@ -940,16 +1203,16 @@ export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 
 
 /**
- * Reference to a field of type 'EngineerDepartment'
+ * Reference to a field of type 'IssueType'
  */
-export type EnumEngineerDepartmentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EngineerDepartment'>
+export type EnumIssueTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IssueType'>
     
 
 
 /**
- * Reference to a field of type 'EngineerDepartment[]'
+ * Reference to a field of type 'IssueType[]'
  */
-export type ListEnumEngineerDepartmentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EngineerDepartment[]'>
+export type ListEnumIssueTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IssueType[]'>
     
 
 
@@ -982,20 +1245,6 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'IssueType'
- */
-export type EnumIssueTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IssueType'>
-    
-
-
-/**
- * Reference to a field of type 'IssueType[]'
- */
-export type ListEnumIssueTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IssueType[]'>
-    
-
-
-/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1006,6 +1255,20 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'Float[]'
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RouteAssignmentStatus'
+ */
+export type EnumRouteAssignmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RouteAssignmentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'RouteAssignmentStatus[]'
+ */
+export type ListEnumRouteAssignmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RouteAssignmentStatus[]'>
     
 
 
@@ -1126,6 +1389,9 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   ward?: Prisma.WardOmit
+  route?: Prisma.RouteOmit
+  routeAssignment?: Prisma.RouteAssignmentOmit
+  surveySession?: Prisma.SurveySessionOmit
   issue?: Prisma.IssueOmit
   issueAssignment?: Prisma.IssueAssignmentOmit
   issueResolution?: Prisma.IssueResolutionOmit

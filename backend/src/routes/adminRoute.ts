@@ -232,6 +232,7 @@ adminRouter.post(
           approved,
           feedback,
           verifiedByAdminId: adminId,
+          verifiedAt: new Date(),
         },
       });
 

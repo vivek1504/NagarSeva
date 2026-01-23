@@ -18,14 +18,6 @@ export const UserRole = {
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 
-export const EngineerDepartment = {
-  POTHOLE: 'POTHOLE',
-  GARBAGE: 'GARBAGE'
-} as const
-
-export type EngineerDepartment = (typeof EngineerDepartment)[keyof typeof EngineerDepartment]
-
-
 export const IssueType = {
   POTHOLE: 'POTHOLE',
   GARBAGE: 'GARBAGE'
@@ -39,8 +31,8 @@ export const IssueStatus = {
   ASSIGNED: 'ASSIGNED',
   IN_PROGRESS: 'IN_PROGRESS',
   FIXED: 'FIXED',
-  REJECTED: 'REJECTED',
-  RESOLVED: 'RESOLVED'
+  RESOLVED: 'RESOLVED',
+  REJECTED: 'REJECTED'
 } as const
 
 export type IssueStatus = (typeof IssueStatus)[keyof typeof IssueStatus]

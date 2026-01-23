@@ -53,6 +53,9 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Ward: 'Ward',
+  Route: 'Route',
+  RouteAssignment: 'RouteAssignment',
+  SurveySession: 'SurveySession',
   Issue: 'Issue',
   IssueAssignment: 'IssueAssignment',
   IssueResolution: 'IssueResolution'
@@ -80,8 +83,8 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role',
-  wardId: 'wardId',
   department: 'department',
+  wardId: 'wardId',
   createdAt: 'createdAt'
 } as const
 
@@ -91,25 +94,62 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const WardScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  number: 'number'
+  number: 'number',
+  userId: 'userId'
 } as const
 
 export type WardScalarFieldEnum = (typeof WardScalarFieldEnum)[keyof typeof WardScalarFieldEnum]
+
+
+export const RouteScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  wardId: 'wardId',
+  startLat: 'startLat',
+  startLon: 'startLon',
+  endLat: 'endLat',
+  endLon: 'endLon',
+  distance: 'distance'
+} as const
+
+export type RouteScalarFieldEnum = (typeof RouteScalarFieldEnum)[keyof typeof RouteScalarFieldEnum]
+
+
+export const RouteAssignmentScalarFieldEnum = {
+  id: 'id',
+  routeId: 'routeId',
+  surveyorId: 'surveyorId',
+  status: 'status',
+  assignedAt: 'assignedAt',
+  completedAt: 'completedAt'
+} as const
+
+export type RouteAssignmentScalarFieldEnum = (typeof RouteAssignmentScalarFieldEnum)[keyof typeof RouteAssignmentScalarFieldEnum]
+
+
+export const SurveySessionScalarFieldEnum = {
+  id: 'id',
+  routeAssignmentId: 'routeAssignmentId',
+  startedAt: 'startedAt',
+  endedAt: 'endedAt'
+} as const
+
+export type SurveySessionScalarFieldEnum = (typeof SurveySessionScalarFieldEnum)[keyof typeof SurveySessionScalarFieldEnum]
 
 
 export const IssueScalarFieldEnum = {
   id: 'id',
   clientCaptureId: 'clientCaptureId',
   type: 'type',
-  aiDetectedType: 'aiDetectedType',
-  aiConfidence: 'aiConfidence',
   status: 'status',
   latitude: 'latitude',
   longitude: 'longitude',
+  wardId: 'wardId',
+  routeId: 'routeId',
+  surveySessionId: 'surveySessionId',
+  surveyorId: 'surveyorId',
   imageUrl: 'imageUrl',
   afterImageUrl: 'afterImageUrl',
-  wardId: 'wardId',
-  surveyorId: 'surveyorId',
   createdAt: 'createdAt'
 } as const
 
@@ -132,6 +172,7 @@ export const IssueResolutionScalarFieldEnum = {
   approved: 'approved',
   feedback: 'feedback',
   verifiedByAdminId: 'verifiedByAdminId',
+  verifiedAt: 'verifiedAt',
   createdAt: 'createdAt'
 } as const
 

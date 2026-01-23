@@ -28,6 +28,21 @@ export type User = Prisma.UserModel
  */
 export type Ward = Prisma.WardModel
 /**
+ * Model Route
+ * 
+ */
+export type Route = Prisma.RouteModel
+/**
+ * Model RouteAssignment
+ * 
+ */
+export type RouteAssignment = Prisma.RouteAssignmentModel
+/**
+ * Model SurveySession
+ * 
+ */
+export type SurveySession = Prisma.SurveySessionModel
+/**
  * Model Issue
  * 
  */
