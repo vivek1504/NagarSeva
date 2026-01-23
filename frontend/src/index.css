@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* UX4G Design System 2.0 - Government of India
+ * Reference: https://doc.ux4g.gov.in
+ * All colors defined as HSL for Tailwind compatibility
+ */
+
+@layer base {
+  :root {
+    /* UX4G Color Palette */
+    --background: 0 0% 100%;
+    --foreground: 210 11% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 11% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 11% 15%;
+
+    /* Primary: Government Blue #1A73E9 */
+    --primary: 214 84% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: #5A6370 */
+    --secondary: 216 10% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted: #6c757d */
+    --muted: 210 7% 46%;
+    --muted-foreground: 210 11% 15%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 210 11% 15%;
+
+    /* Danger/Destructive: #B3261D */
+    --destructive: 3 74% 41%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border/Input: #dee2e6 */
+    --border: 210 14% 89%;
+    --input: 210 14% 75%;
+    --ring: 214 84% 52%;
+
+    --radius: 0.375rem;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 210 11% 15%;
+    --sidebar-primary: 214 84% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 210 11% 15%;
+    --sidebar-border: 210 14% 89%;
+    --sidebar-ring: 214 84% 52%;
+
+    /* Chart Colors - UX4G Compatible */
+    --chart-1: 214 84% 52%;
+    --chart-2: 142 52% 49%;
+    --chart-3: 196 100% 50%;
+    --chart-4: 39 100% 50%;
+    --chart-5: 3 74% 41%;
+
+    --sidebar: 0 0% 100%;
+
+    /* UX4G Typography */
+    --font-sans: 'Roboto', 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-serif: 'Georgia', 'Cambria', 'Times New Roman', Times, serif;
+    --font-mono: 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+
+    /* UX4G Shadows */
+    --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+    --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+
+    --tracking-normal: 0em;
+    --spacing: 0.25rem;
+  }
+
+  .dark {
+    --background: 210 11% 15%;
+    --foreground: 210 40% 98%;
+
+    --card: 215 25% 20%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 215 25% 20%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary: Lighter blue for dark mode */
+    --primary: 207 90% 61%;
+    --primary-foreground: 210 11% 15%;
+
+    /* Secondary */
+    --secondary: 210 14% 83%;
+    --secondary-foreground: 210 11% 15%;
+
+    --muted: 215 15% 40%;
+    --muted-foreground: 210 40% 98%;
+
+    --accent: 210 11% 15%;
+    --accent-foreground: 210 40% 98%;
+
+    /* Danger/Destructive: Lighter for dark mode */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 20% 30%;
+    --input: 215 20% 30%;
+    --ring: 207 90% 61%;
+
+    --sidebar-background: 210 11% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 207 90% 61%;
+    --sidebar-primary-foreground: 210 11% 15%;
+    --sidebar-accent: 215 20% 30%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 215 20% 30%;
+    --sidebar-ring: 207 90% 61%;
+
+    --chart-1: 207 90% 65%;
+    --chart-2: 142 60% 55%;
+    --chart-3: 196 100% 55%;
+    --chart-4: 39 100% 55%;
+    --chart-5: 0 84% 60%;
+
+    --sidebar: 215 25% 20%;
+
+    --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+    --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+}
+
+/* Chatbot Animations */
+@keyframes slide-in-from-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-subtle {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-in {
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.slide-in-from-bottom-4 {
+  animation-name: slide-in-from-bottom;
+}
+
+.slide-in-from-bottom-2 {
+  animation-name: slide-in-from-bottom;
+}
+
+.duration-200 {
+  animation-duration: 200ms;
+}
+
+.duration-300 {
+  animation-duration: 300ms;
+}
+
+/* Smooth scrollbar for chat */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted) / 0.3);
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted) / 0.5);
+}
