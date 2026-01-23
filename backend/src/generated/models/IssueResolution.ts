@@ -30,6 +30,7 @@ export type IssueResolutionMinAggregateOutputType = {
   approved: boolean | null
   feedback: string | null
   verifiedByAdminId: string | null
+  verifiedAt: Date | null
   createdAt: Date | null
 }
 
@@ -39,6 +40,7 @@ export type IssueResolutionMaxAggregateOutputType = {
   approved: boolean | null
   feedback: string | null
   verifiedByAdminId: string | null
+  verifiedAt: Date | null
   createdAt: Date | null
 }
 
@@ -48,6 +50,7 @@ export type IssueResolutionCountAggregateOutputType = {
   approved: number
   feedback: number
   verifiedByAdminId: number
+  verifiedAt: number
   createdAt: number
   _all: number
 }
@@ -59,6 +62,7 @@ export type IssueResolutionMinAggregateInputType = {
   approved?: true
   feedback?: true
   verifiedByAdminId?: true
+  verifiedAt?: true
   createdAt?: true
 }
 
@@ -68,6 +72,7 @@ export type IssueResolutionMaxAggregateInputType = {
   approved?: true
   feedback?: true
   verifiedByAdminId?: true
+  verifiedAt?: true
   createdAt?: true
 }
 
@@ -77,6 +82,7 @@ export type IssueResolutionCountAggregateInputType = {
   approved?: true
   feedback?: true
   verifiedByAdminId?: true
+  verifiedAt?: true
   createdAt?: true
   _all?: true
 }
@@ -159,6 +165,7 @@ export type IssueResolutionGroupByOutputType = {
   approved: boolean
   feedback: string | null
   verifiedByAdminId: string | null
+  verifiedAt: Date | null
   createdAt: Date
   _count: IssueResolutionCountAggregateOutputType | null
   _min: IssueResolutionMinAggregateOutputType | null
@@ -189,6 +196,7 @@ export type IssueResolutionWhereInput = {
   approved?: Prisma.BoolFilter<"IssueResolution"> | boolean
   feedback?: Prisma.StringNullableFilter<"IssueResolution"> | string | null
   verifiedByAdminId?: Prisma.StringNullableFilter<"IssueResolution"> | string | null
+  verifiedAt?: Prisma.DateTimeNullableFilter<"IssueResolution"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"IssueResolution"> | Date | string
   verifiedByAdmin?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   issue?: Prisma.XOR<Prisma.IssueScalarRelationFilter, Prisma.IssueWhereInput>
@@ -200,6 +208,7 @@ export type IssueResolutionOrderByWithRelationInput = {
   approved?: Prisma.SortOrder
   feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   verifiedByAdminId?: Prisma.SortOrderInput | Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   verifiedByAdmin?: Prisma.UserOrderByWithRelationInput
   issue?: Prisma.IssueOrderByWithRelationInput
@@ -214,6 +223,7 @@ export type IssueResolutionWhereUniqueInput = Prisma.AtLeast<{
   approved?: Prisma.BoolFilter<"IssueResolution"> | boolean
   feedback?: Prisma.StringNullableFilter<"IssueResolution"> | string | null
   verifiedByAdminId?: Prisma.StringNullableFilter<"IssueResolution"> | string | null
+  verifiedAt?: Prisma.DateTimeNullableFilter<"IssueResolution"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"IssueResolution"> | Date | string
   verifiedByAdmin?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   issue?: Prisma.XOR<Prisma.IssueScalarRelationFilter, Prisma.IssueWhereInput>
@@ -225,6 +235,7 @@ export type IssueResolutionOrderByWithAggregationInput = {
   approved?: Prisma.SortOrder
   feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   verifiedByAdminId?: Prisma.SortOrderInput | Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.IssueResolutionCountOrderByAggregateInput
   _max?: Prisma.IssueResolutionMaxOrderByAggregateInput
@@ -240,6 +251,7 @@ export type IssueResolutionScalarWhereWithAggregatesInput = {
   approved?: Prisma.BoolWithAggregatesFilter<"IssueResolution"> | boolean
   feedback?: Prisma.StringNullableWithAggregatesFilter<"IssueResolution"> | string | null
   verifiedByAdminId?: Prisma.StringNullableWithAggregatesFilter<"IssueResolution"> | string | null
+  verifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"IssueResolution"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"IssueResolution"> | Date | string
 }
 
@@ -247,8 +259,9 @@ export type IssueResolutionCreateInput = {
   id?: string
   approved?: boolean
   feedback?: string | null
+  verifiedAt?: Date | string | null
   createdAt?: Date | string
-  verifiedByAdmin?: Prisma.UserCreateNestedOneWithoutResolutionsInput
+  verifiedByAdmin?: Prisma.UserCreateNestedOneWithoutIssueResolutionsInput
   issue: Prisma.IssueCreateNestedOneWithoutResolutionInput
 }
 
@@ -258,6 +271,7 @@ export type IssueResolutionUncheckedCreateInput = {
   approved?: boolean
   feedback?: string | null
   verifiedByAdminId?: string | null
+  verifiedAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -265,8 +279,9 @@ export type IssueResolutionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  verifiedByAdmin?: Prisma.UserUpdateOneWithoutResolutionsNestedInput
+  verifiedByAdmin?: Prisma.UserUpdateOneWithoutIssueResolutionsNestedInput
   issue?: Prisma.IssueUpdateOneRequiredWithoutResolutionNestedInput
 }
 
@@ -276,6 +291,7 @@ export type IssueResolutionUncheckedUpdateInput = {
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verifiedByAdminId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -285,6 +301,7 @@ export type IssueResolutionCreateManyInput = {
   approved?: boolean
   feedback?: string | null
   verifiedByAdminId?: string | null
+  verifiedAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -292,6 +309,7 @@ export type IssueResolutionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -301,6 +319,7 @@ export type IssueResolutionUncheckedUpdateManyInput = {
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verifiedByAdminId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -325,6 +344,7 @@ export type IssueResolutionCountOrderByAggregateInput = {
   approved?: Prisma.SortOrder
   feedback?: Prisma.SortOrder
   verifiedByAdminId?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -334,6 +354,7 @@ export type IssueResolutionMaxOrderByAggregateInput = {
   approved?: Prisma.SortOrder
   feedback?: Prisma.SortOrder
   verifiedByAdminId?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -343,6 +364,7 @@ export type IssueResolutionMinOrderByAggregateInput = {
   approved?: Prisma.SortOrder
   feedback?: Prisma.SortOrder
   verifiedByAdminId?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -428,6 +450,7 @@ export type IssueResolutionCreateWithoutVerifiedByAdminInput = {
   id?: string
   approved?: boolean
   feedback?: string | null
+  verifiedAt?: Date | string | null
   createdAt?: Date | string
   issue: Prisma.IssueCreateNestedOneWithoutResolutionInput
 }
@@ -437,6 +460,7 @@ export type IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput = {
   issueId: string
   approved?: boolean
   feedback?: string | null
+  verifiedAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -475,6 +499,7 @@ export type IssueResolutionScalarWhereInput = {
   approved?: Prisma.BoolFilter<"IssueResolution"> | boolean
   feedback?: Prisma.StringNullableFilter<"IssueResolution"> | string | null
   verifiedByAdminId?: Prisma.StringNullableFilter<"IssueResolution"> | string | null
+  verifiedAt?: Prisma.DateTimeNullableFilter<"IssueResolution"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"IssueResolution"> | Date | string
 }
 
@@ -482,8 +507,9 @@ export type IssueResolutionCreateWithoutIssueInput = {
   id?: string
   approved?: boolean
   feedback?: string | null
+  verifiedAt?: Date | string | null
   createdAt?: Date | string
-  verifiedByAdmin?: Prisma.UserCreateNestedOneWithoutResolutionsInput
+  verifiedByAdmin?: Prisma.UserCreateNestedOneWithoutIssueResolutionsInput
 }
 
 export type IssueResolutionUncheckedCreateWithoutIssueInput = {
@@ -491,6 +517,7 @@ export type IssueResolutionUncheckedCreateWithoutIssueInput = {
   approved?: boolean
   feedback?: string | null
   verifiedByAdminId?: string | null
+  verifiedAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -514,8 +541,9 @@ export type IssueResolutionUpdateWithoutIssueInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  verifiedByAdmin?: Prisma.UserUpdateOneWithoutResolutionsNestedInput
+  verifiedByAdmin?: Prisma.UserUpdateOneWithoutIssueResolutionsNestedInput
 }
 
 export type IssueResolutionUncheckedUpdateWithoutIssueInput = {
@@ -523,6 +551,7 @@ export type IssueResolutionUncheckedUpdateWithoutIssueInput = {
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verifiedByAdminId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -531,6 +560,7 @@ export type IssueResolutionCreateManyVerifiedByAdminInput = {
   issueId: string
   approved?: boolean
   feedback?: string | null
+  verifiedAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -538,6 +568,7 @@ export type IssueResolutionUpdateWithoutVerifiedByAdminInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issue?: Prisma.IssueUpdateOneRequiredWithoutResolutionNestedInput
 }
@@ -547,6 +578,7 @@ export type IssueResolutionUncheckedUpdateWithoutVerifiedByAdminInput = {
   issueId?: Prisma.StringFieldUpdateOperationsInput | string
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -555,6 +587,7 @@ export type IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminInput = {
   issueId?: Prisma.StringFieldUpdateOperationsInput | string
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -566,6 +599,7 @@ export type IssueResolutionSelect<ExtArgs extends runtime.Types.Extensions.Inter
   approved?: boolean
   feedback?: boolean
   verifiedByAdminId?: boolean
+  verifiedAt?: boolean
   createdAt?: boolean
   verifiedByAdmin?: boolean | Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs>
   issue?: boolean | Prisma.IssueDefaultArgs<ExtArgs>
@@ -577,6 +611,7 @@ export type IssueResolutionSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   approved?: boolean
   feedback?: boolean
   verifiedByAdminId?: boolean
+  verifiedAt?: boolean
   createdAt?: boolean
   verifiedByAdmin?: boolean | Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs>
   issue?: boolean | Prisma.IssueDefaultArgs<ExtArgs>
@@ -588,6 +623,7 @@ export type IssueResolutionSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   approved?: boolean
   feedback?: boolean
   verifiedByAdminId?: boolean
+  verifiedAt?: boolean
   createdAt?: boolean
   verifiedByAdmin?: boolean | Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs>
   issue?: boolean | Prisma.IssueDefaultArgs<ExtArgs>
@@ -599,10 +635,11 @@ export type IssueResolutionSelectScalar = {
   approved?: boolean
   feedback?: boolean
   verifiedByAdminId?: boolean
+  verifiedAt?: boolean
   createdAt?: boolean
 }
 
-export type IssueResolutionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "issueId" | "approved" | "feedback" | "verifiedByAdminId" | "createdAt", ExtArgs["result"]["issueResolution"]>
+export type IssueResolutionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "issueId" | "approved" | "feedback" | "verifiedByAdminId" | "verifiedAt" | "createdAt", ExtArgs["result"]["issueResolution"]>
 export type IssueResolutionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   verifiedByAdmin?: boolean | Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs>
   issue?: boolean | Prisma.IssueDefaultArgs<ExtArgs>
@@ -628,6 +665,7 @@ export type $IssueResolutionPayload<ExtArgs extends runtime.Types.Extensions.Int
     approved: boolean
     feedback: string | null
     verifiedByAdminId: string | null
+    verifiedAt: Date | null
     createdAt: Date
   }, ExtArgs["result"]["issueResolution"]>
   composites: {}
@@ -1059,6 +1097,7 @@ export interface IssueResolutionFieldRefs {
   readonly approved: Prisma.FieldRef<"IssueResolution", 'Boolean'>
   readonly feedback: Prisma.FieldRef<"IssueResolution", 'String'>
   readonly verifiedByAdminId: Prisma.FieldRef<"IssueResolution", 'String'>
+  readonly verifiedAt: Prisma.FieldRef<"IssueResolution", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"IssueResolution", 'DateTime'>
 }
     

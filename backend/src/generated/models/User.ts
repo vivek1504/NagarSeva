@@ -30,8 +30,8 @@ export type UserMinAggregateOutputType = {
   email: string | null
   password: string | null
   role: $Enums.UserRole | null
+  department: $Enums.IssueType | null
   wardId: string | null
-  department: $Enums.EngineerDepartment | null
   createdAt: Date | null
 }
 
@@ -41,8 +41,8 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   password: string | null
   role: $Enums.UserRole | null
+  department: $Enums.IssueType | null
   wardId: string | null
-  department: $Enums.EngineerDepartment | null
   createdAt: Date | null
 }
 
@@ -52,8 +52,8 @@ export type UserCountAggregateOutputType = {
   email: number
   password: number
   role: number
-  wardId: number
   department: number
+  wardId: number
   createdAt: number
   _all: number
 }
@@ -65,8 +65,8 @@ export type UserMinAggregateInputType = {
   email?: true
   password?: true
   role?: true
-  wardId?: true
   department?: true
+  wardId?: true
   createdAt?: true
 }
 
@@ -76,8 +76,8 @@ export type UserMaxAggregateInputType = {
   email?: true
   password?: true
   role?: true
-  wardId?: true
   department?: true
+  wardId?: true
   createdAt?: true
 }
 
@@ -87,8 +87,8 @@ export type UserCountAggregateInputType = {
   email?: true
   password?: true
   role?: true
-  wardId?: true
   department?: true
+  wardId?: true
   createdAt?: true
   _all?: true
 }
@@ -171,8 +171,8 @@ export type UserGroupByOutputType = {
   email: string
   password: string
   role: $Enums.UserRole
-  wardId: string
-  department: $Enums.EngineerDepartment | null
+  department: $Enums.IssueType | null
+  wardId: string | null
   createdAt: Date
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
@@ -203,13 +203,14 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
-  wardId?: Prisma.StringFilter<"User"> | string
-  department?: Prisma.EnumEngineerDepartmentNullableFilter<"User"> | $Enums.EngineerDepartment | null
+  department?: Prisma.EnumIssueTypeNullableFilter<"User"> | $Enums.IssueType | null
+  wardId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  ward?: Prisma.XOR<Prisma.WardScalarRelationFilter, Prisma.WardWhereInput>
-  issues?: Prisma.IssueListRelationFilter
-  assignedIssues?: Prisma.IssueAssignmentListRelationFilter
-  resolutions?: Prisma.IssueResolutionListRelationFilter
+  ward?: Prisma.XOR<Prisma.WardNullableScalarRelationFilter, Prisma.WardWhereInput> | null
+  routeAssignments?: Prisma.RouteAssignmentListRelationFilter
+  issueAssignments?: Prisma.IssueAssignmentListRelationFilter
+  issueResolutions?: Prisma.IssueResolutionListRelationFilter
+  reportedIssues?: Prisma.IssueListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -218,13 +219,14 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  wardId?: Prisma.SortOrder
   department?: Prisma.SortOrderInput | Prisma.SortOrder
+  wardId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   ward?: Prisma.WardOrderByWithRelationInput
-  issues?: Prisma.IssueOrderByRelationAggregateInput
-  assignedIssues?: Prisma.IssueAssignmentOrderByRelationAggregateInput
-  resolutions?: Prisma.IssueResolutionOrderByRelationAggregateInput
+  routeAssignments?: Prisma.RouteAssignmentOrderByRelationAggregateInput
+  issueAssignments?: Prisma.IssueAssignmentOrderByRelationAggregateInput
+  issueResolutions?: Prisma.IssueResolutionOrderByRelationAggregateInput
+  reportedIssues?: Prisma.IssueOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -236,13 +238,14 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
-  wardId?: Prisma.StringFilter<"User"> | string
-  department?: Prisma.EnumEngineerDepartmentNullableFilter<"User"> | $Enums.EngineerDepartment | null
+  department?: Prisma.EnumIssueTypeNullableFilter<"User"> | $Enums.IssueType | null
+  wardId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  ward?: Prisma.XOR<Prisma.WardScalarRelationFilter, Prisma.WardWhereInput>
-  issues?: Prisma.IssueListRelationFilter
-  assignedIssues?: Prisma.IssueAssignmentListRelationFilter
-  resolutions?: Prisma.IssueResolutionListRelationFilter
+  ward?: Prisma.XOR<Prisma.WardNullableScalarRelationFilter, Prisma.WardWhereInput> | null
+  routeAssignments?: Prisma.RouteAssignmentListRelationFilter
+  issueAssignments?: Prisma.IssueAssignmentListRelationFilter
+  issueResolutions?: Prisma.IssueResolutionListRelationFilter
+  reportedIssues?: Prisma.IssueListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -251,8 +254,8 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  wardId?: Prisma.SortOrder
   department?: Prisma.SortOrderInput | Prisma.SortOrder
+  wardId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -268,8 +271,8 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
-  wardId?: Prisma.StringWithAggregatesFilter<"User"> | string
-  department?: Prisma.EnumEngineerDepartmentNullableWithAggregatesFilter<"User"> | $Enums.EngineerDepartment | null
+  department?: Prisma.EnumIssueTypeNullableWithAggregatesFilter<"User"> | $Enums.IssueType | null
+  wardId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
@@ -279,12 +282,13 @@ export type UserCreateInput = {
   email: string
   password: string
   role: $Enums.UserRole
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
   createdAt?: Date | string
-  ward: Prisma.WardCreateNestedOneWithoutEngineersInput
-  issues?: Prisma.IssueCreateNestedManyWithoutSurveyorInput
-  assignedIssues?: Prisma.IssueAssignmentCreateNestedManyWithoutEngineerInput
-  resolutions?: Prisma.IssueResolutionCreateNestedManyWithoutVerifiedByAdminInput
+  ward?: Prisma.WardCreateNestedOneWithoutUserInput
+  routeAssignments?: Prisma.RouteAssignmentCreateNestedManyWithoutSurveyorInput
+  issueAssignments?: Prisma.IssueAssignmentCreateNestedManyWithoutEngineerInput
+  issueResolutions?: Prisma.IssueResolutionCreateNestedManyWithoutVerifiedByAdminInput
+  reportedIssues?: Prisma.IssueCreateNestedManyWithoutSurveyorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -293,12 +297,13 @@ export type UserUncheckedCreateInput = {
   email: string
   password: string
   role: $Enums.UserRole
-  wardId: string
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
+  wardId?: string | null
   createdAt?: Date | string
-  issues?: Prisma.IssueUncheckedCreateNestedManyWithoutSurveyorInput
-  assignedIssues?: Prisma.IssueAssignmentUncheckedCreateNestedManyWithoutEngineerInput
-  resolutions?: Prisma.IssueResolutionUncheckedCreateNestedManyWithoutVerifiedByAdminInput
+  routeAssignments?: Prisma.RouteAssignmentUncheckedCreateNestedManyWithoutSurveyorInput
+  issueAssignments?: Prisma.IssueAssignmentUncheckedCreateNestedManyWithoutEngineerInput
+  issueResolutions?: Prisma.IssueResolutionUncheckedCreateNestedManyWithoutVerifiedByAdminInput
+  reportedIssues?: Prisma.IssueUncheckedCreateNestedManyWithoutSurveyorInput
 }
 
 export type UserUpdateInput = {
@@ -307,12 +312,13 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ward?: Prisma.WardUpdateOneRequiredWithoutEngineersNestedInput
-  issues?: Prisma.IssueUpdateManyWithoutSurveyorNestedInput
-  assignedIssues?: Prisma.IssueAssignmentUpdateManyWithoutEngineerNestedInput
-  resolutions?: Prisma.IssueResolutionUpdateManyWithoutVerifiedByAdminNestedInput
+  ward?: Prisma.WardUpdateOneWithoutUserNestedInput
+  routeAssignments?: Prisma.RouteAssignmentUpdateManyWithoutSurveyorNestedInput
+  issueAssignments?: Prisma.IssueAssignmentUpdateManyWithoutEngineerNestedInput
+  issueResolutions?: Prisma.IssueResolutionUpdateManyWithoutVerifiedByAdminNestedInput
+  reportedIssues?: Prisma.IssueUpdateManyWithoutSurveyorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -321,12 +327,13 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  wardId?: Prisma.StringFieldUpdateOperationsInput | string
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  wardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  issues?: Prisma.IssueUncheckedUpdateManyWithoutSurveyorNestedInput
-  assignedIssues?: Prisma.IssueAssignmentUncheckedUpdateManyWithoutEngineerNestedInput
-  resolutions?: Prisma.IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminNestedInput
+  routeAssignments?: Prisma.RouteAssignmentUncheckedUpdateManyWithoutSurveyorNestedInput
+  issueAssignments?: Prisma.IssueAssignmentUncheckedUpdateManyWithoutEngineerNestedInput
+  issueResolutions?: Prisma.IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminNestedInput
+  reportedIssues?: Prisma.IssueUncheckedUpdateManyWithoutSurveyorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -335,8 +342,8 @@ export type UserCreateManyInput = {
   email: string
   password: string
   role: $Enums.UserRole
-  wardId: string
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
+  wardId?: string | null
   createdAt?: Date | string
 }
 
@@ -346,7 +353,7 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -356,8 +363,8 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  wardId?: Prisma.StringFieldUpdateOperationsInput | string
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  wardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -367,8 +374,8 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  wardId?: Prisma.SortOrder
   department?: Prisma.SortOrder
+  wardId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -378,8 +385,8 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  wardId?: Prisma.SortOrder
   department?: Prisma.SortOrder
+  wardId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -389,8 +396,8 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  wardId?: Prisma.SortOrder
   department?: Prisma.SortOrder
+  wardId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -422,12 +429,16 @@ export type EnumUserRoleFieldUpdateOperationsInput = {
   set?: $Enums.UserRole
 }
 
-export type NullableEnumEngineerDepartmentFieldUpdateOperationsInput = {
-  set?: $Enums.EngineerDepartment | null
+export type NullableEnumIssueTypeFieldUpdateOperationsInput = {
+  set?: $Enums.IssueType | null
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type UserCreateNestedManyWithoutWardInput = {
@@ -472,48 +483,62 @@ export type UserUncheckedUpdateManyWithoutWardNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
-export type UserCreateNestedOneWithoutIssuesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutIssuesInput, Prisma.UserUncheckedCreateWithoutIssuesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIssuesInput
+export type UserCreateNestedOneWithoutRouteAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRouteAssignmentsInput, Prisma.UserUncheckedCreateWithoutRouteAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRouteAssignmentsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutIssuesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutIssuesInput, Prisma.UserUncheckedCreateWithoutIssuesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIssuesInput
-  upsert?: Prisma.UserUpsertWithoutIssuesInput
+export type UserUpdateOneRequiredWithoutRouteAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRouteAssignmentsInput, Prisma.UserUncheckedCreateWithoutRouteAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRouteAssignmentsInput
+  upsert?: Prisma.UserUpsertWithoutRouteAssignmentsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIssuesInput, Prisma.UserUpdateWithoutIssuesInput>, Prisma.UserUncheckedUpdateWithoutIssuesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRouteAssignmentsInput, Prisma.UserUpdateWithoutRouteAssignmentsInput>, Prisma.UserUncheckedUpdateWithoutRouteAssignmentsInput>
 }
 
-export type UserCreateNestedOneWithoutAssignedIssuesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedIssuesInput, Prisma.UserUncheckedCreateWithoutAssignedIssuesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedIssuesInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutAssignedIssuesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedIssuesInput, Prisma.UserUncheckedCreateWithoutAssignedIssuesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedIssuesInput
-  upsert?: Prisma.UserUpsertWithoutAssignedIssuesInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignedIssuesInput, Prisma.UserUpdateWithoutAssignedIssuesInput>, Prisma.UserUncheckedUpdateWithoutAssignedIssuesInput>
-}
-
-export type UserCreateNestedOneWithoutResolutionsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutResolutionsInput, Prisma.UserUncheckedCreateWithoutResolutionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResolutionsInput
+export type UserCreateNestedOneWithoutReportedIssuesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportedIssuesInput, Prisma.UserUncheckedCreateWithoutReportedIssuesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportedIssuesInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneWithoutResolutionsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutResolutionsInput, Prisma.UserUncheckedCreateWithoutResolutionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResolutionsInput
-  upsert?: Prisma.UserUpsertWithoutResolutionsInput
+export type UserUpdateOneRequiredWithoutReportedIssuesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportedIssuesInput, Prisma.UserUncheckedCreateWithoutReportedIssuesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportedIssuesInput
+  upsert?: Prisma.UserUpsertWithoutReportedIssuesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportedIssuesInput, Prisma.UserUpdateWithoutReportedIssuesInput>, Prisma.UserUncheckedUpdateWithoutReportedIssuesInput>
+}
+
+export type UserCreateNestedOneWithoutIssueAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIssueAssignmentsInput, Prisma.UserUncheckedCreateWithoutIssueAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIssueAssignmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutIssueAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIssueAssignmentsInput, Prisma.UserUncheckedCreateWithoutIssueAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIssueAssignmentsInput
+  upsert?: Prisma.UserUpsertWithoutIssueAssignmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIssueAssignmentsInput, Prisma.UserUpdateWithoutIssueAssignmentsInput>, Prisma.UserUncheckedUpdateWithoutIssueAssignmentsInput>
+}
+
+export type UserCreateNestedOneWithoutIssueResolutionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIssueResolutionsInput, Prisma.UserUncheckedCreateWithoutIssueResolutionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIssueResolutionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutIssueResolutionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIssueResolutionsInput, Prisma.UserUncheckedCreateWithoutIssueResolutionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIssueResolutionsInput
+  upsert?: Prisma.UserUpsertWithoutIssueResolutionsInput
   disconnect?: Prisma.UserWhereInput | boolean
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutResolutionsInput, Prisma.UserUpdateWithoutResolutionsInput>, Prisma.UserUncheckedUpdateWithoutResolutionsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIssueResolutionsInput, Prisma.UserUpdateWithoutIssueResolutionsInput>, Prisma.UserUncheckedUpdateWithoutIssueResolutionsInput>
 }
 
 export type UserCreateWithoutWardInput = {
@@ -522,11 +547,12 @@ export type UserCreateWithoutWardInput = {
   email: string
   password: string
   role: $Enums.UserRole
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
   createdAt?: Date | string
-  issues?: Prisma.IssueCreateNestedManyWithoutSurveyorInput
-  assignedIssues?: Prisma.IssueAssignmentCreateNestedManyWithoutEngineerInput
-  resolutions?: Prisma.IssueResolutionCreateNestedManyWithoutVerifiedByAdminInput
+  routeAssignments?: Prisma.RouteAssignmentCreateNestedManyWithoutSurveyorInput
+  issueAssignments?: Prisma.IssueAssignmentCreateNestedManyWithoutEngineerInput
+  issueResolutions?: Prisma.IssueResolutionCreateNestedManyWithoutVerifiedByAdminInput
+  reportedIssues?: Prisma.IssueCreateNestedManyWithoutSurveyorInput
 }
 
 export type UserUncheckedCreateWithoutWardInput = {
@@ -535,11 +561,12 @@ export type UserUncheckedCreateWithoutWardInput = {
   email: string
   password: string
   role: $Enums.UserRole
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
   createdAt?: Date | string
-  issues?: Prisma.IssueUncheckedCreateNestedManyWithoutSurveyorInput
-  assignedIssues?: Prisma.IssueAssignmentUncheckedCreateNestedManyWithoutEngineerInput
-  resolutions?: Prisma.IssueResolutionUncheckedCreateNestedManyWithoutVerifiedByAdminInput
+  routeAssignments?: Prisma.RouteAssignmentUncheckedCreateNestedManyWithoutSurveyorInput
+  issueAssignments?: Prisma.IssueAssignmentUncheckedCreateNestedManyWithoutEngineerInput
+  issueResolutions?: Prisma.IssueResolutionUncheckedCreateNestedManyWithoutVerifiedByAdminInput
+  reportedIssues?: Prisma.IssueUncheckedCreateNestedManyWithoutSurveyorInput
 }
 
 export type UserCreateOrConnectWithoutWardInput = {
@@ -577,213 +604,297 @@ export type UserScalarWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
-  wardId?: Prisma.StringFilter<"User"> | string
-  department?: Prisma.EnumEngineerDepartmentNullableFilter<"User"> | $Enums.EngineerDepartment | null
+  department?: Prisma.EnumIssueTypeNullableFilter<"User"> | $Enums.IssueType | null
+  wardId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
 }
 
-export type UserCreateWithoutIssuesInput = {
+export type UserCreateWithoutRouteAssignmentsInput = {
   id?: string
   name: string
   email: string
   password: string
   role: $Enums.UserRole
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
   createdAt?: Date | string
-  ward: Prisma.WardCreateNestedOneWithoutEngineersInput
-  assignedIssues?: Prisma.IssueAssignmentCreateNestedManyWithoutEngineerInput
-  resolutions?: Prisma.IssueResolutionCreateNestedManyWithoutVerifiedByAdminInput
+  ward?: Prisma.WardCreateNestedOneWithoutUserInput
+  issueAssignments?: Prisma.IssueAssignmentCreateNestedManyWithoutEngineerInput
+  issueResolutions?: Prisma.IssueResolutionCreateNestedManyWithoutVerifiedByAdminInput
+  reportedIssues?: Prisma.IssueCreateNestedManyWithoutSurveyorInput
 }
 
-export type UserUncheckedCreateWithoutIssuesInput = {
+export type UserUncheckedCreateWithoutRouteAssignmentsInput = {
   id?: string
   name: string
   email: string
   password: string
   role: $Enums.UserRole
-  wardId: string
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
+  wardId?: string | null
   createdAt?: Date | string
-  assignedIssues?: Prisma.IssueAssignmentUncheckedCreateNestedManyWithoutEngineerInput
-  resolutions?: Prisma.IssueResolutionUncheckedCreateNestedManyWithoutVerifiedByAdminInput
+  issueAssignments?: Prisma.IssueAssignmentUncheckedCreateNestedManyWithoutEngineerInput
+  issueResolutions?: Prisma.IssueResolutionUncheckedCreateNestedManyWithoutVerifiedByAdminInput
+  reportedIssues?: Prisma.IssueUncheckedCreateNestedManyWithoutSurveyorInput
 }
 
-export type UserCreateOrConnectWithoutIssuesInput = {
+export type UserCreateOrConnectWithoutRouteAssignmentsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutIssuesInput, Prisma.UserUncheckedCreateWithoutIssuesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRouteAssignmentsInput, Prisma.UserUncheckedCreateWithoutRouteAssignmentsInput>
 }
 
-export type UserUpsertWithoutIssuesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutIssuesInput, Prisma.UserUncheckedUpdateWithoutIssuesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutIssuesInput, Prisma.UserUncheckedCreateWithoutIssuesInput>
+export type UserUpsertWithoutRouteAssignmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRouteAssignmentsInput, Prisma.UserUncheckedUpdateWithoutRouteAssignmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRouteAssignmentsInput, Prisma.UserUncheckedCreateWithoutRouteAssignmentsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutIssuesInput = {
+export type UserUpdateToOneWithWhereWithoutRouteAssignmentsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutIssuesInput, Prisma.UserUncheckedUpdateWithoutIssuesInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRouteAssignmentsInput, Prisma.UserUncheckedUpdateWithoutRouteAssignmentsInput>
 }
 
-export type UserUpdateWithoutIssuesInput = {
+export type UserUpdateWithoutRouteAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ward?: Prisma.WardUpdateOneRequiredWithoutEngineersNestedInput
-  assignedIssues?: Prisma.IssueAssignmentUpdateManyWithoutEngineerNestedInput
-  resolutions?: Prisma.IssueResolutionUpdateManyWithoutVerifiedByAdminNestedInput
+  ward?: Prisma.WardUpdateOneWithoutUserNestedInput
+  issueAssignments?: Prisma.IssueAssignmentUpdateManyWithoutEngineerNestedInput
+  issueResolutions?: Prisma.IssueResolutionUpdateManyWithoutVerifiedByAdminNestedInput
+  reportedIssues?: Prisma.IssueUpdateManyWithoutSurveyorNestedInput
 }
 
-export type UserUncheckedUpdateWithoutIssuesInput = {
+export type UserUncheckedUpdateWithoutRouteAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  wardId?: Prisma.StringFieldUpdateOperationsInput | string
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  wardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  assignedIssues?: Prisma.IssueAssignmentUncheckedUpdateManyWithoutEngineerNestedInput
-  resolutions?: Prisma.IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminNestedInput
+  issueAssignments?: Prisma.IssueAssignmentUncheckedUpdateManyWithoutEngineerNestedInput
+  issueResolutions?: Prisma.IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminNestedInput
+  reportedIssues?: Prisma.IssueUncheckedUpdateManyWithoutSurveyorNestedInput
 }
 
-export type UserCreateWithoutAssignedIssuesInput = {
+export type UserCreateWithoutReportedIssuesInput = {
   id?: string
   name: string
   email: string
   password: string
   role: $Enums.UserRole
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
   createdAt?: Date | string
-  ward: Prisma.WardCreateNestedOneWithoutEngineersInput
-  issues?: Prisma.IssueCreateNestedManyWithoutSurveyorInput
-  resolutions?: Prisma.IssueResolutionCreateNestedManyWithoutVerifiedByAdminInput
+  ward?: Prisma.WardCreateNestedOneWithoutUserInput
+  routeAssignments?: Prisma.RouteAssignmentCreateNestedManyWithoutSurveyorInput
+  issueAssignments?: Prisma.IssueAssignmentCreateNestedManyWithoutEngineerInput
+  issueResolutions?: Prisma.IssueResolutionCreateNestedManyWithoutVerifiedByAdminInput
 }
 
-export type UserUncheckedCreateWithoutAssignedIssuesInput = {
+export type UserUncheckedCreateWithoutReportedIssuesInput = {
   id?: string
   name: string
   email: string
   password: string
   role: $Enums.UserRole
-  wardId: string
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
+  wardId?: string | null
   createdAt?: Date | string
-  issues?: Prisma.IssueUncheckedCreateNestedManyWithoutSurveyorInput
-  resolutions?: Prisma.IssueResolutionUncheckedCreateNestedManyWithoutVerifiedByAdminInput
+  routeAssignments?: Prisma.RouteAssignmentUncheckedCreateNestedManyWithoutSurveyorInput
+  issueAssignments?: Prisma.IssueAssignmentUncheckedCreateNestedManyWithoutEngineerInput
+  issueResolutions?: Prisma.IssueResolutionUncheckedCreateNestedManyWithoutVerifiedByAdminInput
 }
 
-export type UserCreateOrConnectWithoutAssignedIssuesInput = {
+export type UserCreateOrConnectWithoutReportedIssuesInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAssignedIssuesInput, Prisma.UserUncheckedCreateWithoutAssignedIssuesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportedIssuesInput, Prisma.UserUncheckedCreateWithoutReportedIssuesInput>
 }
 
-export type UserUpsertWithoutAssignedIssuesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAssignedIssuesInput, Prisma.UserUncheckedUpdateWithoutAssignedIssuesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAssignedIssuesInput, Prisma.UserUncheckedCreateWithoutAssignedIssuesInput>
+export type UserUpsertWithoutReportedIssuesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReportedIssuesInput, Prisma.UserUncheckedUpdateWithoutReportedIssuesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportedIssuesInput, Prisma.UserUncheckedCreateWithoutReportedIssuesInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutAssignedIssuesInput = {
+export type UserUpdateToOneWithWhereWithoutReportedIssuesInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAssignedIssuesInput, Prisma.UserUncheckedUpdateWithoutAssignedIssuesInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReportedIssuesInput, Prisma.UserUncheckedUpdateWithoutReportedIssuesInput>
 }
 
-export type UserUpdateWithoutAssignedIssuesInput = {
+export type UserUpdateWithoutReportedIssuesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ward?: Prisma.WardUpdateOneRequiredWithoutEngineersNestedInput
-  issues?: Prisma.IssueUpdateManyWithoutSurveyorNestedInput
-  resolutions?: Prisma.IssueResolutionUpdateManyWithoutVerifiedByAdminNestedInput
+  ward?: Prisma.WardUpdateOneWithoutUserNestedInput
+  routeAssignments?: Prisma.RouteAssignmentUpdateManyWithoutSurveyorNestedInput
+  issueAssignments?: Prisma.IssueAssignmentUpdateManyWithoutEngineerNestedInput
+  issueResolutions?: Prisma.IssueResolutionUpdateManyWithoutVerifiedByAdminNestedInput
 }
 
-export type UserUncheckedUpdateWithoutAssignedIssuesInput = {
+export type UserUncheckedUpdateWithoutReportedIssuesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  wardId?: Prisma.StringFieldUpdateOperationsInput | string
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  wardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  issues?: Prisma.IssueUncheckedUpdateManyWithoutSurveyorNestedInput
-  resolutions?: Prisma.IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminNestedInput
+  routeAssignments?: Prisma.RouteAssignmentUncheckedUpdateManyWithoutSurveyorNestedInput
+  issueAssignments?: Prisma.IssueAssignmentUncheckedUpdateManyWithoutEngineerNestedInput
+  issueResolutions?: Prisma.IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminNestedInput
 }
 
-export type UserCreateWithoutResolutionsInput = {
+export type UserCreateWithoutIssueAssignmentsInput = {
   id?: string
   name: string
   email: string
   password: string
   role: $Enums.UserRole
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
   createdAt?: Date | string
-  ward: Prisma.WardCreateNestedOneWithoutEngineersInput
-  issues?: Prisma.IssueCreateNestedManyWithoutSurveyorInput
-  assignedIssues?: Prisma.IssueAssignmentCreateNestedManyWithoutEngineerInput
+  ward?: Prisma.WardCreateNestedOneWithoutUserInput
+  routeAssignments?: Prisma.RouteAssignmentCreateNestedManyWithoutSurveyorInput
+  issueResolutions?: Prisma.IssueResolutionCreateNestedManyWithoutVerifiedByAdminInput
+  reportedIssues?: Prisma.IssueCreateNestedManyWithoutSurveyorInput
 }
 
-export type UserUncheckedCreateWithoutResolutionsInput = {
+export type UserUncheckedCreateWithoutIssueAssignmentsInput = {
   id?: string
   name: string
   email: string
   password: string
   role: $Enums.UserRole
-  wardId: string
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
+  wardId?: string | null
   createdAt?: Date | string
-  issues?: Prisma.IssueUncheckedCreateNestedManyWithoutSurveyorInput
-  assignedIssues?: Prisma.IssueAssignmentUncheckedCreateNestedManyWithoutEngineerInput
+  routeAssignments?: Prisma.RouteAssignmentUncheckedCreateNestedManyWithoutSurveyorInput
+  issueResolutions?: Prisma.IssueResolutionUncheckedCreateNestedManyWithoutVerifiedByAdminInput
+  reportedIssues?: Prisma.IssueUncheckedCreateNestedManyWithoutSurveyorInput
 }
 
-export type UserCreateOrConnectWithoutResolutionsInput = {
+export type UserCreateOrConnectWithoutIssueAssignmentsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutResolutionsInput, Prisma.UserUncheckedCreateWithoutResolutionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIssueAssignmentsInput, Prisma.UserUncheckedCreateWithoutIssueAssignmentsInput>
 }
 
-export type UserUpsertWithoutResolutionsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutResolutionsInput, Prisma.UserUncheckedUpdateWithoutResolutionsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutResolutionsInput, Prisma.UserUncheckedCreateWithoutResolutionsInput>
+export type UserUpsertWithoutIssueAssignmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutIssueAssignmentsInput, Prisma.UserUncheckedUpdateWithoutIssueAssignmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIssueAssignmentsInput, Prisma.UserUncheckedCreateWithoutIssueAssignmentsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutResolutionsInput = {
+export type UserUpdateToOneWithWhereWithoutIssueAssignmentsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutResolutionsInput, Prisma.UserUncheckedUpdateWithoutResolutionsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutIssueAssignmentsInput, Prisma.UserUncheckedUpdateWithoutIssueAssignmentsInput>
 }
 
-export type UserUpdateWithoutResolutionsInput = {
+export type UserUpdateWithoutIssueAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ward?: Prisma.WardUpdateOneRequiredWithoutEngineersNestedInput
-  issues?: Prisma.IssueUpdateManyWithoutSurveyorNestedInput
-  assignedIssues?: Prisma.IssueAssignmentUpdateManyWithoutEngineerNestedInput
+  ward?: Prisma.WardUpdateOneWithoutUserNestedInput
+  routeAssignments?: Prisma.RouteAssignmentUpdateManyWithoutSurveyorNestedInput
+  issueResolutions?: Prisma.IssueResolutionUpdateManyWithoutVerifiedByAdminNestedInput
+  reportedIssues?: Prisma.IssueUpdateManyWithoutSurveyorNestedInput
 }
 
-export type UserUncheckedUpdateWithoutResolutionsInput = {
+export type UserUncheckedUpdateWithoutIssueAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  wardId?: Prisma.StringFieldUpdateOperationsInput | string
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  wardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  issues?: Prisma.IssueUncheckedUpdateManyWithoutSurveyorNestedInput
-  assignedIssues?: Prisma.IssueAssignmentUncheckedUpdateManyWithoutEngineerNestedInput
+  routeAssignments?: Prisma.RouteAssignmentUncheckedUpdateManyWithoutSurveyorNestedInput
+  issueResolutions?: Prisma.IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminNestedInput
+  reportedIssues?: Prisma.IssueUncheckedUpdateManyWithoutSurveyorNestedInput
+}
+
+export type UserCreateWithoutIssueResolutionsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role: $Enums.UserRole
+  department?: $Enums.IssueType | null
+  createdAt?: Date | string
+  ward?: Prisma.WardCreateNestedOneWithoutUserInput
+  routeAssignments?: Prisma.RouteAssignmentCreateNestedManyWithoutSurveyorInput
+  issueAssignments?: Prisma.IssueAssignmentCreateNestedManyWithoutEngineerInput
+  reportedIssues?: Prisma.IssueCreateNestedManyWithoutSurveyorInput
+}
+
+export type UserUncheckedCreateWithoutIssueResolutionsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role: $Enums.UserRole
+  department?: $Enums.IssueType | null
+  wardId?: string | null
+  createdAt?: Date | string
+  routeAssignments?: Prisma.RouteAssignmentUncheckedCreateNestedManyWithoutSurveyorInput
+  issueAssignments?: Prisma.IssueAssignmentUncheckedCreateNestedManyWithoutEngineerInput
+  reportedIssues?: Prisma.IssueUncheckedCreateNestedManyWithoutSurveyorInput
+}
+
+export type UserCreateOrConnectWithoutIssueResolutionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutIssueResolutionsInput, Prisma.UserUncheckedCreateWithoutIssueResolutionsInput>
+}
+
+export type UserUpsertWithoutIssueResolutionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutIssueResolutionsInput, Prisma.UserUncheckedUpdateWithoutIssueResolutionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIssueResolutionsInput, Prisma.UserUncheckedCreateWithoutIssueResolutionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutIssueResolutionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutIssueResolutionsInput, Prisma.UserUncheckedUpdateWithoutIssueResolutionsInput>
+}
+
+export type UserUpdateWithoutIssueResolutionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ward?: Prisma.WardUpdateOneWithoutUserNestedInput
+  routeAssignments?: Prisma.RouteAssignmentUpdateManyWithoutSurveyorNestedInput
+  issueAssignments?: Prisma.IssueAssignmentUpdateManyWithoutEngineerNestedInput
+  reportedIssues?: Prisma.IssueUpdateManyWithoutSurveyorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutIssueResolutionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  wardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  routeAssignments?: Prisma.RouteAssignmentUncheckedUpdateManyWithoutSurveyorNestedInput
+  issueAssignments?: Prisma.IssueAssignmentUncheckedUpdateManyWithoutEngineerNestedInput
+  reportedIssues?: Prisma.IssueUncheckedUpdateManyWithoutSurveyorNestedInput
 }
 
 export type UserCreateManyWardInput = {
@@ -792,7 +903,7 @@ export type UserCreateManyWardInput = {
   email: string
   password: string
   role: $Enums.UserRole
-  department?: $Enums.EngineerDepartment | null
+  department?: $Enums.IssueType | null
   createdAt?: Date | string
 }
 
@@ -802,11 +913,12 @@ export type UserUpdateWithoutWardInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  issues?: Prisma.IssueUpdateManyWithoutSurveyorNestedInput
-  assignedIssues?: Prisma.IssueAssignmentUpdateManyWithoutEngineerNestedInput
-  resolutions?: Prisma.IssueResolutionUpdateManyWithoutVerifiedByAdminNestedInput
+  routeAssignments?: Prisma.RouteAssignmentUpdateManyWithoutSurveyorNestedInput
+  issueAssignments?: Prisma.IssueAssignmentUpdateManyWithoutEngineerNestedInput
+  issueResolutions?: Prisma.IssueResolutionUpdateManyWithoutVerifiedByAdminNestedInput
+  reportedIssues?: Prisma.IssueUpdateManyWithoutSurveyorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWardInput = {
@@ -815,11 +927,12 @@ export type UserUncheckedUpdateWithoutWardInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  issues?: Prisma.IssueUncheckedUpdateManyWithoutSurveyorNestedInput
-  assignedIssues?: Prisma.IssueAssignmentUncheckedUpdateManyWithoutEngineerNestedInput
-  resolutions?: Prisma.IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminNestedInput
+  routeAssignments?: Prisma.RouteAssignmentUncheckedUpdateManyWithoutSurveyorNestedInput
+  issueAssignments?: Prisma.IssueAssignmentUncheckedUpdateManyWithoutEngineerNestedInput
+  issueResolutions?: Prisma.IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminNestedInput
+  reportedIssues?: Prisma.IssueUncheckedUpdateManyWithoutSurveyorNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutWardInput = {
@@ -828,7 +941,7 @@ export type UserUncheckedUpdateManyWithoutWardInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  department?: Prisma.NullableEnumEngineerDepartmentFieldUpdateOperationsInput | $Enums.EngineerDepartment | null
+  department?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -838,15 +951,17 @@ export type UserUncheckedUpdateManyWithoutWardInput = {
  */
 
 export type UserCountOutputType = {
-  issues: number
-  assignedIssues: number
-  resolutions: number
+  routeAssignments: number
+  issueAssignments: number
+  issueResolutions: number
+  reportedIssues: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  issues?: boolean | UserCountOutputTypeCountIssuesArgs
-  assignedIssues?: boolean | UserCountOutputTypeCountAssignedIssuesArgs
-  resolutions?: boolean | UserCountOutputTypeCountResolutionsArgs
+  routeAssignments?: boolean | UserCountOutputTypeCountRouteAssignmentsArgs
+  issueAssignments?: boolean | UserCountOutputTypeCountIssueAssignmentsArgs
+  issueResolutions?: boolean | UserCountOutputTypeCountIssueResolutionsArgs
+  reportedIssues?: boolean | UserCountOutputTypeCountReportedIssuesArgs
 }
 
 /**
@@ -862,22 +977,29 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountIssuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.IssueWhereInput
+export type UserCountOutputTypeCountRouteAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RouteAssignmentWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountAssignedIssuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountIssueAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.IssueAssignmentWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountResolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountIssueResolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.IssueResolutionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReportedIssuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IssueWhereInput
 }
 
 
@@ -887,13 +1009,14 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   password?: boolean
   role?: boolean
-  wardId?: boolean
   department?: boolean
+  wardId?: boolean
   createdAt?: boolean
-  ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
-  issues?: boolean | Prisma.User$issuesArgs<ExtArgs>
-  assignedIssues?: boolean | Prisma.User$assignedIssuesArgs<ExtArgs>
-  resolutions?: boolean | Prisma.User$resolutionsArgs<ExtArgs>
+  ward?: boolean | Prisma.User$wardArgs<ExtArgs>
+  routeAssignments?: boolean | Prisma.User$routeAssignmentsArgs<ExtArgs>
+  issueAssignments?: boolean | Prisma.User$issueAssignmentsArgs<ExtArgs>
+  issueResolutions?: boolean | Prisma.User$issueResolutionsArgs<ExtArgs>
+  reportedIssues?: boolean | Prisma.User$reportedIssuesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -903,10 +1026,10 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   password?: boolean
   role?: boolean
-  wardId?: boolean
   department?: boolean
+  wardId?: boolean
   createdAt?: boolean
-  ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
+  ward?: boolean | Prisma.User$wardArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -915,10 +1038,10 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   password?: boolean
   role?: boolean
-  wardId?: boolean
   department?: boolean
+  wardId?: boolean
   createdAt?: boolean
-  ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
+  ward?: boolean | Prisma.User$wardArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -927,33 +1050,35 @@ export type UserSelectScalar = {
   email?: boolean
   password?: boolean
   role?: boolean
-  wardId?: boolean
   department?: boolean
+  wardId?: boolean
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "wardId" | "department" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "department" | "wardId" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
-  issues?: boolean | Prisma.User$issuesArgs<ExtArgs>
-  assignedIssues?: boolean | Prisma.User$assignedIssuesArgs<ExtArgs>
-  resolutions?: boolean | Prisma.User$resolutionsArgs<ExtArgs>
+  ward?: boolean | Prisma.User$wardArgs<ExtArgs>
+  routeAssignments?: boolean | Prisma.User$routeAssignmentsArgs<ExtArgs>
+  issueAssignments?: boolean | Prisma.User$issueAssignmentsArgs<ExtArgs>
+  issueResolutions?: boolean | Prisma.User$issueResolutionsArgs<ExtArgs>
+  reportedIssues?: boolean | Prisma.User$reportedIssuesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
+  ward?: boolean | Prisma.User$wardArgs<ExtArgs>
 }
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
+  ward?: boolean | Prisma.User$wardArgs<ExtArgs>
 }
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    ward: Prisma.$WardPayload<ExtArgs>
-    issues: Prisma.$IssuePayload<ExtArgs>[]
-    assignedIssues: Prisma.$IssueAssignmentPayload<ExtArgs>[]
-    resolutions: Prisma.$IssueResolutionPayload<ExtArgs>[]
+    ward: Prisma.$WardPayload<ExtArgs> | null
+    routeAssignments: Prisma.$RouteAssignmentPayload<ExtArgs>[]
+    issueAssignments: Prisma.$IssueAssignmentPayload<ExtArgs>[]
+    issueResolutions: Prisma.$IssueResolutionPayload<ExtArgs>[]
+    reportedIssues: Prisma.$IssuePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -961,8 +1086,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     password: string
     role: $Enums.UserRole
-    wardId: string
-    department: $Enums.EngineerDepartment | null
+    department: $Enums.IssueType | null
+    wardId: string | null
     createdAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -1358,10 +1483,11 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  ward<T extends Prisma.WardDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WardDefaultArgs<ExtArgs>>): Prisma.Prisma__WardClient<runtime.Types.Result.GetResult<Prisma.$WardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  issues<T extends Prisma.User$issuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$issuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  assignedIssues<T extends Prisma.User$assignedIssuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedIssuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  resolutions<T extends Prisma.User$resolutionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resolutionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ward<T extends Prisma.User$wardArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$wardArgs<ExtArgs>>): Prisma.Prisma__WardClient<runtime.Types.Result.GetResult<Prisma.$WardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  routeAssignments<T extends Prisma.User$routeAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$routeAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RouteAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  issueAssignments<T extends Prisma.User$issueAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$issueAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  issueResolutions<T extends Prisma.User$issueResolutionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$issueResolutionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reportedIssues<T extends Prisma.User$reportedIssuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportedIssuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1396,8 +1522,8 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
+  readonly department: Prisma.FieldRef<"User", 'IssueType'>
   readonly wardId: Prisma.FieldRef<"User", 'String'>
-  readonly department: Prisma.FieldRef<"User", 'EngineerDepartment'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
@@ -1795,33 +1921,52 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.issues
+ * User.ward
  */
-export type User$issuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$wardArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Issue
+   * Select specific fields to fetch from the Ward
    */
-  select?: Prisma.IssueSelect<ExtArgs> | null
+  select?: Prisma.WardSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Issue
+   * Omit specific fields from the Ward
    */
-  omit?: Prisma.IssueOmit<ExtArgs> | null
+  omit?: Prisma.WardOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.IssueInclude<ExtArgs> | null
-  where?: Prisma.IssueWhereInput
-  orderBy?: Prisma.IssueOrderByWithRelationInput | Prisma.IssueOrderByWithRelationInput[]
-  cursor?: Prisma.IssueWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.IssueScalarFieldEnum | Prisma.IssueScalarFieldEnum[]
+  include?: Prisma.WardInclude<ExtArgs> | null
+  where?: Prisma.WardWhereInput
 }
 
 /**
- * User.assignedIssues
+ * User.routeAssignments
  */
-export type User$assignedIssuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$routeAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RouteAssignment
+   */
+  select?: Prisma.RouteAssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RouteAssignment
+   */
+  omit?: Prisma.RouteAssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RouteAssignmentInclude<ExtArgs> | null
+  where?: Prisma.RouteAssignmentWhereInput
+  orderBy?: Prisma.RouteAssignmentOrderByWithRelationInput | Prisma.RouteAssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.RouteAssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RouteAssignmentScalarFieldEnum | Prisma.RouteAssignmentScalarFieldEnum[]
+}
+
+/**
+ * User.issueAssignments
+ */
+export type User$issueAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the IssueAssignment
    */
@@ -1843,9 +1988,9 @@ export type User$assignedIssuesArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * User.resolutions
+ * User.issueResolutions
  */
-export type User$resolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$issueResolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the IssueResolution
    */
@@ -1864,6 +2009,30 @@ export type User$resolutionsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.IssueResolutionScalarFieldEnum | Prisma.IssueResolutionScalarFieldEnum[]
+}
+
+/**
+ * User.reportedIssues
+ */
+export type User$reportedIssuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Issue
+   */
+  select?: Prisma.IssueSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Issue
+   */
+  omit?: Prisma.IssueOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IssueInclude<ExtArgs> | null
+  where?: Prisma.IssueWhereInput
+  orderBy?: Prisma.IssueOrderByWithRelationInput | Prisma.IssueOrderByWithRelationInput[]
+  cursor?: Prisma.IssueWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IssueScalarFieldEnum | Prisma.IssueScalarFieldEnum[]
 }
 
 /**

@@ -27,13 +27,11 @@ export type AggregateIssue = {
 }
 
 export type IssueAvgAggregateOutputType = {
-  aiConfidence: number | null
   latitude: number | null
   longitude: number | null
 }
 
 export type IssueSumAggregateOutputType = {
-  aiConfidence: number | null
   latitude: number | null
   longitude: number | null
 }
@@ -42,15 +40,15 @@ export type IssueMinAggregateOutputType = {
   id: string | null
   clientCaptureId: string | null
   type: $Enums.IssueType | null
-  aiDetectedType: $Enums.IssueType | null
-  aiConfidence: number | null
   status: $Enums.IssueStatus | null
   latitude: number | null
   longitude: number | null
+  wardId: string | null
+  routeId: string | null
+  surveySessionId: string | null
+  surveyorId: string | null
   imageUrl: string | null
   afterImageUrl: string | null
-  wardId: string | null
-  surveyorId: string | null
   createdAt: Date | null
 }
 
@@ -58,15 +56,15 @@ export type IssueMaxAggregateOutputType = {
   id: string | null
   clientCaptureId: string | null
   type: $Enums.IssueType | null
-  aiDetectedType: $Enums.IssueType | null
-  aiConfidence: number | null
   status: $Enums.IssueStatus | null
   latitude: number | null
   longitude: number | null
+  wardId: string | null
+  routeId: string | null
+  surveySessionId: string | null
+  surveyorId: string | null
   imageUrl: string | null
   afterImageUrl: string | null
-  wardId: string | null
-  surveyorId: string | null
   createdAt: Date | null
 }
 
@@ -74,28 +72,26 @@ export type IssueCountAggregateOutputType = {
   id: number
   clientCaptureId: number
   type: number
-  aiDetectedType: number
-  aiConfidence: number
   status: number
   latitude: number
   longitude: number
+  wardId: number
+  routeId: number
+  surveySessionId: number
+  surveyorId: number
   imageUrl: number
   afterImageUrl: number
-  wardId: number
-  surveyorId: number
   createdAt: number
   _all: number
 }
 
 
 export type IssueAvgAggregateInputType = {
-  aiConfidence?: true
   latitude?: true
   longitude?: true
 }
 
 export type IssueSumAggregateInputType = {
-  aiConfidence?: true
   latitude?: true
   longitude?: true
 }
@@ -104,15 +100,15 @@ export type IssueMinAggregateInputType = {
   id?: true
   clientCaptureId?: true
   type?: true
-  aiDetectedType?: true
-  aiConfidence?: true
   status?: true
   latitude?: true
   longitude?: true
+  wardId?: true
+  routeId?: true
+  surveySessionId?: true
+  surveyorId?: true
   imageUrl?: true
   afterImageUrl?: true
-  wardId?: true
-  surveyorId?: true
   createdAt?: true
 }
 
@@ -120,15 +116,15 @@ export type IssueMaxAggregateInputType = {
   id?: true
   clientCaptureId?: true
   type?: true
-  aiDetectedType?: true
-  aiConfidence?: true
   status?: true
   latitude?: true
   longitude?: true
+  wardId?: true
+  routeId?: true
+  surveySessionId?: true
+  surveyorId?: true
   imageUrl?: true
   afterImageUrl?: true
-  wardId?: true
-  surveyorId?: true
   createdAt?: true
 }
 
@@ -136,15 +132,15 @@ export type IssueCountAggregateInputType = {
   id?: true
   clientCaptureId?: true
   type?: true
-  aiDetectedType?: true
-  aiConfidence?: true
   status?: true
   latitude?: true
   longitude?: true
+  wardId?: true
+  routeId?: true
+  surveySessionId?: true
+  surveyorId?: true
   imageUrl?: true
   afterImageUrl?: true
-  wardId?: true
-  surveyorId?: true
   createdAt?: true
   _all?: true
 }
@@ -239,15 +235,15 @@ export type IssueGroupByOutputType = {
   id: string
   clientCaptureId: string
   type: $Enums.IssueType | null
-  aiDetectedType: $Enums.IssueType | null
-  aiConfidence: number | null
   status: $Enums.IssueStatus
   latitude: number
   longitude: number
+  wardId: string
+  routeId: string
+  surveySessionId: string
+  surveyorId: string
   imageUrl: string
   afterImageUrl: string | null
-  wardId: string
-  surveyorId: string
   createdAt: Date
   _count: IssueCountAggregateOutputType | null
   _avg: IssueAvgAggregateOutputType | null
@@ -278,17 +274,19 @@ export type IssueWhereInput = {
   id?: Prisma.StringFilter<"Issue"> | string
   clientCaptureId?: Prisma.StringFilter<"Issue"> | string
   type?: Prisma.EnumIssueTypeNullableFilter<"Issue"> | $Enums.IssueType | null
-  aiDetectedType?: Prisma.EnumIssueTypeNullableFilter<"Issue"> | $Enums.IssueType | null
-  aiConfidence?: Prisma.FloatNullableFilter<"Issue"> | number | null
   status?: Prisma.EnumIssueStatusFilter<"Issue"> | $Enums.IssueStatus
   latitude?: Prisma.FloatFilter<"Issue"> | number
   longitude?: Prisma.FloatFilter<"Issue"> | number
+  wardId?: Prisma.StringFilter<"Issue"> | string
+  routeId?: Prisma.StringFilter<"Issue"> | string
+  surveySessionId?: Prisma.StringFilter<"Issue"> | string
+  surveyorId?: Prisma.StringFilter<"Issue"> | string
   imageUrl?: Prisma.StringFilter<"Issue"> | string
   afterImageUrl?: Prisma.StringNullableFilter<"Issue"> | string | null
-  wardId?: Prisma.StringFilter<"Issue"> | string
-  surveyorId?: Prisma.StringFilter<"Issue"> | string
   createdAt?: Prisma.DateTimeFilter<"Issue"> | Date | string
   ward?: Prisma.XOR<Prisma.WardScalarRelationFilter, Prisma.WardWhereInput>
+  route?: Prisma.XOR<Prisma.RouteScalarRelationFilter, Prisma.RouteWhereInput>
+  surveySession?: Prisma.XOR<Prisma.SurveySessionScalarRelationFilter, Prisma.SurveySessionWhereInput>
   surveyor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   assignment?: Prisma.XOR<Prisma.IssueAssignmentNullableScalarRelationFilter, Prisma.IssueAssignmentWhereInput> | null
   resolution?: Prisma.XOR<Prisma.IssueResolutionNullableScalarRelationFilter, Prisma.IssueResolutionWhereInput> | null
@@ -298,17 +296,19 @@ export type IssueOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   clientCaptureId?: Prisma.SortOrder
   type?: Prisma.SortOrderInput | Prisma.SortOrder
-  aiDetectedType?: Prisma.SortOrderInput | Prisma.SortOrder
-  aiConfidence?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  wardId?: Prisma.SortOrder
+  routeId?: Prisma.SortOrder
+  surveySessionId?: Prisma.SortOrder
+  surveyorId?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   afterImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  wardId?: Prisma.SortOrder
-  surveyorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   ward?: Prisma.WardOrderByWithRelationInput
+  route?: Prisma.RouteOrderByWithRelationInput
+  surveySession?: Prisma.SurveySessionOrderByWithRelationInput
   surveyor?: Prisma.UserOrderByWithRelationInput
   assignment?: Prisma.IssueAssignmentOrderByWithRelationInput
   resolution?: Prisma.IssueResolutionOrderByWithRelationInput
@@ -321,17 +321,19 @@ export type IssueWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.IssueWhereInput[]
   NOT?: Prisma.IssueWhereInput | Prisma.IssueWhereInput[]
   type?: Prisma.EnumIssueTypeNullableFilter<"Issue"> | $Enums.IssueType | null
-  aiDetectedType?: Prisma.EnumIssueTypeNullableFilter<"Issue"> | $Enums.IssueType | null
-  aiConfidence?: Prisma.FloatNullableFilter<"Issue"> | number | null
   status?: Prisma.EnumIssueStatusFilter<"Issue"> | $Enums.IssueStatus
   latitude?: Prisma.FloatFilter<"Issue"> | number
   longitude?: Prisma.FloatFilter<"Issue"> | number
+  wardId?: Prisma.StringFilter<"Issue"> | string
+  routeId?: Prisma.StringFilter<"Issue"> | string
+  surveySessionId?: Prisma.StringFilter<"Issue"> | string
+  surveyorId?: Prisma.StringFilter<"Issue"> | string
   imageUrl?: Prisma.StringFilter<"Issue"> | string
   afterImageUrl?: Prisma.StringNullableFilter<"Issue"> | string | null
-  wardId?: Prisma.StringFilter<"Issue"> | string
-  surveyorId?: Prisma.StringFilter<"Issue"> | string
   createdAt?: Prisma.DateTimeFilter<"Issue"> | Date | string
   ward?: Prisma.XOR<Prisma.WardScalarRelationFilter, Prisma.WardWhereInput>
+  route?: Prisma.XOR<Prisma.RouteScalarRelationFilter, Prisma.RouteWhereInput>
+  surveySession?: Prisma.XOR<Prisma.SurveySessionScalarRelationFilter, Prisma.SurveySessionWhereInput>
   surveyor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   assignment?: Prisma.XOR<Prisma.IssueAssignmentNullableScalarRelationFilter, Prisma.IssueAssignmentWhereInput> | null
   resolution?: Prisma.XOR<Prisma.IssueResolutionNullableScalarRelationFilter, Prisma.IssueResolutionWhereInput> | null
@@ -341,15 +343,15 @@ export type IssueOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   clientCaptureId?: Prisma.SortOrder
   type?: Prisma.SortOrderInput | Prisma.SortOrder
-  aiDetectedType?: Prisma.SortOrderInput | Prisma.SortOrder
-  aiConfidence?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  wardId?: Prisma.SortOrder
+  routeId?: Prisma.SortOrder
+  surveySessionId?: Prisma.SortOrder
+  surveyorId?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   afterImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  wardId?: Prisma.SortOrder
-  surveyorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.IssueCountOrderByAggregateInput
   _avg?: Prisma.IssueAvgOrderByAggregateInput
@@ -365,15 +367,15 @@ export type IssueScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Issue"> | string
   clientCaptureId?: Prisma.StringWithAggregatesFilter<"Issue"> | string
   type?: Prisma.EnumIssueTypeNullableWithAggregatesFilter<"Issue"> | $Enums.IssueType | null
-  aiDetectedType?: Prisma.EnumIssueTypeNullableWithAggregatesFilter<"Issue"> | $Enums.IssueType | null
-  aiConfidence?: Prisma.FloatNullableWithAggregatesFilter<"Issue"> | number | null
   status?: Prisma.EnumIssueStatusWithAggregatesFilter<"Issue"> | $Enums.IssueStatus
   latitude?: Prisma.FloatWithAggregatesFilter<"Issue"> | number
   longitude?: Prisma.FloatWithAggregatesFilter<"Issue"> | number
+  wardId?: Prisma.StringWithAggregatesFilter<"Issue"> | string
+  routeId?: Prisma.StringWithAggregatesFilter<"Issue"> | string
+  surveySessionId?: Prisma.StringWithAggregatesFilter<"Issue"> | string
+  surveyorId?: Prisma.StringWithAggregatesFilter<"Issue"> | string
   imageUrl?: Prisma.StringWithAggregatesFilter<"Issue"> | string
   afterImageUrl?: Prisma.StringNullableWithAggregatesFilter<"Issue"> | string | null
-  wardId?: Prisma.StringWithAggregatesFilter<"Issue"> | string
-  surveyorId?: Prisma.StringWithAggregatesFilter<"Issue"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Issue"> | Date | string
 }
 
@@ -381,8 +383,6 @@ export type IssueCreateInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
@@ -390,7 +390,9 @@ export type IssueCreateInput = {
   afterImageUrl?: string | null
   createdAt?: Date | string
   ward: Prisma.WardCreateNestedOneWithoutIssuesInput
-  surveyor: Prisma.UserCreateNestedOneWithoutIssuesInput
+  route: Prisma.RouteCreateNestedOneWithoutIssuesInput
+  surveySession: Prisma.SurveySessionCreateNestedOneWithoutIssuesInput
+  surveyor: Prisma.UserCreateNestedOneWithoutReportedIssuesInput
   assignment?: Prisma.IssueAssignmentCreateNestedOneWithoutIssueInput
   resolution?: Prisma.IssueResolutionCreateNestedOneWithoutIssueInput
 }
@@ -399,15 +401,15 @@ export type IssueUncheckedCreateInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
+  wardId: string
+  routeId: string
+  surveySessionId: string
+  surveyorId: string
   imageUrl: string
   afterImageUrl?: string | null
-  wardId: string
-  surveyorId: string
   createdAt?: Date | string
   assignment?: Prisma.IssueAssignmentUncheckedCreateNestedOneWithoutIssueInput
   resolution?: Prisma.IssueResolutionUncheckedCreateNestedOneWithoutIssueInput
@@ -417,8 +419,6 @@ export type IssueUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -426,7 +426,9 @@ export type IssueUpdateInput = {
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ward?: Prisma.WardUpdateOneRequiredWithoutIssuesNestedInput
-  surveyor?: Prisma.UserUpdateOneRequiredWithoutIssuesNestedInput
+  route?: Prisma.RouteUpdateOneRequiredWithoutIssuesNestedInput
+  surveySession?: Prisma.SurveySessionUpdateOneRequiredWithoutIssuesNestedInput
+  surveyor?: Prisma.UserUpdateOneRequiredWithoutReportedIssuesNestedInput
   assignment?: Prisma.IssueAssignmentUpdateOneWithoutIssueNestedInput
   resolution?: Prisma.IssueResolutionUpdateOneWithoutIssueNestedInput
 }
@@ -435,15 +437,15 @@ export type IssueUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  wardId?: Prisma.StringFieldUpdateOperationsInput | string
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveySessionId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  wardId?: Prisma.StringFieldUpdateOperationsInput | string
-  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignment?: Prisma.IssueAssignmentUncheckedUpdateOneWithoutIssueNestedInput
   resolution?: Prisma.IssueResolutionUncheckedUpdateOneWithoutIssueNestedInput
@@ -453,15 +455,15 @@ export type IssueCreateManyInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
+  wardId: string
+  routeId: string
+  surveySessionId: string
+  surveyorId: string
   imageUrl: string
   afterImageUrl?: string | null
-  wardId: string
-  surveyorId: string
   createdAt?: Date | string
 }
 
@@ -469,8 +471,6 @@ export type IssueUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -483,15 +483,15 @@ export type IssueUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  wardId?: Prisma.StringFieldUpdateOperationsInput | string
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveySessionId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  wardId?: Prisma.StringFieldUpdateOperationsInput | string
-  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -509,20 +509,19 @@ export type IssueCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   clientCaptureId?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  aiDetectedType?: Prisma.SortOrder
-  aiConfidence?: Prisma.SortOrder
   status?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  wardId?: Prisma.SortOrder
+  routeId?: Prisma.SortOrder
+  surveySessionId?: Prisma.SortOrder
+  surveyorId?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   afterImageUrl?: Prisma.SortOrder
-  wardId?: Prisma.SortOrder
-  surveyorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type IssueAvgOrderByAggregateInput = {
-  aiConfidence?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
 }
@@ -531,15 +530,15 @@ export type IssueMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   clientCaptureId?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  aiDetectedType?: Prisma.SortOrder
-  aiConfidence?: Prisma.SortOrder
   status?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  wardId?: Prisma.SortOrder
+  routeId?: Prisma.SortOrder
+  surveySessionId?: Prisma.SortOrder
+  surveyorId?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   afterImageUrl?: Prisma.SortOrder
-  wardId?: Prisma.SortOrder
-  surveyorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -547,20 +546,19 @@ export type IssueMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   clientCaptureId?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  aiDetectedType?: Prisma.SortOrder
-  aiConfidence?: Prisma.SortOrder
   status?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  wardId?: Prisma.SortOrder
+  routeId?: Prisma.SortOrder
+  surveySessionId?: Prisma.SortOrder
+  surveyorId?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   afterImageUrl?: Prisma.SortOrder
-  wardId?: Prisma.SortOrder
-  surveyorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type IssueSumOrderByAggregateInput = {
-  aiConfidence?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
 }
@@ -654,32 +652,92 @@ export type IssueUncheckedUpdateManyWithoutWardNestedInput = {
   deleteMany?: Prisma.IssueScalarWhereInput | Prisma.IssueScalarWhereInput[]
 }
 
-export type NullableEnumIssueTypeFieldUpdateOperationsInput = {
-  set?: $Enums.IssueType | null
+export type IssueCreateNestedManyWithoutRouteInput = {
+  create?: Prisma.XOR<Prisma.IssueCreateWithoutRouteInput, Prisma.IssueUncheckedCreateWithoutRouteInput> | Prisma.IssueCreateWithoutRouteInput[] | Prisma.IssueUncheckedCreateWithoutRouteInput[]
+  connectOrCreate?: Prisma.IssueCreateOrConnectWithoutRouteInput | Prisma.IssueCreateOrConnectWithoutRouteInput[]
+  createMany?: Prisma.IssueCreateManyRouteInputEnvelope
+  connect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type IssueUncheckedCreateNestedManyWithoutRouteInput = {
+  create?: Prisma.XOR<Prisma.IssueCreateWithoutRouteInput, Prisma.IssueUncheckedCreateWithoutRouteInput> | Prisma.IssueCreateWithoutRouteInput[] | Prisma.IssueUncheckedCreateWithoutRouteInput[]
+  connectOrCreate?: Prisma.IssueCreateOrConnectWithoutRouteInput | Prisma.IssueCreateOrConnectWithoutRouteInput[]
+  createMany?: Prisma.IssueCreateManyRouteInputEnvelope
+  connect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+}
+
+export type IssueUpdateManyWithoutRouteNestedInput = {
+  create?: Prisma.XOR<Prisma.IssueCreateWithoutRouteInput, Prisma.IssueUncheckedCreateWithoutRouteInput> | Prisma.IssueCreateWithoutRouteInput[] | Prisma.IssueUncheckedCreateWithoutRouteInput[]
+  connectOrCreate?: Prisma.IssueCreateOrConnectWithoutRouteInput | Prisma.IssueCreateOrConnectWithoutRouteInput[]
+  upsert?: Prisma.IssueUpsertWithWhereUniqueWithoutRouteInput | Prisma.IssueUpsertWithWhereUniqueWithoutRouteInput[]
+  createMany?: Prisma.IssueCreateManyRouteInputEnvelope
+  set?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  disconnect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  delete?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  connect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  update?: Prisma.IssueUpdateWithWhereUniqueWithoutRouteInput | Prisma.IssueUpdateWithWhereUniqueWithoutRouteInput[]
+  updateMany?: Prisma.IssueUpdateManyWithWhereWithoutRouteInput | Prisma.IssueUpdateManyWithWhereWithoutRouteInput[]
+  deleteMany?: Prisma.IssueScalarWhereInput | Prisma.IssueScalarWhereInput[]
+}
+
+export type IssueUncheckedUpdateManyWithoutRouteNestedInput = {
+  create?: Prisma.XOR<Prisma.IssueCreateWithoutRouteInput, Prisma.IssueUncheckedCreateWithoutRouteInput> | Prisma.IssueCreateWithoutRouteInput[] | Prisma.IssueUncheckedCreateWithoutRouteInput[]
+  connectOrCreate?: Prisma.IssueCreateOrConnectWithoutRouteInput | Prisma.IssueCreateOrConnectWithoutRouteInput[]
+  upsert?: Prisma.IssueUpsertWithWhereUniqueWithoutRouteInput | Prisma.IssueUpsertWithWhereUniqueWithoutRouteInput[]
+  createMany?: Prisma.IssueCreateManyRouteInputEnvelope
+  set?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  disconnect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  delete?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  connect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  update?: Prisma.IssueUpdateWithWhereUniqueWithoutRouteInput | Prisma.IssueUpdateWithWhereUniqueWithoutRouteInput[]
+  updateMany?: Prisma.IssueUpdateManyWithWhereWithoutRouteInput | Prisma.IssueUpdateManyWithWhereWithoutRouteInput[]
+  deleteMany?: Prisma.IssueScalarWhereInput | Prisma.IssueScalarWhereInput[]
+}
+
+export type IssueCreateNestedManyWithoutSurveySessionInput = {
+  create?: Prisma.XOR<Prisma.IssueCreateWithoutSurveySessionInput, Prisma.IssueUncheckedCreateWithoutSurveySessionInput> | Prisma.IssueCreateWithoutSurveySessionInput[] | Prisma.IssueUncheckedCreateWithoutSurveySessionInput[]
+  connectOrCreate?: Prisma.IssueCreateOrConnectWithoutSurveySessionInput | Prisma.IssueCreateOrConnectWithoutSurveySessionInput[]
+  createMany?: Prisma.IssueCreateManySurveySessionInputEnvelope
+  connect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+}
+
+export type IssueUncheckedCreateNestedManyWithoutSurveySessionInput = {
+  create?: Prisma.XOR<Prisma.IssueCreateWithoutSurveySessionInput, Prisma.IssueUncheckedCreateWithoutSurveySessionInput> | Prisma.IssueCreateWithoutSurveySessionInput[] | Prisma.IssueUncheckedCreateWithoutSurveySessionInput[]
+  connectOrCreate?: Prisma.IssueCreateOrConnectWithoutSurveySessionInput | Prisma.IssueCreateOrConnectWithoutSurveySessionInput[]
+  createMany?: Prisma.IssueCreateManySurveySessionInputEnvelope
+  connect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+}
+
+export type IssueUpdateManyWithoutSurveySessionNestedInput = {
+  create?: Prisma.XOR<Prisma.IssueCreateWithoutSurveySessionInput, Prisma.IssueUncheckedCreateWithoutSurveySessionInput> | Prisma.IssueCreateWithoutSurveySessionInput[] | Prisma.IssueUncheckedCreateWithoutSurveySessionInput[]
+  connectOrCreate?: Prisma.IssueCreateOrConnectWithoutSurveySessionInput | Prisma.IssueCreateOrConnectWithoutSurveySessionInput[]
+  upsert?: Prisma.IssueUpsertWithWhereUniqueWithoutSurveySessionInput | Prisma.IssueUpsertWithWhereUniqueWithoutSurveySessionInput[]
+  createMany?: Prisma.IssueCreateManySurveySessionInputEnvelope
+  set?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  disconnect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  delete?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  connect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  update?: Prisma.IssueUpdateWithWhereUniqueWithoutSurveySessionInput | Prisma.IssueUpdateWithWhereUniqueWithoutSurveySessionInput[]
+  updateMany?: Prisma.IssueUpdateManyWithWhereWithoutSurveySessionInput | Prisma.IssueUpdateManyWithWhereWithoutSurveySessionInput[]
+  deleteMany?: Prisma.IssueScalarWhereInput | Prisma.IssueScalarWhereInput[]
+}
+
+export type IssueUncheckedUpdateManyWithoutSurveySessionNestedInput = {
+  create?: Prisma.XOR<Prisma.IssueCreateWithoutSurveySessionInput, Prisma.IssueUncheckedCreateWithoutSurveySessionInput> | Prisma.IssueCreateWithoutSurveySessionInput[] | Prisma.IssueUncheckedCreateWithoutSurveySessionInput[]
+  connectOrCreate?: Prisma.IssueCreateOrConnectWithoutSurveySessionInput | Prisma.IssueCreateOrConnectWithoutSurveySessionInput[]
+  upsert?: Prisma.IssueUpsertWithWhereUniqueWithoutSurveySessionInput | Prisma.IssueUpsertWithWhereUniqueWithoutSurveySessionInput[]
+  createMany?: Prisma.IssueCreateManySurveySessionInputEnvelope
+  set?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  disconnect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  delete?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  connect?: Prisma.IssueWhereUniqueInput | Prisma.IssueWhereUniqueInput[]
+  update?: Prisma.IssueUpdateWithWhereUniqueWithoutSurveySessionInput | Prisma.IssueUpdateWithWhereUniqueWithoutSurveySessionInput[]
+  updateMany?: Prisma.IssueUpdateManyWithWhereWithoutSurveySessionInput | Prisma.IssueUpdateManyWithWhereWithoutSurveySessionInput[]
+  deleteMany?: Prisma.IssueScalarWhereInput | Prisma.IssueScalarWhereInput[]
 }
 
 export type EnumIssueStatusFieldUpdateOperationsInput = {
   set?: $Enums.IssueStatus
-}
-
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
 }
 
 export type IssueCreateNestedOneWithoutAssignmentInput = {
@@ -714,8 +772,6 @@ export type IssueCreateWithoutSurveyorInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
@@ -723,6 +779,8 @@ export type IssueCreateWithoutSurveyorInput = {
   afterImageUrl?: string | null
   createdAt?: Date | string
   ward: Prisma.WardCreateNestedOneWithoutIssuesInput
+  route: Prisma.RouteCreateNestedOneWithoutIssuesInput
+  surveySession: Prisma.SurveySessionCreateNestedOneWithoutIssuesInput
   assignment?: Prisma.IssueAssignmentCreateNestedOneWithoutIssueInput
   resolution?: Prisma.IssueResolutionCreateNestedOneWithoutIssueInput
 }
@@ -731,14 +789,14 @@ export type IssueUncheckedCreateWithoutSurveyorInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
+  wardId: string
+  routeId: string
+  surveySessionId: string
   imageUrl: string
   afterImageUrl?: string | null
-  wardId: string
   createdAt?: Date | string
   assignment?: Prisma.IssueAssignmentUncheckedCreateNestedOneWithoutIssueInput
   resolution?: Prisma.IssueResolutionUncheckedCreateNestedOneWithoutIssueInput
@@ -777,15 +835,15 @@ export type IssueScalarWhereInput = {
   id?: Prisma.StringFilter<"Issue"> | string
   clientCaptureId?: Prisma.StringFilter<"Issue"> | string
   type?: Prisma.EnumIssueTypeNullableFilter<"Issue"> | $Enums.IssueType | null
-  aiDetectedType?: Prisma.EnumIssueTypeNullableFilter<"Issue"> | $Enums.IssueType | null
-  aiConfidence?: Prisma.FloatNullableFilter<"Issue"> | number | null
   status?: Prisma.EnumIssueStatusFilter<"Issue"> | $Enums.IssueStatus
   latitude?: Prisma.FloatFilter<"Issue"> | number
   longitude?: Prisma.FloatFilter<"Issue"> | number
+  wardId?: Prisma.StringFilter<"Issue"> | string
+  routeId?: Prisma.StringFilter<"Issue"> | string
+  surveySessionId?: Prisma.StringFilter<"Issue"> | string
+  surveyorId?: Prisma.StringFilter<"Issue"> | string
   imageUrl?: Prisma.StringFilter<"Issue"> | string
   afterImageUrl?: Prisma.StringNullableFilter<"Issue"> | string | null
-  wardId?: Prisma.StringFilter<"Issue"> | string
-  surveyorId?: Prisma.StringFilter<"Issue"> | string
   createdAt?: Prisma.DateTimeFilter<"Issue"> | Date | string
 }
 
@@ -793,15 +851,15 @@ export type IssueCreateWithoutWardInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
   imageUrl: string
   afterImageUrl?: string | null
   createdAt?: Date | string
-  surveyor: Prisma.UserCreateNestedOneWithoutIssuesInput
+  route: Prisma.RouteCreateNestedOneWithoutIssuesInput
+  surveySession: Prisma.SurveySessionCreateNestedOneWithoutIssuesInput
+  surveyor: Prisma.UserCreateNestedOneWithoutReportedIssuesInput
   assignment?: Prisma.IssueAssignmentCreateNestedOneWithoutIssueInput
   resolution?: Prisma.IssueResolutionCreateNestedOneWithoutIssueInput
 }
@@ -810,14 +868,14 @@ export type IssueUncheckedCreateWithoutWardInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
+  routeId: string
+  surveySessionId: string
+  surveyorId: string
   imageUrl: string
   afterImageUrl?: string | null
-  surveyorId: string
   createdAt?: Date | string
   assignment?: Prisma.IssueAssignmentUncheckedCreateNestedOneWithoutIssueInput
   resolution?: Prisma.IssueResolutionUncheckedCreateNestedOneWithoutIssueInput
@@ -849,12 +907,10 @@ export type IssueUpdateManyWithWhereWithoutWardInput = {
   data: Prisma.XOR<Prisma.IssueUpdateManyMutationInput, Prisma.IssueUncheckedUpdateManyWithoutWardInput>
 }
 
-export type IssueCreateWithoutAssignmentInput = {
+export type IssueCreateWithoutRouteInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
@@ -862,7 +918,129 @@ export type IssueCreateWithoutAssignmentInput = {
   afterImageUrl?: string | null
   createdAt?: Date | string
   ward: Prisma.WardCreateNestedOneWithoutIssuesInput
-  surveyor: Prisma.UserCreateNestedOneWithoutIssuesInput
+  surveySession: Prisma.SurveySessionCreateNestedOneWithoutIssuesInput
+  surveyor: Prisma.UserCreateNestedOneWithoutReportedIssuesInput
+  assignment?: Prisma.IssueAssignmentCreateNestedOneWithoutIssueInput
+  resolution?: Prisma.IssueResolutionCreateNestedOneWithoutIssueInput
+}
+
+export type IssueUncheckedCreateWithoutRouteInput = {
+  id?: string
+  clientCaptureId: string
+  type?: $Enums.IssueType | null
+  status?: $Enums.IssueStatus
+  latitude: number
+  longitude: number
+  wardId: string
+  surveySessionId: string
+  surveyorId: string
+  imageUrl: string
+  afterImageUrl?: string | null
+  createdAt?: Date | string
+  assignment?: Prisma.IssueAssignmentUncheckedCreateNestedOneWithoutIssueInput
+  resolution?: Prisma.IssueResolutionUncheckedCreateNestedOneWithoutIssueInput
+}
+
+export type IssueCreateOrConnectWithoutRouteInput = {
+  where: Prisma.IssueWhereUniqueInput
+  create: Prisma.XOR<Prisma.IssueCreateWithoutRouteInput, Prisma.IssueUncheckedCreateWithoutRouteInput>
+}
+
+export type IssueCreateManyRouteInputEnvelope = {
+  data: Prisma.IssueCreateManyRouteInput | Prisma.IssueCreateManyRouteInput[]
+  skipDuplicates?: boolean
+}
+
+export type IssueUpsertWithWhereUniqueWithoutRouteInput = {
+  where: Prisma.IssueWhereUniqueInput
+  update: Prisma.XOR<Prisma.IssueUpdateWithoutRouteInput, Prisma.IssueUncheckedUpdateWithoutRouteInput>
+  create: Prisma.XOR<Prisma.IssueCreateWithoutRouteInput, Prisma.IssueUncheckedCreateWithoutRouteInput>
+}
+
+export type IssueUpdateWithWhereUniqueWithoutRouteInput = {
+  where: Prisma.IssueWhereUniqueInput
+  data: Prisma.XOR<Prisma.IssueUpdateWithoutRouteInput, Prisma.IssueUncheckedUpdateWithoutRouteInput>
+}
+
+export type IssueUpdateManyWithWhereWithoutRouteInput = {
+  where: Prisma.IssueScalarWhereInput
+  data: Prisma.XOR<Prisma.IssueUpdateManyMutationInput, Prisma.IssueUncheckedUpdateManyWithoutRouteInput>
+}
+
+export type IssueCreateWithoutSurveySessionInput = {
+  id?: string
+  clientCaptureId: string
+  type?: $Enums.IssueType | null
+  status?: $Enums.IssueStatus
+  latitude: number
+  longitude: number
+  imageUrl: string
+  afterImageUrl?: string | null
+  createdAt?: Date | string
+  ward: Prisma.WardCreateNestedOneWithoutIssuesInput
+  route: Prisma.RouteCreateNestedOneWithoutIssuesInput
+  surveyor: Prisma.UserCreateNestedOneWithoutReportedIssuesInput
+  assignment?: Prisma.IssueAssignmentCreateNestedOneWithoutIssueInput
+  resolution?: Prisma.IssueResolutionCreateNestedOneWithoutIssueInput
+}
+
+export type IssueUncheckedCreateWithoutSurveySessionInput = {
+  id?: string
+  clientCaptureId: string
+  type?: $Enums.IssueType | null
+  status?: $Enums.IssueStatus
+  latitude: number
+  longitude: number
+  wardId: string
+  routeId: string
+  surveyorId: string
+  imageUrl: string
+  afterImageUrl?: string | null
+  createdAt?: Date | string
+  assignment?: Prisma.IssueAssignmentUncheckedCreateNestedOneWithoutIssueInput
+  resolution?: Prisma.IssueResolutionUncheckedCreateNestedOneWithoutIssueInput
+}
+
+export type IssueCreateOrConnectWithoutSurveySessionInput = {
+  where: Prisma.IssueWhereUniqueInput
+  create: Prisma.XOR<Prisma.IssueCreateWithoutSurveySessionInput, Prisma.IssueUncheckedCreateWithoutSurveySessionInput>
+}
+
+export type IssueCreateManySurveySessionInputEnvelope = {
+  data: Prisma.IssueCreateManySurveySessionInput | Prisma.IssueCreateManySurveySessionInput[]
+  skipDuplicates?: boolean
+}
+
+export type IssueUpsertWithWhereUniqueWithoutSurveySessionInput = {
+  where: Prisma.IssueWhereUniqueInput
+  update: Prisma.XOR<Prisma.IssueUpdateWithoutSurveySessionInput, Prisma.IssueUncheckedUpdateWithoutSurveySessionInput>
+  create: Prisma.XOR<Prisma.IssueCreateWithoutSurveySessionInput, Prisma.IssueUncheckedCreateWithoutSurveySessionInput>
+}
+
+export type IssueUpdateWithWhereUniqueWithoutSurveySessionInput = {
+  where: Prisma.IssueWhereUniqueInput
+  data: Prisma.XOR<Prisma.IssueUpdateWithoutSurveySessionInput, Prisma.IssueUncheckedUpdateWithoutSurveySessionInput>
+}
+
+export type IssueUpdateManyWithWhereWithoutSurveySessionInput = {
+  where: Prisma.IssueScalarWhereInput
+  data: Prisma.XOR<Prisma.IssueUpdateManyMutationInput, Prisma.IssueUncheckedUpdateManyWithoutSurveySessionInput>
+}
+
+export type IssueCreateWithoutAssignmentInput = {
+  id?: string
+  clientCaptureId: string
+  type?: $Enums.IssueType | null
+  status?: $Enums.IssueStatus
+  latitude: number
+  longitude: number
+  imageUrl: string
+  afterImageUrl?: string | null
+  createdAt?: Date | string
+  ward: Prisma.WardCreateNestedOneWithoutIssuesInput
+  route: Prisma.RouteCreateNestedOneWithoutIssuesInput
+  surveySession: Prisma.SurveySessionCreateNestedOneWithoutIssuesInput
+  surveyor: Prisma.UserCreateNestedOneWithoutReportedIssuesInput
   resolution?: Prisma.IssueResolutionCreateNestedOneWithoutIssueInput
 }
 
@@ -870,15 +1048,15 @@ export type IssueUncheckedCreateWithoutAssignmentInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
+  wardId: string
+  routeId: string
+  surveySessionId: string
+  surveyorId: string
   imageUrl: string
   afterImageUrl?: string | null
-  wardId: string
-  surveyorId: string
   createdAt?: Date | string
   resolution?: Prisma.IssueResolutionUncheckedCreateNestedOneWithoutIssueInput
 }
@@ -903,8 +1081,6 @@ export type IssueUpdateWithoutAssignmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -912,7 +1088,9 @@ export type IssueUpdateWithoutAssignmentInput = {
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ward?: Prisma.WardUpdateOneRequiredWithoutIssuesNestedInput
-  surveyor?: Prisma.UserUpdateOneRequiredWithoutIssuesNestedInput
+  route?: Prisma.RouteUpdateOneRequiredWithoutIssuesNestedInput
+  surveySession?: Prisma.SurveySessionUpdateOneRequiredWithoutIssuesNestedInput
+  surveyor?: Prisma.UserUpdateOneRequiredWithoutReportedIssuesNestedInput
   resolution?: Prisma.IssueResolutionUpdateOneWithoutIssueNestedInput
 }
 
@@ -920,15 +1098,15 @@ export type IssueUncheckedUpdateWithoutAssignmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  wardId?: Prisma.StringFieldUpdateOperationsInput | string
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveySessionId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  wardId?: Prisma.StringFieldUpdateOperationsInput | string
-  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolution?: Prisma.IssueResolutionUncheckedUpdateOneWithoutIssueNestedInput
 }
@@ -937,8 +1115,6 @@ export type IssueCreateWithoutResolutionInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
@@ -946,7 +1122,9 @@ export type IssueCreateWithoutResolutionInput = {
   afterImageUrl?: string | null
   createdAt?: Date | string
   ward: Prisma.WardCreateNestedOneWithoutIssuesInput
-  surveyor: Prisma.UserCreateNestedOneWithoutIssuesInput
+  route: Prisma.RouteCreateNestedOneWithoutIssuesInput
+  surveySession: Prisma.SurveySessionCreateNestedOneWithoutIssuesInput
+  surveyor: Prisma.UserCreateNestedOneWithoutReportedIssuesInput
   assignment?: Prisma.IssueAssignmentCreateNestedOneWithoutIssueInput
 }
 
@@ -954,15 +1132,15 @@ export type IssueUncheckedCreateWithoutResolutionInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
+  wardId: string
+  routeId: string
+  surveySessionId: string
+  surveyorId: string
   imageUrl: string
   afterImageUrl?: string | null
-  wardId: string
-  surveyorId: string
   createdAt?: Date | string
   assignment?: Prisma.IssueAssignmentUncheckedCreateNestedOneWithoutIssueInput
 }
@@ -987,8 +1165,6 @@ export type IssueUpdateWithoutResolutionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -996,7 +1172,9 @@ export type IssueUpdateWithoutResolutionInput = {
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ward?: Prisma.WardUpdateOneRequiredWithoutIssuesNestedInput
-  surveyor?: Prisma.UserUpdateOneRequiredWithoutIssuesNestedInput
+  route?: Prisma.RouteUpdateOneRequiredWithoutIssuesNestedInput
+  surveySession?: Prisma.SurveySessionUpdateOneRequiredWithoutIssuesNestedInput
+  surveyor?: Prisma.UserUpdateOneRequiredWithoutReportedIssuesNestedInput
   assignment?: Prisma.IssueAssignmentUpdateOneWithoutIssueNestedInput
 }
 
@@ -1004,15 +1182,15 @@ export type IssueUncheckedUpdateWithoutResolutionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  wardId?: Prisma.StringFieldUpdateOperationsInput | string
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveySessionId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  wardId?: Prisma.StringFieldUpdateOperationsInput | string
-  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignment?: Prisma.IssueAssignmentUncheckedUpdateOneWithoutIssueNestedInput
 }
@@ -1021,14 +1199,14 @@ export type IssueCreateManySurveyorInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
+  wardId: string
+  routeId: string
+  surveySessionId: string
   imageUrl: string
   afterImageUrl?: string | null
-  wardId: string
   createdAt?: Date | string
 }
 
@@ -1036,8 +1214,6 @@ export type IssueUpdateWithoutSurveyorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1045,6 +1221,8 @@ export type IssueUpdateWithoutSurveyorInput = {
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ward?: Prisma.WardUpdateOneRequiredWithoutIssuesNestedInput
+  route?: Prisma.RouteUpdateOneRequiredWithoutIssuesNestedInput
+  surveySession?: Prisma.SurveySessionUpdateOneRequiredWithoutIssuesNestedInput
   assignment?: Prisma.IssueAssignmentUpdateOneWithoutIssueNestedInput
   resolution?: Prisma.IssueResolutionUpdateOneWithoutIssueNestedInput
 }
@@ -1053,14 +1231,14 @@ export type IssueUncheckedUpdateWithoutSurveyorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  wardId?: Prisma.StringFieldUpdateOperationsInput | string
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveySessionId?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  wardId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignment?: Prisma.IssueAssignmentUncheckedUpdateOneWithoutIssueNestedInput
   resolution?: Prisma.IssueResolutionUncheckedUpdateOneWithoutIssueNestedInput
@@ -1070,14 +1248,14 @@ export type IssueUncheckedUpdateManyWithoutSurveyorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  wardId?: Prisma.StringFieldUpdateOperationsInput | string
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveySessionId?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  wardId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1085,14 +1263,14 @@ export type IssueCreateManyWardInput = {
   id?: string
   clientCaptureId: string
   type?: $Enums.IssueType | null
-  aiDetectedType?: $Enums.IssueType | null
-  aiConfidence?: number | null
   status?: $Enums.IssueStatus
   latitude: number
   longitude: number
+  routeId: string
+  surveySessionId: string
+  surveyorId: string
   imageUrl: string
   afterImageUrl?: string | null
-  surveyorId: string
   createdAt?: Date | string
 }
 
@@ -1100,15 +1278,15 @@ export type IssueUpdateWithoutWardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  surveyor?: Prisma.UserUpdateOneRequiredWithoutIssuesNestedInput
+  route?: Prisma.RouteUpdateOneRequiredWithoutIssuesNestedInput
+  surveySession?: Prisma.SurveySessionUpdateOneRequiredWithoutIssuesNestedInput
+  surveyor?: Prisma.UserUpdateOneRequiredWithoutReportedIssuesNestedInput
   assignment?: Prisma.IssueAssignmentUpdateOneWithoutIssueNestedInput
   resolution?: Prisma.IssueResolutionUpdateOneWithoutIssueNestedInput
 }
@@ -1117,14 +1295,14 @@ export type IssueUncheckedUpdateWithoutWardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveySessionId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignment?: Prisma.IssueAssignmentUncheckedUpdateOneWithoutIssueNestedInput
   resolution?: Prisma.IssueResolutionUncheckedUpdateOneWithoutIssueNestedInput
@@ -1134,14 +1312,142 @@ export type IssueUncheckedUpdateManyWithoutWardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiDetectedType?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
-  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
+  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveySessionId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type IssueCreateManyRouteInput = {
+  id?: string
+  clientCaptureId: string
+  type?: $Enums.IssueType | null
+  status?: $Enums.IssueStatus
+  latitude: number
+  longitude: number
+  wardId: string
+  surveySessionId: string
+  surveyorId: string
+  imageUrl: string
+  afterImageUrl?: string | null
+  createdAt?: Date | string
+}
+
+export type IssueUpdateWithoutRouteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
   status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ward?: Prisma.WardUpdateOneRequiredWithoutIssuesNestedInput
+  surveySession?: Prisma.SurveySessionUpdateOneRequiredWithoutIssuesNestedInput
+  surveyor?: Prisma.UserUpdateOneRequiredWithoutReportedIssuesNestedInput
+  assignment?: Prisma.IssueAssignmentUpdateOneWithoutIssueNestedInput
+  resolution?: Prisma.IssueResolutionUpdateOneWithoutIssueNestedInput
+}
+
+export type IssueUncheckedUpdateWithoutRouteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
+  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  wardId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveySessionId?: Prisma.StringFieldUpdateOperationsInput | string
   surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignment?: Prisma.IssueAssignmentUncheckedUpdateOneWithoutIssueNestedInput
+  resolution?: Prisma.IssueResolutionUncheckedUpdateOneWithoutIssueNestedInput
+}
+
+export type IssueUncheckedUpdateManyWithoutRouteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
+  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  wardId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveySessionId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type IssueCreateManySurveySessionInput = {
+  id?: string
+  clientCaptureId: string
+  type?: $Enums.IssueType | null
+  status?: $Enums.IssueStatus
+  latitude: number
+  longitude: number
+  wardId: string
+  routeId: string
+  surveyorId: string
+  imageUrl: string
+  afterImageUrl?: string | null
+  createdAt?: Date | string
+}
+
+export type IssueUpdateWithoutSurveySessionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
+  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ward?: Prisma.WardUpdateOneRequiredWithoutIssuesNestedInput
+  route?: Prisma.RouteUpdateOneRequiredWithoutIssuesNestedInput
+  surveyor?: Prisma.UserUpdateOneRequiredWithoutReportedIssuesNestedInput
+  assignment?: Prisma.IssueAssignmentUpdateOneWithoutIssueNestedInput
+  resolution?: Prisma.IssueResolutionUpdateOneWithoutIssueNestedInput
+}
+
+export type IssueUncheckedUpdateWithoutSurveySessionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
+  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  wardId?: Prisma.StringFieldUpdateOperationsInput | string
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignment?: Prisma.IssueAssignmentUncheckedUpdateOneWithoutIssueNestedInput
+  resolution?: Prisma.IssueResolutionUncheckedUpdateOneWithoutIssueNestedInput
+}
+
+export type IssueUncheckedUpdateManyWithoutSurveySessionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCaptureId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableEnumIssueTypeFieldUpdateOperationsInput | $Enums.IssueType | null
+  status?: Prisma.EnumIssueStatusFieldUpdateOperationsInput | $Enums.IssueStatus
+  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  wardId?: Prisma.StringFieldUpdateOperationsInput | string
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveyorId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  afterImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1151,17 +1457,19 @@ export type IssueSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   clientCaptureId?: boolean
   type?: boolean
-  aiDetectedType?: boolean
-  aiConfidence?: boolean
   status?: boolean
   latitude?: boolean
   longitude?: boolean
+  wardId?: boolean
+  routeId?: boolean
+  surveySessionId?: boolean
+  surveyorId?: boolean
   imageUrl?: boolean
   afterImageUrl?: boolean
-  wardId?: boolean
-  surveyorId?: boolean
   createdAt?: boolean
   ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
+  route?: boolean | Prisma.RouteDefaultArgs<ExtArgs>
+  surveySession?: boolean | Prisma.SurveySessionDefaultArgs<ExtArgs>
   surveyor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   assignment?: boolean | Prisma.Issue$assignmentArgs<ExtArgs>
   resolution?: boolean | Prisma.Issue$resolutionArgs<ExtArgs>
@@ -1171,17 +1479,19 @@ export type IssueSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   clientCaptureId?: boolean
   type?: boolean
-  aiDetectedType?: boolean
-  aiConfidence?: boolean
   status?: boolean
   latitude?: boolean
   longitude?: boolean
+  wardId?: boolean
+  routeId?: boolean
+  surveySessionId?: boolean
+  surveyorId?: boolean
   imageUrl?: boolean
   afterImageUrl?: boolean
-  wardId?: boolean
-  surveyorId?: boolean
   createdAt?: boolean
   ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
+  route?: boolean | Prisma.RouteDefaultArgs<ExtArgs>
+  surveySession?: boolean | Prisma.SurveySessionDefaultArgs<ExtArgs>
   surveyor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["issue"]>
 
@@ -1189,17 +1499,19 @@ export type IssueSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   clientCaptureId?: boolean
   type?: boolean
-  aiDetectedType?: boolean
-  aiConfidence?: boolean
   status?: boolean
   latitude?: boolean
   longitude?: boolean
+  wardId?: boolean
+  routeId?: boolean
+  surveySessionId?: boolean
+  surveyorId?: boolean
   imageUrl?: boolean
   afterImageUrl?: boolean
-  wardId?: boolean
-  surveyorId?: boolean
   createdAt?: boolean
   ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
+  route?: boolean | Prisma.RouteDefaultArgs<ExtArgs>
+  surveySession?: boolean | Prisma.SurveySessionDefaultArgs<ExtArgs>
   surveyor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["issue"]>
 
@@ -1207,31 +1519,37 @@ export type IssueSelectScalar = {
   id?: boolean
   clientCaptureId?: boolean
   type?: boolean
-  aiDetectedType?: boolean
-  aiConfidence?: boolean
   status?: boolean
   latitude?: boolean
   longitude?: boolean
+  wardId?: boolean
+  routeId?: boolean
+  surveySessionId?: boolean
+  surveyorId?: boolean
   imageUrl?: boolean
   afterImageUrl?: boolean
-  wardId?: boolean
-  surveyorId?: boolean
   createdAt?: boolean
 }
 
-export type IssueOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clientCaptureId" | "type" | "aiDetectedType" | "aiConfidence" | "status" | "latitude" | "longitude" | "imageUrl" | "afterImageUrl" | "wardId" | "surveyorId" | "createdAt", ExtArgs["result"]["issue"]>
+export type IssueOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clientCaptureId" | "type" | "status" | "latitude" | "longitude" | "wardId" | "routeId" | "surveySessionId" | "surveyorId" | "imageUrl" | "afterImageUrl" | "createdAt", ExtArgs["result"]["issue"]>
 export type IssueInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
+  route?: boolean | Prisma.RouteDefaultArgs<ExtArgs>
+  surveySession?: boolean | Prisma.SurveySessionDefaultArgs<ExtArgs>
   surveyor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   assignment?: boolean | Prisma.Issue$assignmentArgs<ExtArgs>
   resolution?: boolean | Prisma.Issue$resolutionArgs<ExtArgs>
 }
 export type IssueIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
+  route?: boolean | Prisma.RouteDefaultArgs<ExtArgs>
+  surveySession?: boolean | Prisma.SurveySessionDefaultArgs<ExtArgs>
   surveyor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type IssueIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ward?: boolean | Prisma.WardDefaultArgs<ExtArgs>
+  route?: boolean | Prisma.RouteDefaultArgs<ExtArgs>
+  surveySession?: boolean | Prisma.SurveySessionDefaultArgs<ExtArgs>
   surveyor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
@@ -1239,6 +1557,8 @@ export type $IssuePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name: "Issue"
   objects: {
     ward: Prisma.$WardPayload<ExtArgs>
+    route: Prisma.$RoutePayload<ExtArgs>
+    surveySession: Prisma.$SurveySessionPayload<ExtArgs>
     surveyor: Prisma.$UserPayload<ExtArgs>
     assignment: Prisma.$IssueAssignmentPayload<ExtArgs> | null
     resolution: Prisma.$IssueResolutionPayload<ExtArgs> | null
@@ -1247,15 +1567,15 @@ export type $IssuePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: string
     clientCaptureId: string
     type: $Enums.IssueType | null
-    aiDetectedType: $Enums.IssueType | null
-    aiConfidence: number | null
     status: $Enums.IssueStatus
     latitude: number
     longitude: number
+    wardId: string
+    routeId: string
+    surveySessionId: string
+    surveyorId: string
     imageUrl: string
     afterImageUrl: string | null
-    wardId: string
-    surveyorId: string
     createdAt: Date
   }, ExtArgs["result"]["issue"]>
   composites: {}
@@ -1652,6 +1972,8 @@ readonly fields: IssueFieldRefs;
 export interface Prisma__IssueClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   ward<T extends Prisma.WardDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WardDefaultArgs<ExtArgs>>): Prisma.Prisma__WardClient<runtime.Types.Result.GetResult<Prisma.$WardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  route<T extends Prisma.RouteDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RouteDefaultArgs<ExtArgs>>): Prisma.Prisma__RouteClient<runtime.Types.Result.GetResult<Prisma.$RoutePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  surveySession<T extends Prisma.SurveySessionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SurveySessionDefaultArgs<ExtArgs>>): Prisma.Prisma__SurveySessionClient<runtime.Types.Result.GetResult<Prisma.$SurveySessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   surveyor<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   assignment<T extends Prisma.Issue$assignmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Issue$assignmentArgs<ExtArgs>>): Prisma.Prisma__IssueAssignmentClient<runtime.Types.Result.GetResult<Prisma.$IssueAssignmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   resolution<T extends Prisma.Issue$resolutionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Issue$resolutionArgs<ExtArgs>>): Prisma.Prisma__IssueResolutionClient<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -1687,15 +2009,15 @@ export interface IssueFieldRefs {
   readonly id: Prisma.FieldRef<"Issue", 'String'>
   readonly clientCaptureId: Prisma.FieldRef<"Issue", 'String'>
   readonly type: Prisma.FieldRef<"Issue", 'IssueType'>
-  readonly aiDetectedType: Prisma.FieldRef<"Issue", 'IssueType'>
-  readonly aiConfidence: Prisma.FieldRef<"Issue", 'Float'>
   readonly status: Prisma.FieldRef<"Issue", 'IssueStatus'>
   readonly latitude: Prisma.FieldRef<"Issue", 'Float'>
   readonly longitude: Prisma.FieldRef<"Issue", 'Float'>
+  readonly wardId: Prisma.FieldRef<"Issue", 'String'>
+  readonly routeId: Prisma.FieldRef<"Issue", 'String'>
+  readonly surveySessionId: Prisma.FieldRef<"Issue", 'String'>
+  readonly surveyorId: Prisma.FieldRef<"Issue", 'String'>
   readonly imageUrl: Prisma.FieldRef<"Issue", 'String'>
   readonly afterImageUrl: Prisma.FieldRef<"Issue", 'String'>
-  readonly wardId: Prisma.FieldRef<"Issue", 'String'>
-  readonly surveyorId: Prisma.FieldRef<"Issue", 'String'>
   readonly createdAt: Prisma.FieldRef<"Issue", 'DateTime'>
 }
     

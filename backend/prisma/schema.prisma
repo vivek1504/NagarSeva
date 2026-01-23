@@ -1,12 +1,7 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output = "../src/generated"
 }
 
 datasource db {
@@ -14,14 +9,9 @@ datasource db {
 }
 
 enum UserRole {
-  ADMIN 
+  ADMIN
   SURVEYOR
   ENGINEER
-}
-
-enum EngineerDepartment {
-  POTHOLE
-  GARBAGE
 }
 
 enum IssueType {
@@ -30,12 +20,12 @@ enum IssueType {
 }
 
 enum IssueStatus {
-  DETECTED
-  ASSIGNED
-  IN_PROGRESS
-  FIXED
-  REJECTED
-  RESOLVED
+  DETECTED      
+  ASSIGNED     
+  IN_PROGRESS   
+  FIXED         
+  RESOLVED      
+  REJECTED      
 }
 
 enum RouteAssignmentStatus {
@@ -43,74 +33,125 @@ enum RouteAssignmentStatus {
   IN_PROGRESS
   COMPLETED
 }
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      UserRole
 
-model User{
-  id String @id @default(uuid())
-  name String
-  email String @unique
-  password String
-  role UserRole
+  department IssueType?
 
-  wardId String
-  ward Ward @relation(fields: [wardId], references: [id])
-
-  department EngineerDepartment?
-
-  issues Issue[]
-  assignedIssues IssueAssignment[]
-  resolutions IssueResolution[]
+  wardId   String?
+  ward     Ward?    @relation(fields: [wardId], references: [id])
 
   createdAt DateTime @default(now())
+
+  routeAssignments RouteAssignment[]  
+  issueAssignments IssueAssignment[]   
+  issueResolutions IssueResolution[]   
+  reportedIssues Issue[]               
 }
 
 model Ward {
-  id String @id @default(uuid())
-  name String 
-  number Int @unique
+  id     String @id @default(uuid())
+  name   String
+  number Int    @unique
 
-  engineers User[]
+  userId String?
+  user User[]
+
+  routes Route[]
   issues Issue[]
 }
 
-model Issue {
-  id               String      @id @default(uuid())
-  clientCaptureId  String      @unique
 
-  type             IssueType?
-  aiDetectedType   IssueType?
-  aiConfidence     Float?
+model Route {
+  id        String @id @default(uuid())
+  name      String
 
-  status           IssueStatus @default(DETECTED)
+  wardId    String
+  ward      Ward   @relation(fields: [wardId], references: [id])
 
-  latitude         Float
-  longitude        Float
+  startLat  Float
+  startLon  Float
+  endLat    Float
+  endLon    Float
+  distance  Float
 
-  imageUrl         String
-  afterImageUrl    String?
-
-  wardId           String
-  ward             Ward        @relation(fields: [wardId], references: [id])
-
-  surveyorId       String
-  surveyor         User        @relation(fields: [surveyorId], references: [id])
-
-  assignment       IssueAssignment?
-  resolution       IssueResolution?
-
-  createdAt        DateTime    @default(now())
+  assignments RouteAssignment[]
+  issues      Issue[]
 }
 
+model RouteAssignment {
+  id         String @id @default(uuid())
+  routeId    String
+  surveyorId String
+
+  status     RouteAssignmentStatus @default(PENDING)
+
+  route      Route @relation(fields: [routeId], references: [id])
+  surveyor   User  @relation(fields: [surveyorId], references: [id])
+
+  assignedAt DateTime @default(now())
+  completedAt DateTime?
+
+  sessions   SurveySession[]
+}
+
+model SurveySession {
+  id                String   @id @default(uuid())
+  routeAssignmentId String
+
+  startedAt DateTime
+  endedAt   DateTime?
+
+  routeAssignment RouteAssignment @relation(fields: [routeAssignmentId], references: [id])
+  issues          Issue[]
+}
+
+model Issue {
+  id              String @id @default(uuid())
+  clientCaptureId String @unique  
+
+  type            IssueType?
+  status          IssueStatus @default(DETECTED)
+
+  latitude        Float
+  longitude       Float
+
+  wardId          String
+  ward            Ward @relation(fields: [wardId], references: [id])
+
+  routeId         String
+  route           Route @relation(fields: [routeId], references: [id])
+
+  surveySessionId String
+  surveySession   SurveySession @relation(fields: [surveySessionId], references: [id])
+
+  surveyorId      String
+  surveyor        User @relation(fields: [surveyorId], references: [id])
+
+  imageUrl        String
+  afterImageUrl   String?
+
+  assignment      IssueAssignment?
+  resolution      IssueResolution?
+
+  createdAt       DateTime @default(now())
+}
 
 model IssueAssignment {
-  id         String   @id @default(uuid())
-  issueId    String   @unique
+  id         String @id @default(uuid())
+  issueId    String @unique
   engineerId String
 
-  issue      Issue    @relation(fields: [issueId], references: [id])
-  engineer   User     @relation(fields: [engineerId], references: [id])
+  issue      Issue @relation(fields: [issueId], references: [id])
+  engineer   User  @relation(fields: [engineerId], references: [id])
 
   assignedAt DateTime @default(now())
 }
+
 
 model IssueResolution {
   id                String   @id @default(uuid())
@@ -122,7 +163,9 @@ model IssueResolution {
   verifiedByAdminId String?
   verifiedByAdmin   User?    @relation(fields: [verifiedByAdminId], references: [id])
 
-  issue             Issue    @relation(fields: [issueId], references: [id])
-
+  verifiedAt        DateTime?
   createdAt         DateTime @default(now())
+
+  issue             Issue    @relation(fields: [issueId], references: [id])
 }
+

@@ -223,7 +223,7 @@ export type IssueAssignmentCreateInput = {
   id?: string
   assignedAt?: Date | string
   issue: Prisma.IssueCreateNestedOneWithoutAssignmentInput
-  engineer: Prisma.UserCreateNestedOneWithoutAssignedIssuesInput
+  engineer: Prisma.UserCreateNestedOneWithoutIssueAssignmentsInput
 }
 
 export type IssueAssignmentUncheckedCreateInput = {
@@ -237,7 +237,7 @@ export type IssueAssignmentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issue?: Prisma.IssueUpdateOneRequiredWithoutAssignmentNestedInput
-  engineer?: Prisma.UserUpdateOneRequiredWithoutAssignedIssuesNestedInput
+  engineer?: Prisma.UserUpdateOneRequiredWithoutIssueAssignmentsNestedInput
 }
 
 export type IssueAssignmentUncheckedUpdateInput = {
@@ -427,7 +427,7 @@ export type IssueAssignmentScalarWhereInput = {
 export type IssueAssignmentCreateWithoutIssueInput = {
   id?: string
   assignedAt?: Date | string
-  engineer: Prisma.UserCreateNestedOneWithoutAssignedIssuesInput
+  engineer: Prisma.UserCreateNestedOneWithoutIssueAssignmentsInput
 }
 
 export type IssueAssignmentUncheckedCreateWithoutIssueInput = {
@@ -455,7 +455,7 @@ export type IssueAssignmentUpdateToOneWithWhereWithoutIssueInput = {
 export type IssueAssignmentUpdateWithoutIssueInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  engineer?: Prisma.UserUpdateOneRequiredWithoutAssignedIssuesNestedInput
+  engineer?: Prisma.UserUpdateOneRequiredWithoutIssueAssignmentsNestedInput
 }
 
 export type IssueAssignmentUncheckedUpdateWithoutIssueInput = {
