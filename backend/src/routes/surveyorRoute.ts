@@ -16,14 +16,12 @@ dotenv.config();
 
 const surveyorRouter = Router();
 
-/* -------------------- Cloudinary -------------------- */
 cloudinary.config({
   cloud_name: process.env.cloudinary_cloud_name || "",
   api_key: process.env.cloudinary_api_key || "",
   api_secret: process.env.cloudinary_api_secret || "",
 });
 
-/* -------------------- Multer -------------------- */
 const upload = multer({
   storage: multer.diskStorage({
     destination: "uploads/user-images/",
@@ -37,7 +35,6 @@ const upload = multer({
   },
 });
 
-/* -------------------- Helpers -------------------- */
 const BASE_LAT = 22.307701;
 const BASE_LON = 73.210394;
 
@@ -76,7 +73,6 @@ async function sendToPotholeModel(imagePath: string) {
   return res.data;
 }
 
-/* -------------------- Image Processing -------------------- */
 async function processImage(
   file: Express.Multer.File,
   sessionId: string,
@@ -133,7 +129,6 @@ async function processImage(
   }
 }
 
-/* -------------------- Auth -------------------- */
 surveyorRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -153,7 +148,6 @@ surveyorRouter.post("/login", async (req, res) => {
   res.json({ success: true, token });
 });
 
-/* -------------------- Survey Flow -------------------- */
 surveyorRouter.post(
   "/startSurvey",
   requireAuth,
@@ -218,7 +212,6 @@ surveyorRouter.put(
   },
 );
 
-/* -------------------- Upload -------------------- */
 surveyorRouter.post(
   "/upload",
   requireAuth,

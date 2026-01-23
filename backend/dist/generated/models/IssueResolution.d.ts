@@ -1,0 +1,1350 @@
+import type * as runtime from "@prisma/client/runtime/client";
+import type * as Prisma from "../internal/prismaNamespace.js";
+/**
+ * Model IssueResolution
+ *
+ */
+export type IssueResolutionModel = runtime.Types.Result.DefaultSelection<Prisma.$IssueResolutionPayload>;
+export type AggregateIssueResolution = {
+    _count: IssueResolutionCountAggregateOutputType | null;
+    _min: IssueResolutionMinAggregateOutputType | null;
+    _max: IssueResolutionMaxAggregateOutputType | null;
+};
+export type IssueResolutionMinAggregateOutputType = {
+    id: string | null;
+    issueId: string | null;
+    approved: boolean | null;
+    feedback: string | null;
+    verifiedByAdminId: string | null;
+    verifiedAt: Date | null;
+    createdAt: Date | null;
+};
+export type IssueResolutionMaxAggregateOutputType = {
+    id: string | null;
+    issueId: string | null;
+    approved: boolean | null;
+    feedback: string | null;
+    verifiedByAdminId: string | null;
+    verifiedAt: Date | null;
+    createdAt: Date | null;
+};
+export type IssueResolutionCountAggregateOutputType = {
+    id: number;
+    issueId: number;
+    approved: number;
+    feedback: number;
+    verifiedByAdminId: number;
+    verifiedAt: number;
+    createdAt: number;
+    _all: number;
+};
+export type IssueResolutionMinAggregateInputType = {
+    id?: true;
+    issueId?: true;
+    approved?: true;
+    feedback?: true;
+    verifiedByAdminId?: true;
+    verifiedAt?: true;
+    createdAt?: true;
+};
+export type IssueResolutionMaxAggregateInputType = {
+    id?: true;
+    issueId?: true;
+    approved?: true;
+    feedback?: true;
+    verifiedByAdminId?: true;
+    verifiedAt?: true;
+    createdAt?: true;
+};
+export type IssueResolutionCountAggregateInputType = {
+    id?: true;
+    issueId?: true;
+    approved?: true;
+    feedback?: true;
+    verifiedByAdminId?: true;
+    verifiedAt?: true;
+    createdAt?: true;
+    _all?: true;
+};
+export type IssueResolutionAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which IssueResolution to aggregate.
+     */
+    where?: Prisma.IssueResolutionWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IssueResolutions to fetch.
+     */
+    orderBy?: Prisma.IssueResolutionOrderByWithRelationInput | Prisma.IssueResolutionOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: Prisma.IssueResolutionWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IssueResolutions from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IssueResolutions.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned IssueResolutions
+    **/
+    _count?: true | IssueResolutionCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+    **/
+    _min?: IssueResolutionMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+    **/
+    _max?: IssueResolutionMaxAggregateInputType;
+};
+export type GetIssueResolutionAggregateType<T extends IssueResolutionAggregateArgs> = {
+    [P in keyof T & keyof AggregateIssueResolution]: P extends '_count' | 'count' ? T[P] extends true ? number : Prisma.GetScalarType<T[P], AggregateIssueResolution[P]> : Prisma.GetScalarType<T[P], AggregateIssueResolution[P]>;
+};
+export type IssueResolutionGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.IssueResolutionWhereInput;
+    orderBy?: Prisma.IssueResolutionOrderByWithAggregationInput | Prisma.IssueResolutionOrderByWithAggregationInput[];
+    by: Prisma.IssueResolutionScalarFieldEnum[] | Prisma.IssueResolutionScalarFieldEnum;
+    having?: Prisma.IssueResolutionScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: IssueResolutionCountAggregateInputType | true;
+    _min?: IssueResolutionMinAggregateInputType;
+    _max?: IssueResolutionMaxAggregateInputType;
+};
+export type IssueResolutionGroupByOutputType = {
+    id: string;
+    issueId: string;
+    approved: boolean;
+    feedback: string | null;
+    verifiedByAdminId: string | null;
+    verifiedAt: Date | null;
+    createdAt: Date;
+    _count: IssueResolutionCountAggregateOutputType | null;
+    _min: IssueResolutionMinAggregateOutputType | null;
+    _max: IssueResolutionMaxAggregateOutputType | null;
+};
+type GetIssueResolutionGroupByPayload<T extends IssueResolutionGroupByArgs> = Prisma.PrismaPromise<Array<Prisma.PickEnumerable<IssueResolutionGroupByOutputType, T['by']> & {
+    [P in ((keyof T) & (keyof IssueResolutionGroupByOutputType))]: P extends '_count' ? T[P] extends boolean ? number : Prisma.GetScalarType<T[P], IssueResolutionGroupByOutputType[P]> : Prisma.GetScalarType<T[P], IssueResolutionGroupByOutputType[P]>;
+}>>;
+export type IssueResolutionWhereInput = {
+    AND?: Prisma.IssueResolutionWhereInput | Prisma.IssueResolutionWhereInput[];
+    OR?: Prisma.IssueResolutionWhereInput[];
+    NOT?: Prisma.IssueResolutionWhereInput | Prisma.IssueResolutionWhereInput[];
+    id?: Prisma.StringFilter<"IssueResolution"> | string;
+    issueId?: Prisma.StringFilter<"IssueResolution"> | string;
+    approved?: Prisma.BoolFilter<"IssueResolution"> | boolean;
+    feedback?: Prisma.StringNullableFilter<"IssueResolution"> | string | null;
+    verifiedByAdminId?: Prisma.StringNullableFilter<"IssueResolution"> | string | null;
+    verifiedAt?: Prisma.DateTimeNullableFilter<"IssueResolution"> | Date | string | null;
+    createdAt?: Prisma.DateTimeFilter<"IssueResolution"> | Date | string;
+    verifiedByAdmin?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null;
+    issue?: Prisma.XOR<Prisma.IssueScalarRelationFilter, Prisma.IssueWhereInput>;
+};
+export type IssueResolutionOrderByWithRelationInput = {
+    id?: Prisma.SortOrder;
+    issueId?: Prisma.SortOrder;
+    approved?: Prisma.SortOrder;
+    feedback?: Prisma.SortOrderInput | Prisma.SortOrder;
+    verifiedByAdminId?: Prisma.SortOrderInput | Prisma.SortOrder;
+    verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    verifiedByAdmin?: Prisma.UserOrderByWithRelationInput;
+    issue?: Prisma.IssueOrderByWithRelationInput;
+};
+export type IssueResolutionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string;
+    issueId?: string;
+    AND?: Prisma.IssueResolutionWhereInput | Prisma.IssueResolutionWhereInput[];
+    OR?: Prisma.IssueResolutionWhereInput[];
+    NOT?: Prisma.IssueResolutionWhereInput | Prisma.IssueResolutionWhereInput[];
+    approved?: Prisma.BoolFilter<"IssueResolution"> | boolean;
+    feedback?: Prisma.StringNullableFilter<"IssueResolution"> | string | null;
+    verifiedByAdminId?: Prisma.StringNullableFilter<"IssueResolution"> | string | null;
+    verifiedAt?: Prisma.DateTimeNullableFilter<"IssueResolution"> | Date | string | null;
+    createdAt?: Prisma.DateTimeFilter<"IssueResolution"> | Date | string;
+    verifiedByAdmin?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null;
+    issue?: Prisma.XOR<Prisma.IssueScalarRelationFilter, Prisma.IssueWhereInput>;
+}, "id" | "issueId">;
+export type IssueResolutionOrderByWithAggregationInput = {
+    id?: Prisma.SortOrder;
+    issueId?: Prisma.SortOrder;
+    approved?: Prisma.SortOrder;
+    feedback?: Prisma.SortOrderInput | Prisma.SortOrder;
+    verifiedByAdminId?: Prisma.SortOrderInput | Prisma.SortOrder;
+    verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    _count?: Prisma.IssueResolutionCountOrderByAggregateInput;
+    _max?: Prisma.IssueResolutionMaxOrderByAggregateInput;
+    _min?: Prisma.IssueResolutionMinOrderByAggregateInput;
+};
+export type IssueResolutionScalarWhereWithAggregatesInput = {
+    AND?: Prisma.IssueResolutionScalarWhereWithAggregatesInput | Prisma.IssueResolutionScalarWhereWithAggregatesInput[];
+    OR?: Prisma.IssueResolutionScalarWhereWithAggregatesInput[];
+    NOT?: Prisma.IssueResolutionScalarWhereWithAggregatesInput | Prisma.IssueResolutionScalarWhereWithAggregatesInput[];
+    id?: Prisma.StringWithAggregatesFilter<"IssueResolution"> | string;
+    issueId?: Prisma.StringWithAggregatesFilter<"IssueResolution"> | string;
+    approved?: Prisma.BoolWithAggregatesFilter<"IssueResolution"> | boolean;
+    feedback?: Prisma.StringNullableWithAggregatesFilter<"IssueResolution"> | string | null;
+    verifiedByAdminId?: Prisma.StringNullableWithAggregatesFilter<"IssueResolution"> | string | null;
+    verifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"IssueResolution"> | Date | string | null;
+    createdAt?: Prisma.DateTimeWithAggregatesFilter<"IssueResolution"> | Date | string;
+};
+export type IssueResolutionCreateInput = {
+    id?: string;
+    approved?: boolean;
+    feedback?: string | null;
+    verifiedAt?: Date | string | null;
+    createdAt?: Date | string;
+    verifiedByAdmin?: Prisma.UserCreateNestedOneWithoutIssueResolutionsInput;
+    issue: Prisma.IssueCreateNestedOneWithoutResolutionInput;
+};
+export type IssueResolutionUncheckedCreateInput = {
+    id?: string;
+    issueId: string;
+    approved?: boolean;
+    feedback?: string | null;
+    verifiedByAdminId?: string | null;
+    verifiedAt?: Date | string | null;
+    createdAt?: Date | string;
+};
+export type IssueResolutionUpdateInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    approved?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    verifiedByAdmin?: Prisma.UserUpdateOneWithoutIssueResolutionsNestedInput;
+    issue?: Prisma.IssueUpdateOneRequiredWithoutResolutionNestedInput;
+};
+export type IssueResolutionUncheckedUpdateInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    issueId?: Prisma.StringFieldUpdateOperationsInput | string;
+    approved?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedByAdminId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IssueResolutionCreateManyInput = {
+    id?: string;
+    issueId: string;
+    approved?: boolean;
+    feedback?: string | null;
+    verifiedByAdminId?: string | null;
+    verifiedAt?: Date | string | null;
+    createdAt?: Date | string;
+};
+export type IssueResolutionUpdateManyMutationInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    approved?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IssueResolutionUncheckedUpdateManyInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    issueId?: Prisma.StringFieldUpdateOperationsInput | string;
+    approved?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedByAdminId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IssueResolutionListRelationFilter = {
+    every?: Prisma.IssueResolutionWhereInput;
+    some?: Prisma.IssueResolutionWhereInput;
+    none?: Prisma.IssueResolutionWhereInput;
+};
+export type IssueResolutionOrderByRelationAggregateInput = {
+    _count?: Prisma.SortOrder;
+};
+export type IssueResolutionNullableScalarRelationFilter = {
+    is?: Prisma.IssueResolutionWhereInput | null;
+    isNot?: Prisma.IssueResolutionWhereInput | null;
+};
+export type IssueResolutionCountOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    issueId?: Prisma.SortOrder;
+    approved?: Prisma.SortOrder;
+    feedback?: Prisma.SortOrder;
+    verifiedByAdminId?: Prisma.SortOrder;
+    verifiedAt?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+};
+export type IssueResolutionMaxOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    issueId?: Prisma.SortOrder;
+    approved?: Prisma.SortOrder;
+    feedback?: Prisma.SortOrder;
+    verifiedByAdminId?: Prisma.SortOrder;
+    verifiedAt?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+};
+export type IssueResolutionMinOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    issueId?: Prisma.SortOrder;
+    approved?: Prisma.SortOrder;
+    feedback?: Prisma.SortOrder;
+    verifiedByAdminId?: Prisma.SortOrder;
+    verifiedAt?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+};
+export type IssueResolutionCreateNestedManyWithoutVerifiedByAdminInput = {
+    create?: Prisma.XOR<Prisma.IssueResolutionCreateWithoutVerifiedByAdminInput, Prisma.IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput> | Prisma.IssueResolutionCreateWithoutVerifiedByAdminInput[] | Prisma.IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput[];
+    connectOrCreate?: Prisma.IssueResolutionCreateOrConnectWithoutVerifiedByAdminInput | Prisma.IssueResolutionCreateOrConnectWithoutVerifiedByAdminInput[];
+    createMany?: Prisma.IssueResolutionCreateManyVerifiedByAdminInputEnvelope;
+    connect?: Prisma.IssueResolutionWhereUniqueInput | Prisma.IssueResolutionWhereUniqueInput[];
+};
+export type IssueResolutionUncheckedCreateNestedManyWithoutVerifiedByAdminInput = {
+    create?: Prisma.XOR<Prisma.IssueResolutionCreateWithoutVerifiedByAdminInput, Prisma.IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput> | Prisma.IssueResolutionCreateWithoutVerifiedByAdminInput[] | Prisma.IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput[];
+    connectOrCreate?: Prisma.IssueResolutionCreateOrConnectWithoutVerifiedByAdminInput | Prisma.IssueResolutionCreateOrConnectWithoutVerifiedByAdminInput[];
+    createMany?: Prisma.IssueResolutionCreateManyVerifiedByAdminInputEnvelope;
+    connect?: Prisma.IssueResolutionWhereUniqueInput | Prisma.IssueResolutionWhereUniqueInput[];
+};
+export type IssueResolutionUpdateManyWithoutVerifiedByAdminNestedInput = {
+    create?: Prisma.XOR<Prisma.IssueResolutionCreateWithoutVerifiedByAdminInput, Prisma.IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput> | Prisma.IssueResolutionCreateWithoutVerifiedByAdminInput[] | Prisma.IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput[];
+    connectOrCreate?: Prisma.IssueResolutionCreateOrConnectWithoutVerifiedByAdminInput | Prisma.IssueResolutionCreateOrConnectWithoutVerifiedByAdminInput[];
+    upsert?: Prisma.IssueResolutionUpsertWithWhereUniqueWithoutVerifiedByAdminInput | Prisma.IssueResolutionUpsertWithWhereUniqueWithoutVerifiedByAdminInput[];
+    createMany?: Prisma.IssueResolutionCreateManyVerifiedByAdminInputEnvelope;
+    set?: Prisma.IssueResolutionWhereUniqueInput | Prisma.IssueResolutionWhereUniqueInput[];
+    disconnect?: Prisma.IssueResolutionWhereUniqueInput | Prisma.IssueResolutionWhereUniqueInput[];
+    delete?: Prisma.IssueResolutionWhereUniqueInput | Prisma.IssueResolutionWhereUniqueInput[];
+    connect?: Prisma.IssueResolutionWhereUniqueInput | Prisma.IssueResolutionWhereUniqueInput[];
+    update?: Prisma.IssueResolutionUpdateWithWhereUniqueWithoutVerifiedByAdminInput | Prisma.IssueResolutionUpdateWithWhereUniqueWithoutVerifiedByAdminInput[];
+    updateMany?: Prisma.IssueResolutionUpdateManyWithWhereWithoutVerifiedByAdminInput | Prisma.IssueResolutionUpdateManyWithWhereWithoutVerifiedByAdminInput[];
+    deleteMany?: Prisma.IssueResolutionScalarWhereInput | Prisma.IssueResolutionScalarWhereInput[];
+};
+export type IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminNestedInput = {
+    create?: Prisma.XOR<Prisma.IssueResolutionCreateWithoutVerifiedByAdminInput, Prisma.IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput> | Prisma.IssueResolutionCreateWithoutVerifiedByAdminInput[] | Prisma.IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput[];
+    connectOrCreate?: Prisma.IssueResolutionCreateOrConnectWithoutVerifiedByAdminInput | Prisma.IssueResolutionCreateOrConnectWithoutVerifiedByAdminInput[];
+    upsert?: Prisma.IssueResolutionUpsertWithWhereUniqueWithoutVerifiedByAdminInput | Prisma.IssueResolutionUpsertWithWhereUniqueWithoutVerifiedByAdminInput[];
+    createMany?: Prisma.IssueResolutionCreateManyVerifiedByAdminInputEnvelope;
+    set?: Prisma.IssueResolutionWhereUniqueInput | Prisma.IssueResolutionWhereUniqueInput[];
+    disconnect?: Prisma.IssueResolutionWhereUniqueInput | Prisma.IssueResolutionWhereUniqueInput[];
+    delete?: Prisma.IssueResolutionWhereUniqueInput | Prisma.IssueResolutionWhereUniqueInput[];
+    connect?: Prisma.IssueResolutionWhereUniqueInput | Prisma.IssueResolutionWhereUniqueInput[];
+    update?: Prisma.IssueResolutionUpdateWithWhereUniqueWithoutVerifiedByAdminInput | Prisma.IssueResolutionUpdateWithWhereUniqueWithoutVerifiedByAdminInput[];
+    updateMany?: Prisma.IssueResolutionUpdateManyWithWhereWithoutVerifiedByAdminInput | Prisma.IssueResolutionUpdateManyWithWhereWithoutVerifiedByAdminInput[];
+    deleteMany?: Prisma.IssueResolutionScalarWhereInput | Prisma.IssueResolutionScalarWhereInput[];
+};
+export type IssueResolutionCreateNestedOneWithoutIssueInput = {
+    create?: Prisma.XOR<Prisma.IssueResolutionCreateWithoutIssueInput, Prisma.IssueResolutionUncheckedCreateWithoutIssueInput>;
+    connectOrCreate?: Prisma.IssueResolutionCreateOrConnectWithoutIssueInput;
+    connect?: Prisma.IssueResolutionWhereUniqueInput;
+};
+export type IssueResolutionUncheckedCreateNestedOneWithoutIssueInput = {
+    create?: Prisma.XOR<Prisma.IssueResolutionCreateWithoutIssueInput, Prisma.IssueResolutionUncheckedCreateWithoutIssueInput>;
+    connectOrCreate?: Prisma.IssueResolutionCreateOrConnectWithoutIssueInput;
+    connect?: Prisma.IssueResolutionWhereUniqueInput;
+};
+export type IssueResolutionUpdateOneWithoutIssueNestedInput = {
+    create?: Prisma.XOR<Prisma.IssueResolutionCreateWithoutIssueInput, Prisma.IssueResolutionUncheckedCreateWithoutIssueInput>;
+    connectOrCreate?: Prisma.IssueResolutionCreateOrConnectWithoutIssueInput;
+    upsert?: Prisma.IssueResolutionUpsertWithoutIssueInput;
+    disconnect?: Prisma.IssueResolutionWhereInput | boolean;
+    delete?: Prisma.IssueResolutionWhereInput | boolean;
+    connect?: Prisma.IssueResolutionWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.IssueResolutionUpdateToOneWithWhereWithoutIssueInput, Prisma.IssueResolutionUpdateWithoutIssueInput>, Prisma.IssueResolutionUncheckedUpdateWithoutIssueInput>;
+};
+export type IssueResolutionUncheckedUpdateOneWithoutIssueNestedInput = {
+    create?: Prisma.XOR<Prisma.IssueResolutionCreateWithoutIssueInput, Prisma.IssueResolutionUncheckedCreateWithoutIssueInput>;
+    connectOrCreate?: Prisma.IssueResolutionCreateOrConnectWithoutIssueInput;
+    upsert?: Prisma.IssueResolutionUpsertWithoutIssueInput;
+    disconnect?: Prisma.IssueResolutionWhereInput | boolean;
+    delete?: Prisma.IssueResolutionWhereInput | boolean;
+    connect?: Prisma.IssueResolutionWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.IssueResolutionUpdateToOneWithWhereWithoutIssueInput, Prisma.IssueResolutionUpdateWithoutIssueInput>, Prisma.IssueResolutionUncheckedUpdateWithoutIssueInput>;
+};
+export type BoolFieldUpdateOperationsInput = {
+    set?: boolean;
+};
+export type IssueResolutionCreateWithoutVerifiedByAdminInput = {
+    id?: string;
+    approved?: boolean;
+    feedback?: string | null;
+    verifiedAt?: Date | string | null;
+    createdAt?: Date | string;
+    issue: Prisma.IssueCreateNestedOneWithoutResolutionInput;
+};
+export type IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput = {
+    id?: string;
+    issueId: string;
+    approved?: boolean;
+    feedback?: string | null;
+    verifiedAt?: Date | string | null;
+    createdAt?: Date | string;
+};
+export type IssueResolutionCreateOrConnectWithoutVerifiedByAdminInput = {
+    where: Prisma.IssueResolutionWhereUniqueInput;
+    create: Prisma.XOR<Prisma.IssueResolutionCreateWithoutVerifiedByAdminInput, Prisma.IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput>;
+};
+export type IssueResolutionCreateManyVerifiedByAdminInputEnvelope = {
+    data: Prisma.IssueResolutionCreateManyVerifiedByAdminInput | Prisma.IssueResolutionCreateManyVerifiedByAdminInput[];
+    skipDuplicates?: boolean;
+};
+export type IssueResolutionUpsertWithWhereUniqueWithoutVerifiedByAdminInput = {
+    where: Prisma.IssueResolutionWhereUniqueInput;
+    update: Prisma.XOR<Prisma.IssueResolutionUpdateWithoutVerifiedByAdminInput, Prisma.IssueResolutionUncheckedUpdateWithoutVerifiedByAdminInput>;
+    create: Prisma.XOR<Prisma.IssueResolutionCreateWithoutVerifiedByAdminInput, Prisma.IssueResolutionUncheckedCreateWithoutVerifiedByAdminInput>;
+};
+export type IssueResolutionUpdateWithWhereUniqueWithoutVerifiedByAdminInput = {
+    where: Prisma.IssueResolutionWhereUniqueInput;
+    data: Prisma.XOR<Prisma.IssueResolutionUpdateWithoutVerifiedByAdminInput, Prisma.IssueResolutionUncheckedUpdateWithoutVerifiedByAdminInput>;
+};
+export type IssueResolutionUpdateManyWithWhereWithoutVerifiedByAdminInput = {
+    where: Prisma.IssueResolutionScalarWhereInput;
+    data: Prisma.XOR<Prisma.IssueResolutionUpdateManyMutationInput, Prisma.IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminInput>;
+};
+export type IssueResolutionScalarWhereInput = {
+    AND?: Prisma.IssueResolutionScalarWhereInput | Prisma.IssueResolutionScalarWhereInput[];
+    OR?: Prisma.IssueResolutionScalarWhereInput[];
+    NOT?: Prisma.IssueResolutionScalarWhereInput | Prisma.IssueResolutionScalarWhereInput[];
+    id?: Prisma.StringFilter<"IssueResolution"> | string;
+    issueId?: Prisma.StringFilter<"IssueResolution"> | string;
+    approved?: Prisma.BoolFilter<"IssueResolution"> | boolean;
+    feedback?: Prisma.StringNullableFilter<"IssueResolution"> | string | null;
+    verifiedByAdminId?: Prisma.StringNullableFilter<"IssueResolution"> | string | null;
+    verifiedAt?: Prisma.DateTimeNullableFilter<"IssueResolution"> | Date | string | null;
+    createdAt?: Prisma.DateTimeFilter<"IssueResolution"> | Date | string;
+};
+export type IssueResolutionCreateWithoutIssueInput = {
+    id?: string;
+    approved?: boolean;
+    feedback?: string | null;
+    verifiedAt?: Date | string | null;
+    createdAt?: Date | string;
+    verifiedByAdmin?: Prisma.UserCreateNestedOneWithoutIssueResolutionsInput;
+};
+export type IssueResolutionUncheckedCreateWithoutIssueInput = {
+    id?: string;
+    approved?: boolean;
+    feedback?: string | null;
+    verifiedByAdminId?: string | null;
+    verifiedAt?: Date | string | null;
+    createdAt?: Date | string;
+};
+export type IssueResolutionCreateOrConnectWithoutIssueInput = {
+    where: Prisma.IssueResolutionWhereUniqueInput;
+    create: Prisma.XOR<Prisma.IssueResolutionCreateWithoutIssueInput, Prisma.IssueResolutionUncheckedCreateWithoutIssueInput>;
+};
+export type IssueResolutionUpsertWithoutIssueInput = {
+    update: Prisma.XOR<Prisma.IssueResolutionUpdateWithoutIssueInput, Prisma.IssueResolutionUncheckedUpdateWithoutIssueInput>;
+    create: Prisma.XOR<Prisma.IssueResolutionCreateWithoutIssueInput, Prisma.IssueResolutionUncheckedCreateWithoutIssueInput>;
+    where?: Prisma.IssueResolutionWhereInput;
+};
+export type IssueResolutionUpdateToOneWithWhereWithoutIssueInput = {
+    where?: Prisma.IssueResolutionWhereInput;
+    data: Prisma.XOR<Prisma.IssueResolutionUpdateWithoutIssueInput, Prisma.IssueResolutionUncheckedUpdateWithoutIssueInput>;
+};
+export type IssueResolutionUpdateWithoutIssueInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    approved?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    verifiedByAdmin?: Prisma.UserUpdateOneWithoutIssueResolutionsNestedInput;
+};
+export type IssueResolutionUncheckedUpdateWithoutIssueInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    approved?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedByAdminId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IssueResolutionCreateManyVerifiedByAdminInput = {
+    id?: string;
+    issueId: string;
+    approved?: boolean;
+    feedback?: string | null;
+    verifiedAt?: Date | string | null;
+    createdAt?: Date | string;
+};
+export type IssueResolutionUpdateWithoutVerifiedByAdminInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    approved?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    issue?: Prisma.IssueUpdateOneRequiredWithoutResolutionNestedInput;
+};
+export type IssueResolutionUncheckedUpdateWithoutVerifiedByAdminInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    issueId?: Prisma.StringFieldUpdateOperationsInput | string;
+    approved?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IssueResolutionUncheckedUpdateManyWithoutVerifiedByAdminInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    issueId?: Prisma.StringFieldUpdateOperationsInput | string;
+    approved?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IssueResolutionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    issueId?: boolean;
+    approved?: boolean;
+    feedback?: boolean;
+    verifiedByAdminId?: boolean;
+    verifiedAt?: boolean;
+    createdAt?: boolean;
+    verifiedByAdmin?: boolean | Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs>;
+    issue?: boolean | Prisma.IssueDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["issueResolution"]>;
+export type IssueResolutionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    issueId?: boolean;
+    approved?: boolean;
+    feedback?: boolean;
+    verifiedByAdminId?: boolean;
+    verifiedAt?: boolean;
+    createdAt?: boolean;
+    verifiedByAdmin?: boolean | Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs>;
+    issue?: boolean | Prisma.IssueDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["issueResolution"]>;
+export type IssueResolutionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    issueId?: boolean;
+    approved?: boolean;
+    feedback?: boolean;
+    verifiedByAdminId?: boolean;
+    verifiedAt?: boolean;
+    createdAt?: boolean;
+    verifiedByAdmin?: boolean | Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs>;
+    issue?: boolean | Prisma.IssueDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["issueResolution"]>;
+export type IssueResolutionSelectScalar = {
+    id?: boolean;
+    issueId?: boolean;
+    approved?: boolean;
+    feedback?: boolean;
+    verifiedByAdminId?: boolean;
+    verifiedAt?: boolean;
+    createdAt?: boolean;
+};
+export type IssueResolutionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "issueId" | "approved" | "feedback" | "verifiedByAdminId" | "verifiedAt" | "createdAt", ExtArgs["result"]["issueResolution"]>;
+export type IssueResolutionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    verifiedByAdmin?: boolean | Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs>;
+    issue?: boolean | Prisma.IssueDefaultArgs<ExtArgs>;
+};
+export type IssueResolutionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    verifiedByAdmin?: boolean | Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs>;
+    issue?: boolean | Prisma.IssueDefaultArgs<ExtArgs>;
+};
+export type IssueResolutionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    verifiedByAdmin?: boolean | Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs>;
+    issue?: boolean | Prisma.IssueDefaultArgs<ExtArgs>;
+};
+export type $IssueResolutionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    name: "IssueResolution";
+    objects: {
+        verifiedByAdmin: Prisma.$UserPayload<ExtArgs> | null;
+        issue: Prisma.$IssuePayload<ExtArgs>;
+    };
+    scalars: runtime.Types.Extensions.GetPayloadResult<{
+        id: string;
+        issueId: string;
+        approved: boolean;
+        feedback: string | null;
+        verifiedByAdminId: string | null;
+        verifiedAt: Date | null;
+        createdAt: Date;
+    }, ExtArgs["result"]["issueResolution"]>;
+    composites: {};
+};
+export type IssueResolutionGetPayload<S extends boolean | null | undefined | IssueResolutionDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload, S>;
+export type IssueResolutionCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = Omit<IssueResolutionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: IssueResolutionCountAggregateInputType | true;
+};
+export interface IssueResolutionDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: {
+        types: Prisma.TypeMap<ExtArgs>['model']['IssueResolution'];
+        meta: {
+            name: 'IssueResolution';
+        };
+    };
+    /**
+     * Find zero or one IssueResolution that matches the filter.
+     * @param {IssueResolutionFindUniqueArgs} args - Arguments to find a IssueResolution
+     * @example
+     * // Get one IssueResolution
+     * const issueResolution = await prisma.issueResolution.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IssueResolutionFindUniqueArgs>(args: Prisma.SelectSubset<T, IssueResolutionFindUniqueArgs<ExtArgs>>): Prisma.Prisma__IssueResolutionClient<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find one IssueResolution that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IssueResolutionFindUniqueOrThrowArgs} args - Arguments to find a IssueResolution
+     * @example
+     * // Get one IssueResolution
+     * const issueResolution = await prisma.issueResolution.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IssueResolutionFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, IssueResolutionFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__IssueResolutionClient<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first IssueResolution that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IssueResolutionFindFirstArgs} args - Arguments to find a IssueResolution
+     * @example
+     * // Get one IssueResolution
+     * const issueResolution = await prisma.issueResolution.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IssueResolutionFindFirstArgs>(args?: Prisma.SelectSubset<T, IssueResolutionFindFirstArgs<ExtArgs>>): Prisma.Prisma__IssueResolutionClient<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first IssueResolution that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IssueResolutionFindFirstOrThrowArgs} args - Arguments to find a IssueResolution
+     * @example
+     * // Get one IssueResolution
+     * const issueResolution = await prisma.issueResolution.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IssueResolutionFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, IssueResolutionFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__IssueResolutionClient<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find zero or more IssueResolutions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IssueResolutionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IssueResolutions
+     * const issueResolutions = await prisma.issueResolution.findMany()
+     *
+     * // Get first 10 IssueResolutions
+     * const issueResolutions = await prisma.issueResolution.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const issueResolutionWithIdOnly = await prisma.issueResolution.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends IssueResolutionFindManyArgs>(args?: Prisma.SelectSubset<T, IssueResolutionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
+    /**
+     * Create a IssueResolution.
+     * @param {IssueResolutionCreateArgs} args - Arguments to create a IssueResolution.
+     * @example
+     * // Create one IssueResolution
+     * const IssueResolution = await prisma.issueResolution.create({
+     *   data: {
+     *     // ... data to create a IssueResolution
+     *   }
+     * })
+     *
+     */
+    create<T extends IssueResolutionCreateArgs>(args: Prisma.SelectSubset<T, IssueResolutionCreateArgs<ExtArgs>>): Prisma.Prisma__IssueResolutionClient<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Create many IssueResolutions.
+     * @param {IssueResolutionCreateManyArgs} args - Arguments to create many IssueResolutions.
+     * @example
+     * // Create many IssueResolutions
+     * const issueResolution = await prisma.issueResolution.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends IssueResolutionCreateManyArgs>(args?: Prisma.SelectSubset<T, IssueResolutionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Create many IssueResolutions and returns the data saved in the database.
+     * @param {IssueResolutionCreateManyAndReturnArgs} args - Arguments to create many IssueResolutions.
+     * @example
+     * // Create many IssueResolutions
+     * const issueResolution = await prisma.issueResolution.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many IssueResolutions and only return the `id`
+     * const issueResolutionWithIdOnly = await prisma.issueResolution.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends IssueResolutionCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, IssueResolutionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Delete a IssueResolution.
+     * @param {IssueResolutionDeleteArgs} args - Arguments to delete one IssueResolution.
+     * @example
+     * // Delete one IssueResolution
+     * const IssueResolution = await prisma.issueResolution.delete({
+     *   where: {
+     *     // ... filter to delete one IssueResolution
+     *   }
+     * })
+     *
+     */
+    delete<T extends IssueResolutionDeleteArgs>(args: Prisma.SelectSubset<T, IssueResolutionDeleteArgs<ExtArgs>>): Prisma.Prisma__IssueResolutionClient<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Update one IssueResolution.
+     * @param {IssueResolutionUpdateArgs} args - Arguments to update one IssueResolution.
+     * @example
+     * // Update one IssueResolution
+     * const issueResolution = await prisma.issueResolution.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends IssueResolutionUpdateArgs>(args: Prisma.SelectSubset<T, IssueResolutionUpdateArgs<ExtArgs>>): Prisma.Prisma__IssueResolutionClient<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Delete zero or more IssueResolutions.
+     * @param {IssueResolutionDeleteManyArgs} args - Arguments to filter IssueResolutions to delete.
+     * @example
+     * // Delete a few IssueResolutions
+     * const { count } = await prisma.issueResolution.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends IssueResolutionDeleteManyArgs>(args?: Prisma.SelectSubset<T, IssueResolutionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more IssueResolutions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IssueResolutionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IssueResolutions
+     * const issueResolution = await prisma.issueResolution.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends IssueResolutionUpdateManyArgs>(args: Prisma.SelectSubset<T, IssueResolutionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more IssueResolutions and returns the data updated in the database.
+     * @param {IssueResolutionUpdateManyAndReturnArgs} args - Arguments to update many IssueResolutions.
+     * @example
+     * // Update many IssueResolutions
+     * const issueResolution = await prisma.issueResolution.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more IssueResolutions and only return the `id`
+     * const issueResolutionWithIdOnly = await prisma.issueResolution.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends IssueResolutionUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, IssueResolutionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Create or update one IssueResolution.
+     * @param {IssueResolutionUpsertArgs} args - Arguments to update or create a IssueResolution.
+     * @example
+     * // Update or create a IssueResolution
+     * const issueResolution = await prisma.issueResolution.upsert({
+     *   create: {
+     *     // ... data to create a IssueResolution
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IssueResolution we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IssueResolutionUpsertArgs>(args: Prisma.SelectSubset<T, IssueResolutionUpsertArgs<ExtArgs>>): Prisma.Prisma__IssueResolutionClient<runtime.Types.Result.GetResult<Prisma.$IssueResolutionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Count the number of IssueResolutions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IssueResolutionCountArgs} args - Arguments to filter IssueResolutions to count.
+     * @example
+     * // Count the number of IssueResolutions
+     * const count = await prisma.issueResolution.count({
+     *   where: {
+     *     // ... the filter for the IssueResolutions we want to count
+     *   }
+     * })
+    **/
+    count<T extends IssueResolutionCountArgs>(args?: Prisma.Subset<T, IssueResolutionCountArgs>): Prisma.PrismaPromise<T extends runtime.Types.Utils.Record<'select', any> ? T['select'] extends true ? number : Prisma.GetScalarType<T['select'], IssueResolutionCountAggregateOutputType> : number>;
+    /**
+     * Allows you to perform aggregations operations on a IssueResolution.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IssueResolutionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IssueResolutionAggregateArgs>(args: Prisma.Subset<T, IssueResolutionAggregateArgs>): Prisma.PrismaPromise<GetIssueResolutionAggregateType<T>>;
+    /**
+     * Group by IssueResolution.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IssueResolutionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+    **/
+    groupBy<T extends IssueResolutionGroupByArgs, HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>, OrderByArg extends Prisma.True extends HasSelectOrTake ? {
+        orderBy: IssueResolutionGroupByArgs['orderBy'];
+    } : {
+        orderBy?: IssueResolutionGroupByArgs['orderBy'];
+    }, OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>, ByFields extends Prisma.MaybeTupleToUnion<T['by']>, ByValid extends Prisma.Has<ByFields, OrderFields>, HavingFields extends Prisma.GetHavingFields<T['having']>, HavingValid extends Prisma.Has<ByFields, HavingFields>, ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False, InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.` : HavingValid extends Prisma.False ? {
+        [P in HavingFields]: P extends ByFields ? never : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".` : [
+            Error,
+            'Field ',
+            P,
+            ` in "having" needs to be provided in "by"`
+        ];
+    }[HavingFields] : 'take' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "take", you also need to provide "orderBy"' : 'skip' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "skip", you also need to provide "orderBy"' : ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields]>(args: Prisma.SubsetIntersection<T, IssueResolutionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIssueResolutionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the IssueResolution model
+     */
+    readonly fields: IssueResolutionFieldRefs;
+}
+/**
+ * The delegate class that acts as a "Promise-like" for IssueResolution.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
+export interface Prisma__IssueResolutionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    verifiedByAdmin<T extends Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IssueResolution$verifiedByAdminArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    issue<T extends Prisma.IssueDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IssueDefaultArgs<ExtArgs>>): Prisma.Prisma__IssueClient<runtime.Types.Result.GetResult<Prisma.$IssuePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): runtime.Types.Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
+}
+/**
+ * Fields of the IssueResolution model
+ */
+export interface IssueResolutionFieldRefs {
+    readonly id: Prisma.FieldRef<"IssueResolution", 'String'>;
+    readonly issueId: Prisma.FieldRef<"IssueResolution", 'String'>;
+    readonly approved: Prisma.FieldRef<"IssueResolution", 'Boolean'>;
+    readonly feedback: Prisma.FieldRef<"IssueResolution", 'String'>;
+    readonly verifiedByAdminId: Prisma.FieldRef<"IssueResolution", 'String'>;
+    readonly verifiedAt: Prisma.FieldRef<"IssueResolution", 'DateTime'>;
+    readonly createdAt: Prisma.FieldRef<"IssueResolution", 'DateTime'>;
+}
+/**
+ * IssueResolution findUnique
+ */
+export type IssueResolutionFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionInclude<ExtArgs> | null;
+    /**
+     * Filter, which IssueResolution to fetch.
+     */
+    where: Prisma.IssueResolutionWhereUniqueInput;
+};
+/**
+ * IssueResolution findUniqueOrThrow
+ */
+export type IssueResolutionFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionInclude<ExtArgs> | null;
+    /**
+     * Filter, which IssueResolution to fetch.
+     */
+    where: Prisma.IssueResolutionWhereUniqueInput;
+};
+/**
+ * IssueResolution findFirst
+ */
+export type IssueResolutionFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionInclude<ExtArgs> | null;
+    /**
+     * Filter, which IssueResolution to fetch.
+     */
+    where?: Prisma.IssueResolutionWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IssueResolutions to fetch.
+     */
+    orderBy?: Prisma.IssueResolutionOrderByWithRelationInput | Prisma.IssueResolutionOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for IssueResolutions.
+     */
+    cursor?: Prisma.IssueResolutionWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IssueResolutions from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IssueResolutions.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of IssueResolutions.
+     */
+    distinct?: Prisma.IssueResolutionScalarFieldEnum | Prisma.IssueResolutionScalarFieldEnum[];
+};
+/**
+ * IssueResolution findFirstOrThrow
+ */
+export type IssueResolutionFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionInclude<ExtArgs> | null;
+    /**
+     * Filter, which IssueResolution to fetch.
+     */
+    where?: Prisma.IssueResolutionWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IssueResolutions to fetch.
+     */
+    orderBy?: Prisma.IssueResolutionOrderByWithRelationInput | Prisma.IssueResolutionOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for IssueResolutions.
+     */
+    cursor?: Prisma.IssueResolutionWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IssueResolutions from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IssueResolutions.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of IssueResolutions.
+     */
+    distinct?: Prisma.IssueResolutionScalarFieldEnum | Prisma.IssueResolutionScalarFieldEnum[];
+};
+/**
+ * IssueResolution findMany
+ */
+export type IssueResolutionFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionInclude<ExtArgs> | null;
+    /**
+     * Filter, which IssueResolutions to fetch.
+     */
+    where?: Prisma.IssueResolutionWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IssueResolutions to fetch.
+     */
+    orderBy?: Prisma.IssueResolutionOrderByWithRelationInput | Prisma.IssueResolutionOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing IssueResolutions.
+     */
+    cursor?: Prisma.IssueResolutionWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IssueResolutions from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IssueResolutions.
+     */
+    skip?: number;
+    distinct?: Prisma.IssueResolutionScalarFieldEnum | Prisma.IssueResolutionScalarFieldEnum[];
+};
+/**
+ * IssueResolution create
+ */
+export type IssueResolutionCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a IssueResolution.
+     */
+    data: Prisma.XOR<Prisma.IssueResolutionCreateInput, Prisma.IssueResolutionUncheckedCreateInput>;
+};
+/**
+ * IssueResolution createMany
+ */
+export type IssueResolutionCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IssueResolutions.
+     */
+    data: Prisma.IssueResolutionCreateManyInput | Prisma.IssueResolutionCreateManyInput[];
+    skipDuplicates?: boolean;
+};
+/**
+ * IssueResolution createManyAndReturn
+ */
+export type IssueResolutionCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * The data used to create many IssueResolutions.
+     */
+    data: Prisma.IssueResolutionCreateManyInput | Prisma.IssueResolutionCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionIncludeCreateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * IssueResolution update
+ */
+export type IssueResolutionUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a IssueResolution.
+     */
+    data: Prisma.XOR<Prisma.IssueResolutionUpdateInput, Prisma.IssueResolutionUncheckedUpdateInput>;
+    /**
+     * Choose, which IssueResolution to update.
+     */
+    where: Prisma.IssueResolutionWhereUniqueInput;
+};
+/**
+ * IssueResolution updateMany
+ */
+export type IssueResolutionUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IssueResolutions.
+     */
+    data: Prisma.XOR<Prisma.IssueResolutionUpdateManyMutationInput, Prisma.IssueResolutionUncheckedUpdateManyInput>;
+    /**
+     * Filter which IssueResolutions to update
+     */
+    where?: Prisma.IssueResolutionWhereInput;
+    /**
+     * Limit how many IssueResolutions to update.
+     */
+    limit?: number;
+};
+/**
+ * IssueResolution updateManyAndReturn
+ */
+export type IssueResolutionUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * The data used to update IssueResolutions.
+     */
+    data: Prisma.XOR<Prisma.IssueResolutionUpdateManyMutationInput, Prisma.IssueResolutionUncheckedUpdateManyInput>;
+    /**
+     * Filter which IssueResolutions to update
+     */
+    where?: Prisma.IssueResolutionWhereInput;
+    /**
+     * Limit how many IssueResolutions to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionIncludeUpdateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * IssueResolution upsert
+ */
+export type IssueResolutionUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the IssueResolution to update in case it exists.
+     */
+    where: Prisma.IssueResolutionWhereUniqueInput;
+    /**
+     * In case the IssueResolution found by the `where` argument doesn't exist, create a new IssueResolution with this data.
+     */
+    create: Prisma.XOR<Prisma.IssueResolutionCreateInput, Prisma.IssueResolutionUncheckedCreateInput>;
+    /**
+     * In case the IssueResolution was found with the provided `where` argument, update it with this data.
+     */
+    update: Prisma.XOR<Prisma.IssueResolutionUpdateInput, Prisma.IssueResolutionUncheckedUpdateInput>;
+};
+/**
+ * IssueResolution delete
+ */
+export type IssueResolutionDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionInclude<ExtArgs> | null;
+    /**
+     * Filter which IssueResolution to delete.
+     */
+    where: Prisma.IssueResolutionWhereUniqueInput;
+};
+/**
+ * IssueResolution deleteMany
+ */
+export type IssueResolutionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which IssueResolutions to delete
+     */
+    where?: Prisma.IssueResolutionWhereInput;
+    /**
+     * Limit how many IssueResolutions to delete.
+     */
+    limit?: number;
+};
+/**
+ * IssueResolution.verifiedByAdmin
+ */
+export type IssueResolution$verifiedByAdminArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: Prisma.UserSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: Prisma.UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
+    where?: Prisma.UserWhereInput;
+};
+/**
+ * IssueResolution without action
+ */
+export type IssueResolutionDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IssueResolution
+     */
+    select?: Prisma.IssueResolutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IssueResolution
+     */
+    omit?: Prisma.IssueResolutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IssueResolutionInclude<ExtArgs> | null;
+};
+export {};
+//# sourceMappingURL=IssueResolution.d.ts.map
