@@ -63,6 +63,8 @@ export const UserScalarFieldEnum = {
     email: 'email',
     password: 'password',
     role: 'role',
+    department: 'department',
+    wardId: 'wardId',
     createdAt: 'createdAt'
 };
 export const WardScalarFieldEnum = {

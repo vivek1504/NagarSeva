@@ -24,4 +24,9 @@ export declare const RouteAssignmentStatus: {
     readonly COMPLETED: "COMPLETED";
 };
 export type RouteAssignmentStatus = (typeof RouteAssignmentStatus)[keyof typeof RouteAssignmentStatus];
+export declare const Department: {
+    readonly POTHOLE: "POTHOLE";
+    readonly GARBAGE: "GARBAGE";
+};
+export type Department = (typeof Department)[keyof typeof Department];
 //# sourceMappingURL=enums.d.ts.map

@@ -49,6 +49,8 @@ export declare const UserScalarFieldEnum: {
     readonly email: "email";
     readonly password: "password";
     readonly role: "role";
+    readonly department: "department";
+    readonly wardId: "wardId";
     readonly createdAt: "createdAt";
 };
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];

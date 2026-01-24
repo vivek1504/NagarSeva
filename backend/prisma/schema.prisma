@@ -33,12 +33,22 @@ enum RouteAssignmentStatus {
   COMPLETED
 }
 
+enum Department {
+  POTHOLE
+  GARBAGE
+}
+
 model User {
   id String @id @default(uuid())
   name String
   email String @unique
   password String
   role UserRole
+
+  department Department?
+
+  wardId String
+  ward Ward? @relation(fields: [wardId], references: [id])
 
   routeAssigned RouteAssignment[]
   issueAssigned IssueAssignment[]
@@ -51,6 +61,8 @@ model Ward {
   id String @id @default(uuid())
   name String
   number Int @unique
+
+  users User[]
 
   routes Route[]
   issues Issue[]

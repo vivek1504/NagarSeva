@@ -152,6 +152,7 @@ export type WardWhereInput = {
     id?: Prisma.StringFilter<"Ward"> | string;
     name?: Prisma.StringFilter<"Ward"> | string;
     number?: Prisma.IntFilter<"Ward"> | number;
+    users?: Prisma.UserListRelationFilter;
     routes?: Prisma.RouteListRelationFilter;
     issues?: Prisma.IssueListRelationFilter;
 };
@@ -159,6 +160,7 @@ export type WardOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
     number?: Prisma.SortOrder;
+    users?: Prisma.UserOrderByRelationAggregateInput;
     routes?: Prisma.RouteOrderByRelationAggregateInput;
     issues?: Prisma.IssueOrderByRelationAggregateInput;
 };
@@ -169,6 +171,7 @@ export type WardWhereUniqueInput = Prisma.AtLeast<{
     OR?: Prisma.WardWhereInput[];
     NOT?: Prisma.WardWhereInput | Prisma.WardWhereInput[];
     name?: Prisma.StringFilter<"Ward"> | string;
+    users?: Prisma.UserListRelationFilter;
     routes?: Prisma.RouteListRelationFilter;
     issues?: Prisma.IssueListRelationFilter;
 }, "id" | "number">;
@@ -194,6 +197,7 @@ export type WardCreateInput = {
     id?: string;
     name: string;
     number: number;
+    users?: Prisma.UserCreateNestedManyWithoutWardInput;
     routes?: Prisma.RouteCreateNestedManyWithoutWardInput;
     issues?: Prisma.IssueCreateNestedManyWithoutWardInput;
 };
@@ -201,6 +205,7 @@ export type WardUncheckedCreateInput = {
     id?: string;
     name: string;
     number: number;
+    users?: Prisma.UserUncheckedCreateNestedManyWithoutWardInput;
     routes?: Prisma.RouteUncheckedCreateNestedManyWithoutWardInput;
     issues?: Prisma.IssueUncheckedCreateNestedManyWithoutWardInput;
 };
@@ -208,6 +213,7 @@ export type WardUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     number?: Prisma.IntFieldUpdateOperationsInput | number;
+    users?: Prisma.UserUpdateManyWithoutWardNestedInput;
     routes?: Prisma.RouteUpdateManyWithoutWardNestedInput;
     issues?: Prisma.IssueUpdateManyWithoutWardNestedInput;
 };
@@ -215,6 +221,7 @@ export type WardUncheckedUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     number?: Prisma.IntFieldUpdateOperationsInput | number;
+    users?: Prisma.UserUncheckedUpdateManyWithoutWardNestedInput;
     routes?: Prisma.RouteUncheckedUpdateManyWithoutWardNestedInput;
     issues?: Prisma.IssueUncheckedUpdateManyWithoutWardNestedInput;
 };
@@ -232,6 +239,10 @@ export type WardUncheckedUpdateManyInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     number?: Prisma.IntFieldUpdateOperationsInput | number;
+};
+export type WardNullableScalarRelationFilter = {
+    is?: Prisma.WardWhereInput | null;
+    isNot?: Prisma.WardWhereInput | null;
 };
 export type WardCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
@@ -257,6 +268,20 @@ export type WardSumOrderByAggregateInput = {
 export type WardScalarRelationFilter = {
     is?: Prisma.WardWhereInput;
     isNot?: Prisma.WardWhereInput;
+};
+export type WardCreateNestedOneWithoutUsersInput = {
+    create?: Prisma.XOR<Prisma.WardCreateWithoutUsersInput, Prisma.WardUncheckedCreateWithoutUsersInput>;
+    connectOrCreate?: Prisma.WardCreateOrConnectWithoutUsersInput;
+    connect?: Prisma.WardWhereUniqueInput;
+};
+export type WardUpdateOneWithoutUsersNestedInput = {
+    create?: Prisma.XOR<Prisma.WardCreateWithoutUsersInput, Prisma.WardUncheckedCreateWithoutUsersInput>;
+    connectOrCreate?: Prisma.WardCreateOrConnectWithoutUsersInput;
+    upsert?: Prisma.WardUpsertWithoutUsersInput;
+    disconnect?: Prisma.WardWhereInput | boolean;
+    delete?: Prisma.WardWhereInput | boolean;
+    connect?: Prisma.WardWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.WardUpdateToOneWithWhereWithoutUsersInput, Prisma.WardUpdateWithoutUsersInput>, Prisma.WardUncheckedUpdateWithoutUsersInput>;
 };
 export type IntFieldUpdateOperationsInput = {
     set?: number;
@@ -289,16 +314,59 @@ export type WardUpdateOneRequiredWithoutIssuesNestedInput = {
     connect?: Prisma.WardWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.WardUpdateToOneWithWhereWithoutIssuesInput, Prisma.WardUpdateWithoutIssuesInput>, Prisma.WardUncheckedUpdateWithoutIssuesInput>;
 };
+export type WardCreateWithoutUsersInput = {
+    id?: string;
+    name: string;
+    number: number;
+    routes?: Prisma.RouteCreateNestedManyWithoutWardInput;
+    issues?: Prisma.IssueCreateNestedManyWithoutWardInput;
+};
+export type WardUncheckedCreateWithoutUsersInput = {
+    id?: string;
+    name: string;
+    number: number;
+    routes?: Prisma.RouteUncheckedCreateNestedManyWithoutWardInput;
+    issues?: Prisma.IssueUncheckedCreateNestedManyWithoutWardInput;
+};
+export type WardCreateOrConnectWithoutUsersInput = {
+    where: Prisma.WardWhereUniqueInput;
+    create: Prisma.XOR<Prisma.WardCreateWithoutUsersInput, Prisma.WardUncheckedCreateWithoutUsersInput>;
+};
+export type WardUpsertWithoutUsersInput = {
+    update: Prisma.XOR<Prisma.WardUpdateWithoutUsersInput, Prisma.WardUncheckedUpdateWithoutUsersInput>;
+    create: Prisma.XOR<Prisma.WardCreateWithoutUsersInput, Prisma.WardUncheckedCreateWithoutUsersInput>;
+    where?: Prisma.WardWhereInput;
+};
+export type WardUpdateToOneWithWhereWithoutUsersInput = {
+    where?: Prisma.WardWhereInput;
+    data: Prisma.XOR<Prisma.WardUpdateWithoutUsersInput, Prisma.WardUncheckedUpdateWithoutUsersInput>;
+};
+export type WardUpdateWithoutUsersInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    number?: Prisma.IntFieldUpdateOperationsInput | number;
+    routes?: Prisma.RouteUpdateManyWithoutWardNestedInput;
+    issues?: Prisma.IssueUpdateManyWithoutWardNestedInput;
+};
+export type WardUncheckedUpdateWithoutUsersInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    number?: Prisma.IntFieldUpdateOperationsInput | number;
+    routes?: Prisma.RouteUncheckedUpdateManyWithoutWardNestedInput;
+    issues?: Prisma.IssueUncheckedUpdateManyWithoutWardNestedInput;
+};
 export type WardCreateWithoutRoutesInput = {
     id?: string;
     name: string;
     number: number;
+    users?: Prisma.UserCreateNestedManyWithoutWardInput;
     issues?: Prisma.IssueCreateNestedManyWithoutWardInput;
 };
 export type WardUncheckedCreateWithoutRoutesInput = {
     id?: string;
     name: string;
     number: number;
+    users?: Prisma.UserUncheckedCreateNestedManyWithoutWardInput;
     issues?: Prisma.IssueUncheckedCreateNestedManyWithoutWardInput;
 };
 export type WardCreateOrConnectWithoutRoutesInput = {
@@ -318,24 +386,28 @@ export type WardUpdateWithoutRoutesInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     number?: Prisma.IntFieldUpdateOperationsInput | number;
+    users?: Prisma.UserUpdateManyWithoutWardNestedInput;
     issues?: Prisma.IssueUpdateManyWithoutWardNestedInput;
 };
 export type WardUncheckedUpdateWithoutRoutesInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     number?: Prisma.IntFieldUpdateOperationsInput | number;
+    users?: Prisma.UserUncheckedUpdateManyWithoutWardNestedInput;
     issues?: Prisma.IssueUncheckedUpdateManyWithoutWardNestedInput;
 };
 export type WardCreateWithoutIssuesInput = {
     id?: string;
     name: string;
     number: number;
+    users?: Prisma.UserCreateNestedManyWithoutWardInput;
     routes?: Prisma.RouteCreateNestedManyWithoutWardInput;
 };
 export type WardUncheckedCreateWithoutIssuesInput = {
     id?: string;
     name: string;
     number: number;
+    users?: Prisma.UserUncheckedCreateNestedManyWithoutWardInput;
     routes?: Prisma.RouteUncheckedCreateNestedManyWithoutWardInput;
 };
 export type WardCreateOrConnectWithoutIssuesInput = {
@@ -355,22 +427,26 @@ export type WardUpdateWithoutIssuesInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     number?: Prisma.IntFieldUpdateOperationsInput | number;
+    users?: Prisma.UserUpdateManyWithoutWardNestedInput;
     routes?: Prisma.RouteUpdateManyWithoutWardNestedInput;
 };
 export type WardUncheckedUpdateWithoutIssuesInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     number?: Prisma.IntFieldUpdateOperationsInput | number;
+    users?: Prisma.UserUncheckedUpdateManyWithoutWardNestedInput;
     routes?: Prisma.RouteUncheckedUpdateManyWithoutWardNestedInput;
 };
 /**
  * Count Type WardCountOutputType
  */
 export type WardCountOutputType = {
+    users: number;
     routes: number;
     issues: number;
 };
 export type WardCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    users?: boolean | WardCountOutputTypeCountUsersArgs;
     routes?: boolean | WardCountOutputTypeCountRoutesArgs;
     issues?: boolean | WardCountOutputTypeCountIssuesArgs;
 };
@@ -382,6 +458,12 @@ export type WardCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
      * Select specific fields to fetch from the WardCountOutputType
      */
     select?: Prisma.WardCountOutputTypeSelect<ExtArgs> | null;
+};
+/**
+ * WardCountOutputType without action
+ */
+export type WardCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.UserWhereInput;
 };
 /**
  * WardCountOutputType without action
@@ -399,6 +481,7 @@ export type WardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
     id?: boolean;
     name?: boolean;
     number?: boolean;
+    users?: boolean | Prisma.Ward$usersArgs<ExtArgs>;
     routes?: boolean | Prisma.Ward$routesArgs<ExtArgs>;
     issues?: boolean | Prisma.Ward$issuesArgs<ExtArgs>;
     _count?: boolean | Prisma.WardCountOutputTypeDefaultArgs<ExtArgs>;
@@ -420,6 +503,7 @@ export type WardSelectScalar = {
 };
 export type WardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "number", ExtArgs["result"]["ward"]>;
 export type WardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    users?: boolean | Prisma.Ward$usersArgs<ExtArgs>;
     routes?: boolean | Prisma.Ward$routesArgs<ExtArgs>;
     issues?: boolean | Prisma.Ward$issuesArgs<ExtArgs>;
     _count?: boolean | Prisma.WardCountOutputTypeDefaultArgs<ExtArgs>;
@@ -429,6 +513,7 @@ export type WardIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $WardPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     name: "Ward";
     objects: {
+        users: Prisma.$UserPayload<ExtArgs>[];
         routes: Prisma.$RoutePayload<ExtArgs>[];
         issues: Prisma.$IssuePayload<ExtArgs>[];
     };
@@ -765,6 +850,7 @@ export interface WardDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
  */
 export interface Prisma__WardClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
+    users<T extends Prisma.Ward$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ward$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     routes<T extends Prisma.Ward$routesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ward$routesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoutePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     issues<T extends Prisma.Ward$issuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ward$issuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
@@ -1164,6 +1250,29 @@ export type WardDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
      * Limit how many Wards to delete.
      */
     limit?: number;
+};
+/**
+ * Ward.users
+ */
+export type Ward$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: Prisma.UserSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: Prisma.UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
+    where?: Prisma.UserWhereInput;
+    orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[];
+    cursor?: Prisma.UserWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[];
 };
 /**
  * Ward.routes

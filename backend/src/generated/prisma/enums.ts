@@ -45,3 +45,11 @@ export const RouteAssignmentStatus = {
 } as const
 
 export type RouteAssignmentStatus = (typeof RouteAssignmentStatus)[keyof typeof RouteAssignmentStatus]
+
+
+export const Department = {
+  POTHOLE: 'POTHOLE',
+  GARBAGE: 'GARBAGE'
+} as const
+
+export type Department = (typeof Department)[keyof typeof Department]
