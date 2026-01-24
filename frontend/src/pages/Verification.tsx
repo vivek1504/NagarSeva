@@ -22,9 +22,11 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { getIssueTypeLabel } from "@/lib/issueUtils";
 import type { Issue } from "@/types";
+import { useTranslation } from 'react-i18next';
 
 const Verification = () => {
   const { data: issues, verifyResolution } = useIssues();
+  const { t } = useTranslation();
   const [selectedIssue, setSelectedIssue] = useState<Issue | null>(null);
   const [feedback, setFeedback] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -35,7 +37,7 @@ const Verification = () => {
     if (selectedIssue) {
       verifyResolution(selectedIssue.id, approved, feedback);
       toast.success(
-        approved ? "Issue closed successfully" : "Issue sent back for rework",
+        approved ? t('verification.issueClosedSuccess') : t('verification.issueSentBack'),
       );
       setDialogOpen(false);
       setFeedback("");
@@ -53,10 +55,10 @@ const Verification = () => {
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold text-foreground">
-            Resolution Verification
+            {t('verification.title')}
           </h1>
           <p className="text-muted-foreground mt-1">
-            Review and verify resolved issues
+            {t('verification.subtitle')}
           </p>
         </div>
 
@@ -65,7 +67,7 @@ const Verification = () => {
             <CardContent className="py-12 text-center">
               <CheckCircle className="w-12 h-12 mx-auto mb-4 text-muted-foreground opacity-50" />
               <p className="text-muted-foreground">
-                No issues pending verification
+                {t('verification.pendingVerification')}
               </p>
             </CardContent>
           </Card>
@@ -113,7 +115,7 @@ const Verification = () => {
                     onClick={() => openVerifyDialog(issue)}
                     className="w-full"
                   >
-                    Verify Resolution
+                    {t('verification.verifyResolution')}
                   </Button>
                 </CardContent>
               </Card>
@@ -125,7 +127,7 @@ const Verification = () => {
           <DialogContent className="max-w-3xl">
             <DialogHeader>
               <DialogTitle className="text-xl font-semibold">
-                Verify Resolution
+                {t('verification.verifyResolution')}
               </DialogTitle>
             </DialogHeader>
 
@@ -135,7 +137,7 @@ const Verification = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="relative rounded-lg overflow-hidden border">
                     <span className="absolute top-2 left-2 z-10 rounded bg-black/60 px-2 py-0.5 text-xs text-white">
-                      Before
+                      {t('verification.before')}
                     </span>
                     <img
                       src={selectedIssue.imageUrl}
@@ -146,7 +148,7 @@ const Verification = () => {
 
                   <div className="relative rounded-lg overflow-hidden border">
                     <span className="absolute top-2 left-2 z-10 rounded bg-black/60 px-2 py-0.5 text-xs text-white">
-                      After
+                      {t('verification.after')}
                     </span>
                     <img
                       src={selectedIssue.afterImageUrl}
@@ -165,10 +167,10 @@ const Verification = () => {
                     {selectedIssue.wardName} – {selectedIssue.routeName}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Engineer: {selectedIssue.assignedEngineerName}
+                    {t('verification.engineer')}: {selectedIssue.assignedEngineerName}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Fixed on:{" "}
+                    {t('verification.fixedOn')}:{" "}
                     {new Date(selectedIssue.updatedAt).toLocaleDateString()}
                   </p>
                 </div>
@@ -176,10 +178,10 @@ const Verification = () => {
                 {/* FEEDBACK */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium">
-                    Feedback (optional)
+                    {t('verification.feedback')}
                   </label>
                   <Textarea
-                    placeholder="Add feedback for the resolution..."
+                    placeholder={t('verification.addFeedback')}
                     value={feedback}
                     onChange={(e) => setFeedback(e.target.value)}
                     rows={3}
@@ -193,7 +195,7 @@ const Verification = () => {
                     onClick={() => handleVerify(false)}
                   >
                     <XCircle className="w-4 h-4 mr-2" />
-                    Reject
+                    {t('verification.reject')}
                   </Button>
 
                   <Button
@@ -201,7 +203,7 @@ const Verification = () => {
                     className="bg-green-600 hover:bg-green-700"
                   >
                     <CheckCircle className="w-4 h-4 mr-2" />
-                    Approve & Close
+                    {t('verification.approve')}
                   </Button>
                 </div>
               </div>

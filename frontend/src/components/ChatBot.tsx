@@ -10,7 +10,15 @@ import {
   Loader2,
   Sparkles,
   MessageSquare,
+  Languages,
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface Message {
   id: string;
@@ -19,15 +27,28 @@ interface Message {
   timestamp: Date;
 }
 
-const API_BASE_URL = "https://sql-agent-vmc.onrender.com";
+// Use proxy in development to avoid CORS issues
+const API_BASE_URL = import.meta.env.DEV
+  ? "/api/chat"
+  : "https://sql-agent-vmc-1.onrender.com";
+
+type ChatLanguage = "english" | "hindi" | "gujarati";
 
 export function ChatBot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [chatLanguage, setChatLanguage] = useState<ChatLanguage>(
+    (localStorage.getItem("chatLanguage") as ChatLanguage) || "english"
+  );
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleLanguageChange = (language: ChatLanguage) => {
+    setChatLanguage(language);
+    localStorage.setItem("chatLanguage", language);
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -55,7 +76,7 @@ export function ChatBot() {
 
     try {
       const response = await fetch(
-        `${API_BASE_URL}/ask?question=${encodeURIComponent(userMessage.content)}`,
+        `${API_BASE_URL}/ask?question=${encodeURIComponent(userMessage.content)}&language=${chatLanguage}`,
         {
           method: "POST",
           headers: {
@@ -130,9 +151,22 @@ export function ChatBot() {
               Ask questions about civic issues, wards, engineers, and survey data
             </p>
           </div>
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-sm font-medium">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            Online
+          <div className="flex items-center gap-3">
+            <Select value={chatLanguage} onValueChange={handleLanguageChange}>
+              <SelectTrigger className="w-[140px]">
+                <Languages className="w-4 h-4 mr-2" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="english">English</SelectItem>
+                <SelectItem value="hindi">हिन्दी</SelectItem>
+                <SelectItem value="gujarati">ગુજરાતી</SelectItem>
+              </SelectContent>
+            </Select>
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-sm font-medium">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Online
+            </div>
           </div>
         </div>
       </div>

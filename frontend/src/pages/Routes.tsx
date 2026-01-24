@@ -28,11 +28,13 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { UserPlus, Route as RouteIcon, MapPin } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslation } from 'react-i18next';
 
 const Routes = () => {
   const { data: routes, assignSurveyor } = useRoutes();
   const { data: surveyors } = useSurveyors();
   const { data: wards } = useWards();
+  const { t } = useTranslation();
   const [filterWard, setFilterWard] = useState<string>("all");
   const [assignDialogOpen, setAssignDialogOpen] = useState(false);
   const [selectedRoute, setSelectedRoute] = useState<string | null>(null);
@@ -57,13 +59,13 @@ const Routes = () => {
 
   const handleAssign = () => {
     if (!selectedRoute || !selectedSurveyor) {
-      toast.error("Please select a surveyor");
+      toast.error(t('routesPage.selectSurveyorError'));
       return;
     }
     const surveyor = surveyors?.find((s) => s.id === selectedSurveyor);
     if (surveyor) {
       assignSurveyor(selectedRoute, surveyor.id, surveyor.name);
-      toast.success("Surveyor assigned successfully");
+      toast.success(t('routesPage.surveyorAssignedSuccess'));
     }
     setAssignDialogOpen(false);
     setSelectedRoute(null);
@@ -81,18 +83,18 @@ const Routes = () => {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold text-foreground">
-              Route Assignment
+              {t('routesPage.title')}
             </h1>
             <p className="text-muted-foreground mt-1">
-              Assign surveyors to survey routes
+              {t('routesPage.subtitle')}
             </p>
           </div>
           <Select value={filterWard} onValueChange={setFilterWard}>
             <SelectTrigger className="w-full sm:w-48">
-              <SelectValue placeholder="Filter by ward" />
+              <SelectValue placeholder={t('routesPage.filterByWard')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Wards</SelectItem>
+              <SelectItem value="all">{t('mapView.allWards')}</SelectItem>
               {wards?.map((ward) => (
                 <SelectItem key={ward.id} value={ward.id}>
                   {ward.name}
@@ -114,10 +116,10 @@ const Routes = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Route Name</TableHead>
-                    <TableHead>Assigned Surveyor</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead className="text-right">Action</TableHead>
+                    <TableHead>{t('routesPage.routeName')}</TableHead>
+                    <TableHead>{t('routesPage.assignedSurveyor')}</TableHead>
+                    <TableHead>{t('common.status')}</TableHead>
+                    <TableHead className="text-right">{t('common.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -132,7 +134,7 @@ const Routes = () => {
                       <TableCell>
                         {route.assignedSurveyorName || (
                           <span className="text-muted-foreground italic">
-                            Unassigned
+                            {t('routesPage.unassigned')}
                           </span>
                         )}
                       </TableCell>
@@ -153,7 +155,7 @@ const Routes = () => {
                           onClick={() => openAssignDialog(route.id)}
                         >
                           <UserPlus className="w-4 h-4 mr-1" />
-                          {route.status === "ASSIGNED" ? "Assigned" : "Assign"}
+                          {route.status === "ASSIGNED" ? t('routesPage.assigned') : t('routesPage.assign')}
                         </Button>
                       </TableCell>
                     </TableRow>
@@ -168,7 +170,7 @@ const Routes = () => {
           <Card>
             <CardContent className="py-12 text-center">
               <RouteIcon className="w-12 h-12 mx-auto mb-4 text-muted-foreground opacity-50" />
-              <p className="text-muted-foreground">No routes found</p>
+              <p className="text-muted-foreground">{t('routesPage.noRoutesFound')}</p>
             </CardContent>
           </Card>
         )}
@@ -176,17 +178,17 @@ const Routes = () => {
         <Dialog open={assignDialogOpen} onOpenChange={setAssignDialogOpen}>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Assign Surveyor</DialogTitle>
+              <DialogTitle>{t('routesPage.assignSurveyor')}</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 pt-4">
               <div className="space-y-2">
-                <label className="text-sm font-medium">Select Surveyor</label>
+                <label className="text-sm font-medium">{t('routesPage.selectSurveyor')}</label>
                 <Select
                   value={selectedSurveyor}
                   onValueChange={setSelectedSurveyor}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Choose a surveyor" />
+                    <SelectValue placeholder={t('routesPage.chooseSurveyor')} />
                   </SelectTrigger>
                   <SelectContent>
                     {surveyors?.map((surveyor) => (
@@ -198,7 +200,7 @@ const Routes = () => {
                 </Select>
               </div>
               <Button onClick={handleAssign} className="w-full">
-                Confirm Assignment
+                {t('routesPage.confirmAssignment')}
               </Button>
             </div>
           </DialogContent>
