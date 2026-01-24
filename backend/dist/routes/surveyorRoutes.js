@@ -27,8 +27,8 @@ const upload = multer({
         },
     }),
 });
-const BASE_LAT = 22.307701;
-const BASE_LON = 73.210394;
+const BASE_LAT = 22.287325;
+const BASE_LON = 73.361665;
 function randomAround(value, meters = 2000) {
     const maxOffset = meters / 111000;
     return value + (Math.random() * 2 - 1) * maxOffset;
@@ -57,7 +57,7 @@ async function sendToPotholeModel(imagePath) {
     });
     return response.data;
 }
-async function processImage(file, surverySession, routeId, wardId) {
+async function processImage(file, surverySession, routeId, wardId, engineerId) {
     const imagePath = file.path;
     console.log("uploading image");
     const latitude = randomAround(BASE_LAT, 20);
@@ -81,18 +81,26 @@ async function processImage(file, surverySession, routeId, wardId) {
         folder: "pothole-detections",
     });
     console.log("image uploaded");
-    await prisma.issue.create({
+    const issue = await prisma.issue.create({
         data: {
             latitude,
             longitude,
             type: "POTHOLE",
-            status: "DETECTED",
+            status: engineerId ? "ASSIGNED" : "DETECTED",
             wardId,
             surveySessionId: surverySession.id,
             routeId,
             imageUrl: uploadResult.url,
         },
     });
+    if (engineerId) {
+        await prisma.issueAssignment.create({
+            data: {
+                issueId: issue.id,
+                engineerId,
+            },
+        });
+    }
 }
 surveyorRouter.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -236,10 +244,17 @@ surveyorRouter.post("/upload", requireAuth, requireRole("SURVEYOR"), upload.arra
             success: true,
             message: "images accepted ",
         });
+        const engineer = await prisma.user.findFirst({
+            where: {
+                role: "ENGINEER",
+                department: "POTHOLE",
+                wardId: wardId,
+            },
+        });
         (async () => {
             for (const file of files) {
                 try {
-                    await processImage(file, surverySession, routeId, wardId);
+                    await processImage(file, surverySession, routeId, wardId, engineer ? engineer.id : null);
                 }
                 catch (e) {
                     console.error("Processing failed", e);

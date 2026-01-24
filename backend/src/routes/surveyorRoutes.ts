@@ -31,8 +31,8 @@ const upload = multer({
   }),
 });
 
-const BASE_LAT = 22.307701;
-const BASE_LON = 73.210394;
+const BASE_LAT = 22.287325;
+const BASE_LON = 73.361665;
 
 function randomAround(value: any, meters = 2000) {
   const maxOffset = meters / 111000;
@@ -77,6 +77,7 @@ async function processImage(
   surverySession: any,
   routeId: string,
   wardId: string,
+  engineerId: string | null,
 ) {
   const imagePath = file.path;
   console.log("uploading image");
@@ -107,18 +108,28 @@ async function processImage(
   });
   console.log("image uploaded");
 
-  await prisma.issue.create({
+  const issue = await prisma.issue.create({
     data: {
       latitude,
       longitude,
       type: "POTHOLE",
-      status: "DETECTED",
+      status: engineerId ? "ASSIGNED" : "DETECTED",
       wardId,
       surveySessionId: surverySession.id,
       routeId,
       imageUrl: uploadResult.url,
     },
   });
+
+
+  if (engineerId) {
+    await prisma.issueAssignment.create({
+      data: {
+        issueId: issue.id,
+        engineerId,
+      },
+    });
+  }
 }
 
 surveyorRouter.post("/login", async (req: Request, res: Response) => {
@@ -307,10 +318,24 @@ surveyorRouter.post(
         message: "images accepted ",
       });
 
+      const engineer = await prisma.user.findFirst({
+        where: {
+          role: "ENGINEER",
+          department: "POTHOLE",
+          wardId: wardId,
+        },
+      });
+
       (async () => {
         for (const file of files) {
           try {
-            await processImage(file, surverySession, routeId, wardId);
+            await processImage(
+              file,
+              surverySession,
+              routeId,
+              wardId,
+              engineer ? engineer.id : null,
+            );
           } catch (e) {
             console.error("Processing failed", e);
           }

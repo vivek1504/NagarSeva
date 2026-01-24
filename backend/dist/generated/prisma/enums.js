@@ -29,4 +29,8 @@ export const RouteAssignmentStatus = {
     IN_PROGRESS: 'IN_PROGRESS',
     COMPLETED: 'COMPLETED'
 };
+export const Department = {
+    POTHOLE: 'POTHOLE',
+    GARBAGE: 'GARBAGE'
+};
 //# sourceMappingURL=enums.js.map
