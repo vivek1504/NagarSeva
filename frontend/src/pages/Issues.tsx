@@ -7,11 +7,13 @@ import { AssignEngineerDialog } from "@/components/issues/AssignEngineerDialog";
 import { VerifyResolutionDialog } from "@/components/issues/VerifyResolutionDialog";
 import type { Issue, IssueType, IssueStatus } from "@/types";
 import { AlertTriangle } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 const Issues = () => {
   const { data: issues, assignEngineer, verifyResolution } = useIssues();
   const { data: engineers } = useEngineers();
   const { data: wards } = useWards();
+  const { t } = useTranslation();
 
   const [filters, setFilters] = useState({
     wardId: "all",
@@ -60,10 +62,10 @@ const Issues = () => {
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold text-foreground">
-            Issue Management
+            {t('issuesPage.title')}
           </h1>
           <p className="text-muted-foreground mt-1">
-            View and manage detected civic issues
+            {t('issuesPage.subtitle')}
           </p>
         </div>
 
@@ -88,7 +90,7 @@ const Issues = () => {
           <div className="text-center py-12">
             <AlertTriangle className="w-12 h-12 mx-auto mb-4 text-muted-foreground opacity-50" />
             <p className="text-muted-foreground">
-              No issues found matching your filters
+              {t('issuesPage.noIssuesFound')}
             </p>
           </div>
         )}

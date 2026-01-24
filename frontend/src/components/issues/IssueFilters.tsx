@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Ward, IssueType, IssueStatus } from "@/types";
+import { useTranslation } from 'react-i18next';
 
 interface IssueFiltersProps {
   filters: {
@@ -22,27 +23,29 @@ interface IssueFiltersProps {
   wards: Ward[];
 }
 
-// NagarSeva tracks pothole and garbage civic issues
-const issueTypes: { value: IssueType; label: string }[] = [
-  { value: "POTHOLE", label: "Pothole" },
-  { value: "GARBAGE", label: "Garbage Accumulation" },
-];
-
-// NagarSeva issue workflow statuses
-const issueStatuses: { value: IssueStatus; label: string }[] = [
-  { value: "DETECTED", label: "Detected" },
-  { value: "ASSIGNED", label: "Assigned" },
-  { value: "IN_PROGRESS", label: "In Progress" },
-  { value: "FIXED", label: "Fixed" },
-  { value: "RESOLVED", label: "Resolved" },
-  { value: "REJECTED", label: "Rejected" },
-];
 
 export const IssueFilters = ({
   filters,
   onFiltersChange,
   wards,
 }: IssueFiltersProps) => {
+  const { t } = useTranslation();
+
+  // Use translation keys for issue types
+  const issueTypes: { value: IssueType; labelKey: string }[] = [
+    { value: "POTHOLE", labelKey: "issues.pothole" },
+    { value: "GARBAGE", labelKey: "issues.garbage" },
+  ];
+
+  // Use translation keys for issue statuses
+  const issueStatuses: { value: IssueStatus; labelKey: string }[] = [
+    { value: "DETECTED", labelKey: "issues.detected" },
+    { value: "ASSIGNED", labelKey: "issues.assigned" },
+    { value: "IN_PROGRESS", labelKey: "issues.inProgress" },
+    { value: "FIXED", labelKey: "issues.fixed" },
+    { value: "RESOLVED", labelKey: "issues.resolved" },
+    { value: "REJECTED", labelKey: "issues.rejected" },
+  ];
   return (
     <Card>
       <CardContent className="py-4">
@@ -54,10 +57,10 @@ export const IssueFilters = ({
             }
           >
             <SelectTrigger className="w-full sm:w-48">
-              <SelectValue placeholder="Filter by Ward" />
+              <SelectValue placeholder={t('routesPage.filterByWard')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Wards</SelectItem>
+              <SelectItem value="all">{t('mapView.allWards')}</SelectItem>
               {wards.map((ward) => (
                 <SelectItem key={ward.id} value={ward.id}>
                   {ward.name}
@@ -73,13 +76,13 @@ export const IssueFilters = ({
             }
           >
             <SelectTrigger className="w-full sm:w-48">
-              <SelectValue placeholder="Filter by Type" />
+              <SelectValue placeholder={t('common.filter')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="all">{t('mapView.allTypes')}</SelectItem>
               {issueTypes.map((type) => (
                 <SelectItem key={type.value} value={type.value}>
-                  {type.label}
+                  {t(type.labelKey)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -95,13 +98,13 @@ export const IssueFilters = ({
             }
           >
             <SelectTrigger className="w-full sm:w-48">
-              <SelectValue placeholder="Filter by Status" />
+              <SelectValue placeholder={t('common.filter')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Statuses</SelectItem>
+              <SelectItem value="all">{t('mapView.allStatuses')}</SelectItem>
               {issueStatuses.map((status) => (
                 <SelectItem key={status.value} value={status.value}>
-                  {status.label}
+                  {t(status.labelKey)}
                 </SelectItem>
               ))}
             </SelectContent>

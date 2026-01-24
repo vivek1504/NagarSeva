@@ -18,25 +18,28 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
 interface DashboardLayoutProps {
   children: ReactNode;
 }
 
 const navItems = [
-  { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { path: '/employees', label: 'Employees', icon: Users },
-  { path: '/routes', label: 'Routes', icon: Route },
-  { path: '/issues', label: 'Issues', icon: AlertTriangle },
-  { path: '/map', label: 'Map View', icon: Map },
-  { path: '/verification', label: 'Verification', icon: CheckCircle },
-  { path: '/chat', label: 'Seva Assistant', icon: MessageCircle },
+  { path: '/dashboard', labelKey: 'nav.dashboard', icon: LayoutDashboard },
+  { path: '/employees', labelKey: 'nav.employees', icon: Users },
+  { path: '/routes', labelKey: 'nav.routes', icon: Route },
+  { path: '/issues', labelKey: 'nav.issues', icon: AlertTriangle },
+  { path: '/map', labelKey: 'nav.mapView', icon: Map },
+  { path: '/verification', labelKey: 'nav.verification', icon: CheckCircle },
+  { path: '/chat', labelKey: 'nav.sevaAssistant', icon: MessageCircle },
 ];
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { logout, user } = useAuth();
+  const { t } = useTranslation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
@@ -50,11 +53,14 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-card border-b border-border px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Building2 className="w-6 h-6 text-primary" />
-          <span className="font-semibold">NagarSeva Admin</span>
+          <span className="font-semibold">{t('header.nagarSevaAdmin')}</span>
         </div>
-        <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
-          {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </Button>
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
+            {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </Button>
+        </div>
       </header>
 
       {/* Sidebar */}
@@ -71,10 +77,11 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                 <Building2 className="w-6 h-6 text-primary-foreground" />
               </div>
-              <div>
-                <h1 className="font-bold text-foreground">NagarSeva Admin</h1>
-                <p className="text-xs text-muted-foreground">Civic Monitoring</p>
+              <div className="flex-1">
+                <h1 className="font-bold text-foreground">{t('header.nagarSevaAdmin')}</h1>
+                <p className="text-xs text-muted-foreground">{t('header.civicMonitoring')}</p>
               </div>
+              <LanguageSwitcher />
             </div>
           </div>
 
@@ -96,7 +103,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     )}
                   >
                     <item.icon className="w-5 h-5" />
-                    {item.label}
+                    {t(item.labelKey)}
                   </Link>
                 );
               })}
@@ -122,7 +129,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               onClick={handleLogout}
             >
               <LogOut className="w-4 h-4 mr-2" />
-              Logout
+              {t('common.logout')}
             </Button>
           </div>
         </div>

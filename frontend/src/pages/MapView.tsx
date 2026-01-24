@@ -9,10 +9,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Clock } from 'lucide-react';
 import { getStatusColor, getIssueTypeLabel } from '@/lib/issueUtils';
+import { useTranslation } from 'react-i18next';
 
 const MapView = () => {
   const { data: issues } = useIssues();
   const { data: wards } = useWards();
+  const { t } = useTranslation();
 
   const [filters, setFilters] = useState({
     wardId: 'all',
@@ -39,8 +41,8 @@ const MapView = () => {
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Map View</h1>
-          <p className="text-muted-foreground mt-1">Visualize issues on the city map</p>
+          <h1 className="text-3xl font-bold text-foreground">{t('mapView.title')}</h1>
+          <p className="text-muted-foreground mt-1">{t('mapView.subtitle')}</p>
         </div>
 
         <IssueFilters
@@ -61,7 +63,7 @@ const MapView = () => {
           <div className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Legend</CardTitle>
+                <CardTitle className="text-lg">{t('mapView.legend')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
                 {(['DETECTED', 'ASSIGNED', 'IN_PROGRESS', 'FIXED', 'RESOLVED', 'REJECTED'] as IssueStatus[]).map(status => (
@@ -78,7 +80,7 @@ const MapView = () => {
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-primary" />
-                    Issue Details
+                    {t('mapView.issueDetails')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -100,10 +102,10 @@ const MapView = () => {
                       {new Date(selectedIssue.createdAt).toLocaleDateString()}
                     </div>
                     <div className="text-sm">
-                      <strong>Ward:</strong> {selectedIssue.wardName}
+                      <strong>{t('mapView.ward')}:</strong> {selectedIssue.wardName}
                     </div>
                     <div className="text-sm">
-                      <strong>Route:</strong> {selectedIssue.routeName}
+                      <strong>{t('mapView.route')}:</strong> {selectedIssue.routeName}
                     </div>
                     <div className="text-xs font-mono text-muted-foreground">
                       {selectedIssue.latitude.toFixed(4)}, {selectedIssue.longitude.toFixed(4)}

@@ -14,6 +14,7 @@ import Verification from "./pages/Verification";
 import ChatBotPage from "./pages/ChatBotPage";
 import ChatBotWidget from "./components/ChatBotWidget";
 import NotFound from "./pages/NotFound";
+import './i18n'; // Initialize i18n
 
 const queryClient = new QueryClient();
 

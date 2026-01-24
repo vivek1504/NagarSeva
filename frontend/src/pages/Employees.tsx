@@ -30,9 +30,11 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Plus, Search, Users } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslation } from 'react-i18next';
 
 const Employees = () => {
   const { data: employees, addEmployee } = useEmployees();
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterRole, setFilterRole] = useState<string>("all");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -54,7 +56,7 @@ const Employees = () => {
 
   const handleAddEmployee = () => {
     if (!newEmployee.name || !newEmployee.email) {
-      toast.error("Please fill all fields");
+      toast.error(t('employees.fillAllFields'));
       return;
     }
     addEmployee({
@@ -63,7 +65,7 @@ const Employees = () => {
       role: newEmployee.role,
       password: newEmployee.password,
     });
-    toast.success("Employee added successfully");
+    toast.success(t('employees.employeeAdded'));
     setNewEmployee({ name: "", email: "", role: "SURVEYOR", password: "" });
     setIsDialogOpen(false);
   };
@@ -73,28 +75,28 @@ const Employees = () => {
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Employees</h1>
+            <h1 className="text-3xl font-bold text-foreground">{t('employees.title')}</h1>
             <p className="text-muted-foreground mt-1">
-              Manage surveyors and engineers
+              {t('employees.subtitle')}
             </p>
           </div>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button>
                 <Plus className="w-4 h-4 mr-2" />
-                Add Employee
+                {t('employees.addEmployee')}
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Add New Employee</DialogTitle>
+                <DialogTitle>{t('employees.addNewEmployee')}</DialogTitle>
               </DialogHeader>
               <div className="space-y-4 pt-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
+                  <Label htmlFor="name">{t('employees.fullName')}</Label>
                   <Input
                     id="name"
-                    placeholder="Enter full name"
+                    placeholder={t('employees.enterFullName')}
                     value={newEmployee.name}
                     onChange={(e) =>
                       setNewEmployee({ ...newEmployee, name: e.target.value })
@@ -102,7 +104,7 @@ const Employees = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">{t('common.email')}</Label>
                   <Input
                     id="email"
                     type="email"
@@ -114,7 +116,7 @@ const Employees = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{t('common.password')}</Label>
                   <Input
                     id="password"
                     type="text"
@@ -129,7 +131,7 @@ const Employees = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="role">Role</Label>
+                  <Label htmlFor="role">{t('employees.role')}</Label>
                   <Select
                     value={newEmployee.role}
                     onValueChange={(value: "SURVEYOR" | "ENGINEER") =>
@@ -137,16 +139,16 @@ const Employees = () => {
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select role" />
+                      <SelectValue placeholder={t('employees.selectRole')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="SURVEYOR">Surveyor</SelectItem>
-                      <SelectItem value="ENGINEER">Engineer</SelectItem>
+                      <SelectItem value="SURVEYOR">{t('employees.surveyor')}</SelectItem>
+                      <SelectItem value="ENGINEER">{t('employees.engineer')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <Button onClick={handleAddEmployee} className="w-full">
-                  Add Employee
+                  {t('employees.addEmployee')}
                 </Button>
               </div>
             </DialogContent>
@@ -159,7 +161,7 @@ const Employees = () => {
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
-                  placeholder="Search employees..."
+                  placeholder={t('employees.searchEmployees')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
@@ -167,12 +169,12 @@ const Employees = () => {
               </div>
               <Select value={filterRole} onValueChange={setFilterRole}>
                 <SelectTrigger className="w-full sm:w-40">
-                  <SelectValue placeholder="Filter by role" />
+                  <SelectValue placeholder={t('employees.filterByRole')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Roles</SelectItem>
-                  <SelectItem value="SURVEYOR">Surveyors</SelectItem>
-                  <SelectItem value="ENGINEER">Engineers</SelectItem>
+                  <SelectItem value="all">{t('employees.allRoles')}</SelectItem>
+                  <SelectItem value="SURVEYOR">{t('employees.surveyors')}</SelectItem>
+                  <SelectItem value="ENGINEER">{t('employees.engineers')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -181,10 +183,10 @@ const Employees = () => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Created</TableHead>
+                  <TableHead>{t('employees.name')}</TableHead>
+                  <TableHead>{t('common.email')}</TableHead>
+                  <TableHead>{t('employees.role')}</TableHead>
+                  <TableHead>{t('employees.created')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -211,7 +213,7 @@ const Employees = () => {
             {filteredEmployees.length === 0 && (
               <div className="text-center py-8 text-muted-foreground">
                 <Users className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                <p>No employees found</p>
+                <p>{t('employees.noEmployeesFound')}</p>
               </div>
             )}
           </CardContent>
