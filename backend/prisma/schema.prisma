@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  SURVEYOR
+  ENGINEER
+}
+
+enum IssueType {
+  POTHOLE
+  GARBAGE
+}
+
+enum IssueStatus {
+  DETECTED
+  ASSIGNED
+  IN_PROGRESS
+  FIXED
+  REJECTED
+  RESOLVED
+}
+
+enum RouteAssignmentStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum Department {
+  POTHOLE
+  GARBAGE
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  role UserRole
+
+  department Department?
+
+  wardId String
+  ward Ward? @relation(fields: [wardId], references: [id])
+
+  routeAssigned RouteAssignment[]
+  issueAssigned IssueAssignment[]
+  issueResolved IssueResolution[]
+
+  createdAt DateTime @default(now())
+}
+
+model Ward {
+  id String @id @default(uuid())
+  name String
+  number Int @unique
+
+  users User[]
+
+  routes Route[]
+  issues Issue[]
+}
+
+model Route {
+  id String @id @default(uuid())
+  name String
+
+  wardId String
+  ward Ward @relation(fields: [wardId], references: [id])
+
+  startLat  Float
+  startLon  Float
+  endLat    Float
+  endLon    Float
+  distance  Float
+
+  assignments RouteAssignment[]
+  issues Issue[]
+}
+
+model RouteAssignment {
+  id String @id @default(uuid())
+  routeId String
+  surveyorId String
+  status RouteAssignmentStatus @default(PENDING)
+
+  route Route @relation(fields: [routeId], references: [id])
+  surveyor User @relation(fields: [surveyorId], references: [id])
+
+  assignedAt DateTime @default(now())
+  completed Boolean @default(false)
+
+  sessions SurveySession[]
+}
+
+model SurveySession{
+  id String @id @default(uuid())
+  routeAssignmentId String
+  startedAt DateTime 
+  endedAt DateTime?
+
+  routeAssignment RouteAssignment @relation(fields: [routeAssignmentId], references: [id])
+  issues Issue[]
+}
+
+model Issue {
+  id String @id @default(uuid())
+  type IssueType
+  status IssueStatus
+  
+  latitude Float
+  longitude Float
+
+  wardId String
+  ward Ward @relation(fields: [wardId], references: [id])
+
+  surveySessionId String
+  surveySession SurveySession @relation(fields: [surveySessionId], references: [id])
+
+  routeId String
+  route Route @relation(fields: [routeId], references: [id])
+
+  imageUrl String
+  afterUrl String?
+
+  assignments IssueAssignment[]
+  resolutions IssueResolution[]
+
+  createdAt DateTime @default(now())
+}
+
+model IssueAssignment {
+  id String @id @default(uuid())
+  issueId String
+  engineerId String
+
+  issue Issue @relation(fields: [issueId], references: [id])
+  engineer User @relation(fields: [engineerId], references: [id])
+
+  assignedAt DateTime @default(now())
+}
+
+model IssueResolution {
+  id String @id @default(uuid())
+  issueId String
+  approved Boolean @default(false)
+  feedback String?
+
+  issue Issue @relation(fields: [issueId], references: [id])
+
+  verifiedByAdminId String?
+  verifiedByAdmin User? @relation(fields: [verifiedByAdminId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+
