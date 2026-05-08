@@ -226,6 +226,15 @@ Each folder has its own detailed README:
 
 ---
 
+## 👨‍💻 Authors
+
+<a href="https://github.com/vivek1504"><img src="https://img.shields.io/badge/Vivek%20Jadhav-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
+<a href="https://github.com/mynkchn"><img src="https://img.shields.io/badge/Mayank%20Chouhan-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
+<a href="https://github.com/Vikas28"><img src="https://img.shields.io/badge/Vikas%20Sahu-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
+<a href="https://github.com/Volatile875"><img src="https://img.shields.io/badge/Pratik%20Thakur-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
+
+---
+
 ## 📄 License
 
 This project is for educational and municipal governance purposes.
