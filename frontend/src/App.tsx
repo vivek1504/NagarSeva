@@ -14,7 +14,7 @@ import Verification from "./pages/Verification";
 import ChatBotPage from "./pages/ChatBotPage";
 import ChatBotWidget from "./components/ChatBotWidget";
 import NotFound from "./pages/NotFound";
-import './i18n'; // Initialize i18n
+import "./i18n";
 
 const queryClient = new QueryClient();
 
@@ -33,9 +33,9 @@ const App = () => (
           <Route path="/map" element={<MapView />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/chat" element={<ChatBotPage />} />
+          <Route path="/login" element={<Login />}></Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-        {/* Global Floating Chatbot Widget */}
         <ChatBotWidget />
       </BrowserRouter>
     </TooltipProvider>
